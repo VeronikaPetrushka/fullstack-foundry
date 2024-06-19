@@ -1,0 +1,9 @@
+{
+  "files": {
+    "main.js": "/fullstack-foundry/static/js/main.31d6cfe0.js",
+    "index.html": "/fullstack-foundry/index.html"
+  },
+  "entrypoints": [
+    "static/js/main.31d6cfe0.js"
+  ]
+}
