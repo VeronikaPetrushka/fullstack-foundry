@@ -4,7 +4,7 @@
 // створити приватний ендпоінт для логаута користувача
 
 import express from 'express';
-import { logIn, logOut, register } from '../authControllers/authControllers.js';
+import { logIn, logOut, register } from '../controllers/auth.js';
 import { loginSchema, registerSchema } from '../models/user.js';
 import validateBody from '../middlewares/validateBody.js';
 import auth from '../middlewares/authenticate.js';
