@@ -9,7 +9,13 @@ import authRouter from './routes/auth.js';
 import userRouter from './routes/user.js';
 import waterRouter from './routes/water.js';
 
+import swaggerUi from 'swagger-ui-express';
+
+import swaggerDocument from './openapi.json' assert { type: "json" };
+
+
 const app = express();
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 app.use(cors());

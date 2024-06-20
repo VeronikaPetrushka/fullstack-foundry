@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "AquaTrack - OpenAPI 3.0",
+    "description": "This is a AquaTrack based on the OpenAPI 3.0 specification.",
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "AquaTrack",
+    "url": "https://veronikapetrushka.github.io/fullstack-foundry/"
+  },
+  "servers": [
+    {
+      "url": "https://WILL_BE_API_DOMAIN/api/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "Operations about user"
+    },
+    {
+      "name": "water",
+      "description": "Record daily water intake and track"
+    }
+  ],
+  "paths": {
+    "/users/register": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Add a new user",
+        "description": "Add a new user",
+        "operationId": "register",
+        "requestBody": {
+          "description": "Create a new user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/baseUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/baseUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Email in use!"
+          },
+          "409": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Logs user into the system",
+        "description": "",
+        "operationId": "login",
+        "requestBody": {
+          "description": "Create a new user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/baseUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/baseUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Email or password is wrong!"
+          }
+        }
+      }
+    },
+    "/users/logout": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Logs out current logged in user session",
+        "description": "",
+        "operationId": "logout",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "baseUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "yourmail@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "JSD78jfk*hjd"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
