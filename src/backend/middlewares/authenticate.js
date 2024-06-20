@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from 'backend/models/user.js';
+import { User } from '../models/user.js';
 import HttpError from './HttpError.js';
 
 function auth(req, res, next) {

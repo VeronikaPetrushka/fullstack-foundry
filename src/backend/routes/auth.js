@@ -4,10 +4,10 @@
 // створити приватний ендпоінт для логаута користувача
 
 import express from 'express';
-import { logIn, logOut, register } from 'backend/authControllers/authControllers.js';
-import { loginSchema, registerSchema } from 'backend/models/user.js';
-import validateBody from 'backend/middlewares/validateBody.js';
-import auth from 'backend/middlewares/authenticate.js';
+import { logIn, logOut, register } from '../authControllers/authControllers.js';
+import { loginSchema, registerSchema } from '../models/user.js';
+import validateBody from '../middlewares/validateBody.js';
+import auth from '../middlewares/authenticate.js';
 
 const authRouter = express.Router();
 
