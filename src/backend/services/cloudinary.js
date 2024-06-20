@@ -2,6 +2,12 @@ import { v2 as cloudinary } from 'cloudinary';
 import HttpError from '../middlewares/HttpError.js';
 
 
+/**
+ * Uploads an image to Cloudinary.
+ *
+ * @param {string} imagePath - The path of the image to upload
+ * @return {string} The secure URL of the uploaded image
+ */
 const CloudinaryUploadImage = async (imagePath) => {
 
   const options = {
