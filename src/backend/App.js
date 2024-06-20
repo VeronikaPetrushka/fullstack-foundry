@@ -19,7 +19,7 @@ app.use(morgan('tiny'));
 
 app.use('/avatars', express.static(path.resolve('public/avatars')));
 
-app.use('/api/users', authRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/water', waterRouter);
 
