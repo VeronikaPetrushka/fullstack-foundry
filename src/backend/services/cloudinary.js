@@ -1,42 +1,53 @@
 import { v2 as cloudinary } from 'cloudinary';
+import HttpError from '../middlewares/HttpError.js';
 
-(async function() {
 
-    // Configuration
-    cloudinary.config({
-        cloud_name: 'dmo99evjz',
-        api_key: '521778346988472',
-        api_secret: '<your_api_secret>' // Click 'View Credentials' below to copy your API secret
-    });
+const CloudinaryUploadImage = async (imagePath) => {
 
-    // Upload an image
-     const uploadResult = await cloudinary.uploader
-       .upload(
-           'https://res.cloudinary.com/demo/image/upload/getting-started/shoes.jpg', {
-               public_id: 'shoes',
-           }
-       )
-       .catch((error) => {
-           console.log(error);
-       });
+  const options = {
+    use_filename: true,
+    unique_filename: false,
+    overwrite: true,
+  };
 
-    console.log(uploadResult);
+  try {
+    const result = await cloudinary.uploader.upload(imagePath, options);
+    console.log(result);
+    return result.secure_url;
+  } catch (error) {
+    //console.error(error);
+    throw HttpError(500, 'Cloudinary upload image error');}
+};
 
-    // Optimize delivery by resizing and applying auto-format and auto-quality
-    const optimizeUrl = cloudinary.url('shoes', {
-        fetch_format: 'auto',
-        quality: 'auto'
-    });
+export default CloudinaryUploadImage;
 
-    console.log(optimizeUrl);
 
-    // Transform the image: auto-crop to square aspect_ratio
-    const autoCropUrl = cloudinary.url('shoes', {
-        crop: 'auto',
-        gravity: 'auto',
-        width: 500,
-        height: 500,
-    });
+/*
+response object from cloudinary:
 
-    console.log(autoCropUrl);
-})();
+result =
+{
+  asset_id: 'cf4a479f2f034af41f2e8f4c74868a4e',
+  public_id: 'IMG_20210502_133456',
+  version: 1718907191,
+  version_id: 'b973d63d90d6aab0d4eba23a37c584e4',
+  signature: '5b518707d7f2251db2d3128ee4c142b880af764b',
+  width: 3000,
+  height: 4000,
+  format: 'jpg',
+  resource_type: 'image',
+  created_at: '2024-06-20T18:13:11Z',
+  tags: [],
+  bytes: 2808758,
+  type: 'upload',
+  etag: '5c73507f905082ad72fa01dc548ff82d',
+  placeholder: false,
+  url: 'http://res.cloudinary.com/dmo99evjz/image/upload/v1718907191/IMG_20210502_133456.jpg',
+  secure_url: 'https://res.cloudinary.com/dmo99evjz/image/upload/v1718907191/IMG_20210502_133456.jpg',
+  asset_folder: '',
+  display_name: 'IMG_20210502_133456',
+  overwritten: true,
+  original_filename: 'IMG_20210502_133456',
+  api_key: '521778346988472'
+}
+  */

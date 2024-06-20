@@ -7,7 +7,7 @@ import handleMongooseError from './middlewares/mongooseError.js';
 import authRouter from './routes/auth.js';
 import userRouter from './routes/user.js';
 import waterRouter from './routes/water.js';
-import { env } from 'process';
+
 
 const app = express();
 
@@ -39,7 +39,6 @@ const PORT = process.env.PORT || 8080;
 try {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    console.log(process.env.CLOUDINARY_NAME);
   });
 } catch (err) {
   console.error(`Server not running. Error message: ${err.message}`);
