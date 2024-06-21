@@ -2,5 +2,14 @@
   "compilerOptions": {
     "baseUrl": "src"
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "backend/controllers",
+    "backend/constants",
+    "backend/middlewares",
+    "backend/models",
+    "backend/routes",
+    "backend/app.js",
+    "frontend/src"
+  ]
 }
