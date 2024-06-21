@@ -1,6 +1,7 @@
 import { User } from "../models/user.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import HttpError from "../middlewares/HttpError.js";
 
 const { JWT } = process.env
 
@@ -10,7 +11,7 @@ const register = async (req, res, next) => {
         const user = await User.findOne({ email })
 
         if (user !== null) {
-            return next(409, "Email in use!")
+            return next(HttpError(409, "Email in use!"))
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
@@ -30,16 +31,16 @@ const logIn = async (req, res, next) => {
         const user = await User.findOne({ email })
 
         if (user === null) {
-            return next(401, "Email or password is wrong!")
+            return next(HttpError(401, "Email or password is wrong!"))
         }
 
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) {
-            return next(401, "Email or password is wrong!")
+            return next(HttpError(401, "Email or password is wrong!"))
         }
 
         if (user.verify === false) {
-            return next(401, "Please verify your mail!")
+            return next(HttpError(401, "Please verify your mail!"))
         }
 
         const token = jwt.sign({id: user._id, email: user.email}, JWT)
