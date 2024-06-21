@@ -20,8 +20,8 @@ const userModel = new mongoose.Schema(
       default: null,
     },
     water: {
-      type: String,
-      default: "2.0"
+      type: Number,
+      default: 1.8
     },
     verify: {
       type: Boolean,
