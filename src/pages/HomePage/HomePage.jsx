@@ -1,7 +1,7 @@
-const Homepage = () => {
+const Homepage = (children) => {
     return (
         <div>
-            <h1>Home Page</h1>
+            <h1>{children}</h1>
         </div>
     )
 }
