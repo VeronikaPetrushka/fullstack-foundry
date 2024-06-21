@@ -1,57 +1,29 @@
 {
-  "name": "react-homework-template",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://VeronikaPetrushka.github.io/fullstack-foundry/",
-  "type": "module",
+  "name": "fullstack-foundry",
+  "version": "1.0.0",
+  "description": "Acest proiect a fost creat cu ajutorul\r [Create React App](https://github.com/facebook/create-react-app). Pentru prezentări\r și configurarea de funcții suplimentare\r [consultă documentația](https://facebook.github.io/create-react-app/docs/getting-started).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "back:inst": "npm --prefix ./backend install",
+    "front:inst": "npm --prefix ./frontend_vite install --force",
+    "common:inst": "npm run back:inst; npm run front:inst",
+    "start": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.5",
-    "@testing-library/jest-dom": "^5.16.3",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mongoose": "^8.4.3",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.3",
-    "path": "^0.12.7",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^5.2.1",
-    "react-redux": "^9.1.2",
-    "react-router-dom": "^6.23.1",
-    "react-scripts": "^5.0.1",
-    "redux-persist": "^6.0.0",
-    "web-vitals": "^2.1.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "dev": "nodemon ./src/backend/App.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint:js": "eslint src/**/*.{js,jsx}"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemailer": "^6.9.14",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7"
   }
 }
