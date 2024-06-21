@@ -1,22 +1,6 @@
 import mongoose from "mongoose";
-import Joi from "joi";
 
-export const registerSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(8).required(),
-  repeatPassword: Joi.string().min(8).required(),
-});
-
-export const loginSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(8).required(),
-});
-
-export const emailSchema = Joi.object({
-  email: Joi.string().email().required(),
-});
-
-const userSchema = new mongoose.Schema(
+const userModel = new mongoose.Schema(
   {
     password: {
       type: String,
@@ -35,6 +19,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    water: {
+      type: String,
+      default: "2.0"
+    },
     verify: {
       type: Boolean,
       default: false,
@@ -51,4 +39,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-export const User = mongoose.model('User', userSchema);
+export const User = mongoose.model('User', userModel);

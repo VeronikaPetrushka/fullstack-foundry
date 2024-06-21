@@ -5,7 +5,7 @@
 
 import express from 'express';
 import { logIn, logOut, register } from '../controllers/auth.js';
-import { loginSchema, registerSchema } from '../models/user.js';
+import { loginSchema, registerSchema } from '../schemas/authSchemas.js';
 import validateBody from '../middlewares/validateBody.js';
 import auth from '../middlewares/authenticate.js';
 
