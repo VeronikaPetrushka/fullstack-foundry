@@ -18,20 +18,20 @@ jobs:
 
       #Frontend steps
       - name: Install frontend dependencies
-        working-directory: src/frontend
+        working-directory: ./src/frontend
         run: npm install
 
       - name: Build frontend
-        working-directory: src/frontend
+        working-directory: ./src/frontend
         run: npm run build
 
       # Backend steps
       - name: Install backend dependencies
-        working-directory: src/backend
+        working-directory: ./src/backend
         run: npm install
 
       - name: Build backend
-        working-directory: src/backend
+        working-directory: ./src/backend
         run: npm run build
 
       - name: Deploy 🚀
