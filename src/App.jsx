@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import SharedLayout from './components/SharedLayout/SharedLayout';
+// import SharedLayout from './components/SharedLayout/SharedLayout';
 // import { PrivateRoute } from './components/PrivateRoute';
 // import { RestrictedRoute } from './components/RestrictedRoute';
 
@@ -12,7 +12,7 @@ const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const App = () => {
 
   return (
-    <SharedLayout>
+    // <SharedLayout>
        <Routes>
         <Route path="/" element={<HomePage />} />
         {/* <Route
@@ -34,7 +34,7 @@ const App = () => {
           }
         /> */}
        </Routes>
-    </SharedLayout>
+    //  {/* </SharedLayout> */}
   );
 };
 
