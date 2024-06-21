@@ -33,7 +33,10 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "back:inst": "npm --prefix ./src/backend install",
+    "front:inst": "npm --prefix ./src/frontend install --force",
+    "common:inst": "npm run back:inst; npm run front:inst",
+    "start": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend start\"",
     "build": "react-scripts build",
     "dev": "nodemon ./src/backend/App.js",
     "test": "react-scripts test",
