@@ -45,6 +45,7 @@ const PORT = process.env.PORT || 8080;
 try {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(`Swagger UI is available at http://localhost:${PORT}/api-docs`);
   });
 } catch (err) {
   console.error(`Server not running. Error message: ${err.message}`);
