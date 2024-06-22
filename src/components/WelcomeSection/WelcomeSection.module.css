@@ -110,8 +110,8 @@
   }
   @media (min-width: 1440px) {
     .welcomeSection {
-        max-width: 548px;
-      padding: 180px 62px 180px 62px;
+        max-width: 672px;
+      padding: 188px 62px 188px 62px;
       margin: 0;
     }
     .title {

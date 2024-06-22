@@ -1,3 +1,26 @@
-.mojdiv{
-    background-color: red;
-}
+.advantagesSection {
+  
+    border-radius: 30px;
+    background-color: var(--bacground);
+  
+    padding: 209px 16px 32px;
+    background-image: url(../../img/homePage.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  @media only screen and (min-resolution: 192dpi) {
+    .advantages_main {
+      background-image: url(../../assets/img/baner@2x.jpg);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+
+  }
+  
+  @media screen and (min-width: 1440px) {
+    .advantagesSection {
+        width: 672px;
+    }
+  }
