@@ -5,14 +5,17 @@
 :root {
   --dark-grey: #2F2F2F;
   --grey: #323F47;
-  ---green: #9BE1A0;
+  --green: #9BE1A0;
+  --lightGreenHover: #87d28d;
   --light: #F0EFF4;
   --white: #FFFFFF;
+  
+    /* Animation */
+    --animation: 150ms ease-in;
 
   max-width: 1440px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
   color: var(--grey);
   background-color: var(--white);
 
@@ -22,10 +25,6 @@
   font-weight: 400;
 }
 
-.container {
-  max-width: 1376px;
-  margin: 0 auto;
-}
 
 *,
 *:before,
@@ -106,6 +105,8 @@ main {
 
 body {
   line-height: 1;
+ 
+ 
 }
 
 ol,
@@ -136,16 +137,8 @@ input {
 }
 
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+
+
+
+
