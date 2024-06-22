@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { requestLogin, requestRegister } from 'redux/services/aquatrackApi';
+import { requestLogin, requestRegister } from '../services/aquatrackApi';
 
 export const register = createAsyncThunk(
   'auth/register',
