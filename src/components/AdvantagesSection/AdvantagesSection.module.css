@@ -1,13 +1,15 @@
 .advantagesSection {
-  
+  width: 343px;
+  height: 363px;
     border-radius: 30px;
-    background-color: var(--bacground);
+    background-color: var(--background);
   
-    padding: 209px 16px 32px;
+    
     background-image: url(../../img/homePage.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    position: relative;
   }
   @media only screen and (min-resolution: 192dpi) {
     .advantages_main {
@@ -15,12 +17,155 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  .group {
+    position: absolute;
+    bottom: 32px;
+    right: 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
 
+  .advantagesGroup {
+    max-width: 168px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .textAdvantage {
+    display: flex;
+    padding: 9px 12px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+  }
+  .textAdvantage:nth-child(2) {
+    background: var(--color-lightgreen);
+    width: 83px;
+  }
+  .textAdvantage:nth-child(1) {
+    background: var(--color-darkblue);
+    width: 81px;
+    gap: 4px;
+  }
+  .textAdvantage:nth-child(3) {
+    background: var(--color-white);
+    width: 108px;
+  }
+  .circle {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-lightgreen);
+  }
+  .text {
+    color: var(--color-white);
+    text-align: center;
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 8px;
+    letter-spacing: -0.08px;
+  }
+  .textBlack {
+    color: var(--color-darkblue);
+    text-align: center;
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 8px;
+    letter-spacing: -0.08px;
+  }
+ 
+
+
+  
+
+
+  @media (min-width: 768px) {
+
+    .group {
+      position: absolute;
+      right: 32px;
+      height: 78px;
+    }
+    .advantagesGroup {
+      gap: 10px;
+      max-width: 242px;
+      height: 78px;
+    }
+
+    .textAdvantage {
+      font-size: 12px;
+      height: 34px;
+      padding: 11px 16px;
+    }
+    .textAdvantage:nth-child(2) {
+      width: 121px;
+    }
+    .textAdvantage:nth-child(1) {
+      width: 111px;
+      gap: 4px;
+    }
+    .textAdvantage:nth-child(3) {
+      width: 158px;
+    }
+    .text {
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: -0.12px;
+    }
+    .textBlack {
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: -0.12px;
+    }
+
+    
+    
+  }
+  @media (min-width: 1440px) {
+
+    .group {
+      bottom: 64px;
+    }
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @media screen and (min-width: 768px) {
+    .advantagesSection {
+      width: 704px;
+      height: 446px;
+  }
   }
   
   @media screen and (min-width: 1440px) {
     .advantagesSection {
         width: 672px;
+        height: 736px;
     }
   }
