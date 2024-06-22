@@ -1,0 +1,123 @@
+.welcomeSection {
+  border-radius: 30px;
+  background: var(--color-lightgray);
+  padding: 100px 16px 54px 16px;
+  margin-bottom: 16px;
+}
+
+.text {
+  color: var(--color-black);
+  font-size: 14px;
+  line-height: 1.28;
+  letter-spacing: 0.84px;
+  margin-bottom: 16px;
+  
+}
+
+.title {
+    margin: 0;
+    color: var(--color-darkblue);
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: -0.38px;
+    margin-bottom: 32px;
+  }
+
+  .linkBox {
+    display: flex;
+    gap: 10px;
+    max-height: 60px;
+  }
+  .linkSignUP {
+    text-decoration: none;
+    width: 116px;
+    display: flex;
+    padding: 14px 19px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    background: var(--color-lightgreen);
+    color: var(--color-darkblue);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.28;
+    letter-spacing: -0.14px;
+    transition: background-color var(--animation);
+  }
+  .linkSignUP:hover,
+  .linkSignUP:active,
+  .linkSignUP:focus {
+    background-color: var(--color-lightgreenhover);
+  }
+
+  .linkSignIn {
+    text-decoration: none;
+    width: 104px;
+    display: flex;
+    padding: 14px 10px;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-darkblue);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.28;
+    letter-spacing: -0.14px;
+    border-radius: 30px;
+    border: 1px solid var(--color-darkblue);
+    transition:
+      border var(--animation),
+      color var(--animation);
+  }
+  .linkSignIn:hover,
+  .linkSignIn:focus,
+  .linkSignIn:active {
+    border: 1px solid var(--color-lightgreenhover);
+    color: var(--color-lightgreenhover);
+  }
+
+
+  @media (min-width: 768px) {
+    .welcomeSection {
+      padding: 94px 93px 50px 93px;
+    }
+    .text {
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: 0.96px;
+    }
+    .title {
+      font-size: 64px;
+      line-height: 70px;
+      letter-spacing: -0.64px;
+    }
+    .linkSignUP {
+      padding: 18px 14px;
+      width: 169px;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.16px;
+    }
+    .linkSignIn {
+      width: 135px;
+      padding: 18px 10px;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.16px;
+    }
+  }
+  @media (min-width: 1440px) {
+    .welcomeSection {
+        max-width: 548px;
+      padding: 180px 62px 180px 62px;
+      margin: 0;
+    }
+    .title {
+      font-size: 80px;
+      line-height: 76px;
+      letter-spacing: -0.8px;
+    }
+  }
+ 
