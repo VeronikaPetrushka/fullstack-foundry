@@ -11,8 +11,9 @@
     "lint:js": "eslint src/**/*.{js,jsx}"
   },
   "dependencies": {
-    "fullstack-foundry": "file:..",
     "@reduxjs/toolkit": "^2.2.5",
+    "axios": "^1.7.2",
+    "fullstack-foundry": "file:..",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.0",
