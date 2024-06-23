@@ -66,12 +66,16 @@ export default function UserSettingsForm() {
       <div>
         <label>
           <h2>Your name</h2>
-          <input type="text" {...register('username')} />
+          <input type="text" placeholder="Nadia" {...register('username')} />
         </label>
 
         <label>
           <h2>Email</h2>
-          <input type="email" {...register('email')} />
+          <input
+            type="email"
+            placeholder="nadia10@gmail.com"
+            {...register('email')}
+          />
         </label>
         {errors.option && <p>{errors.option.message}</p>}
       </div>
@@ -104,12 +108,12 @@ export default function UserSettingsForm() {
       <div>
         <label>
           Your weight in kilograms:
-          <input type="text" {...register('number')} />
+          <input type="number" placeholder="0" {...register('number')} />
         </label>
 
         <label>
           The time of active participation in sports:
-          <input type="text" {...register('number')} />
+          <input type="number" placeholder="0" {...register('number')} />
         </label>
       </div>
 
@@ -120,7 +124,7 @@ export default function UserSettingsForm() {
         </p>
         <label>
           <h2>Write down how much water you will drink:</h2>
-          <input {...register('number')} />
+          <input type="number" placeholder="1.8" {...register('number')} />
         </label>
       </div>
 
