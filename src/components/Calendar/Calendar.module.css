@@ -1,0 +1,32 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 40px 20px;
+  gap: 24px;
+}
+
+.calendar-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 24px;
+}
+
+.calendar-title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+
+.calendar-body{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 24px;
+}
