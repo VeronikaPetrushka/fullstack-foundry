@@ -1,8 +1,11 @@
+import css from './CalendarItem.module.css';
 
-const CalendarItem = ({day, procent}) => {
+export const CalendarItem = ({ day }) => {
+  console.log(day);
   return (
-    <div>CalendarItem</div>
-  )
-}
-
-export default CalendarItem;
+    <button type="button" className={css.calendarBtn}>
+      <span className={css.btnDay}>{day.day}</span>
+      <span className={css.btnProcent}>{day.procent}%</span>
+    </button>
+  );
+};

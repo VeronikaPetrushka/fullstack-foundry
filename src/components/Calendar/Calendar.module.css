@@ -6,7 +6,7 @@
   gap: 24px;
 }
 
-.calendar-head {
+.calendarHead {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -14,19 +14,28 @@
   gap: 24px;
 }
 
-.calendar-title {
-  font-family: var(--font-family);
+.calendarTitle {
   font-weight: 700;
   font-size: 20px;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  color: var(--main);
+  color: var(--grey);
 }
 
-.calendar-body{
+.calendarBody{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   width: 100%;
-  gap: 24px;
+  gap: 18px;
+}
+
+.calendarItem{
+  display: flex;
+  justify-content: center;
+  width: calc((100% - 108px) / 7);
+}
+.calendarPagination{
+
 }

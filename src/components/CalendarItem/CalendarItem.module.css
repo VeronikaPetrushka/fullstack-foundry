@@ -1,0 +1,46 @@
+.calendarBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 100%;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.btnDay{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.btnDay.full{
+  color: var(--gray);
+  background-color: var(--white);
+}
+.btnDay.part{
+  color: var(--gray);
+  background-color: rgba(50, 63, 71, 0.2);
+}
+.btnDay.current{
+  color: var(--accent);
+  background-color: var(--gray);
+}
+.btnProcent{
+  text-align: center;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1;
+  color: rgba(47, 47, 47, 0.6);
+}

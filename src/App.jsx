@@ -7,7 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 // const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
 // const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
-// const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
+const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
 
 const App = () => {
 
@@ -15,6 +15,7 @@ const App = () => {
     // <SharedLayout>
        <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/tracker" element={<TrackerPage />} />
         {/* <Route
           path="/signup"
           element={
