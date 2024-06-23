@@ -1,8 +1,19 @@
 import axios from 'axios';
+import instance from './instance';
 
-const instance = axios.create({
-  baseURL: 'https://aquatrack-api-myzh.onrender.com/api',
-});
+//////////////////////////////////////////////////////////////////////////////////
+
+// Utility to add JWT
+export const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+// Utility to remove JWT
+export const clearAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = '';
+};
+
+/////////////////////////////////////////////////////////////////////////////////
 
 //AUTH
 export const requestRegister = async formData => {

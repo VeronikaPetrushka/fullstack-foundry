@@ -10,13 +10,11 @@ const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
 
 const App = () => {
-
   return (
     // <SharedLayout>
-       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/tracker" element={<TrackerPage />} />
-        {/* <Route
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      {/* <Route
           path="/signup"
           element={
             <RestrictedRoute redirectTo="/" component={<SignUpPage />} />
@@ -34,7 +32,8 @@ const App = () => {
             <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
           }
         /> */}
-       </Routes>
+      <Route path="/tracker" element={<TrackerPage />} />
+    </Routes>
     //  {/* </SharedLayout> */}
   );
 };

@@ -8,9 +8,9 @@ import {
 
 export const dailyActivity = createAsyncThunk('water/day', async thunkAPI => {
   try {
-    const response = await requestDailyActivity();
+    const res = await requestDailyActivity();
 
-    return response;
+    return res;
   } catch (err) {
     return thunkAPI.rejectWithValue(err.message);
   }
@@ -18,9 +18,9 @@ export const dailyActivity = createAsyncThunk('water/day', async thunkAPI => {
 
 export const monthActivity = createAsyncThunk('water/month', async thunkAPI => {
   try {
-    const response = await requestMonthActivity();
+    const res = await requestMonthActivity();
 
-    return response;
+    return res;
   } catch (err) {
     return thunkAPI.rejectWithValue(err.message);
   }
@@ -30,9 +30,9 @@ export const addWater = createAsyncThunk(
   'water/add',
   async (formData, thunkAPI) => {
     try {
-      const response = await addWaterRecord(formData);
+      const res = await addWaterRecord(formData);
 
-      return response;
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -43,9 +43,9 @@ export const editWater = createAsyncThunk(
   'water/edit',
   async ({ id, formData }, thunkAPI) => {
     try {
-      const response = await editWaterRecord(id, formData);
+      const res = await editWaterRecord(id, formData);
 
-      return response;
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -56,9 +56,9 @@ export const deleteWater = createAsyncThunk(
   'water/delete',
   async ({ id, formData }, thunkAPI) => {
     try {
-      const response = await editWaterRecord(id, formData);
+      const res = await editWaterRecord(id, formData);
 
-      return response;
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
