@@ -2,11 +2,7 @@ import { CalendarPagination } from '../CalendarPagination/CalendarPagination';
 import { CalendarItem } from '../CalendarItem/CalendarItem';
 import css from './Calendar.module.css'
 
-function daysInMonth(month, year) {
-  return new Date(year, month, 0).getDate();
-}
-
-export const Calendar = ({data = [], currentMonth, currentDay, currentYear}) => {
+export const Calendar = ({data = [], today}) => {
 
   return (
     <div className={css.calendar}>
@@ -17,11 +13,18 @@ export const Calendar = ({data = [], currentMonth, currentDay, currentYear}) => 
         </div>
       </div>
       <div className={css.calendarBody}>
-        {data.map(day => (
+        {
+          for(let i = 1; i < today.dayInMonth; i++){
+            <div className={css.calendarItem} key={day.day}>
+              <CalendarItem day={{day: i, procent: 0}} today={today} />
+            </div>
+          }
+        }
+        {/* {data.map(day => (
           <div className={css.calendarItem} key={day.day}>
-            <CalendarItem day={day} />
+            <CalendarItem day={day} today={today} />
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

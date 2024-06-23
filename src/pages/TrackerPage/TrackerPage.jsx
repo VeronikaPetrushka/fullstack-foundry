@@ -5,17 +5,28 @@ import Page from '../../components/Page/Page';
 import '../../styles/styles.scss';
 import css from './TrackerPage.module.css';
 
+function daysInMonth(month, year) {
+  return new Date(year, month, 0).getDate();
+}
+
 const TrackerPage = () => {
   const currentDate = new Date();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentDay = currentDate.getDay();
-  const currentYear = currentDate.getFullYear();
+  const today = {
+    day: currentDate.getDate(),
+    month: currentDate.getMonth() + 1,
+    year: currentDate.getFullYear(),
+    dayInMonth: daysInMonth(currentDate.getMonth() + 1, currentDate.getFullYear()),
+  }
 
+  /**
+   * send request to API for get data for today by default
+   * save to const data
+   */
   const data = [
     { day: 1, procent: 100 },
     { day: 2, procent: 100 },
     { day: 3, procent: 100 },
-    { day: 4, procent: 100 },
+    { day: 4, procent: 65 },
     { day: 5, procent: 100 },
     { day: 6, procent: 100 },
     { day: 7, procent: 100 },
@@ -49,7 +60,7 @@ const TrackerPage = () => {
       <Page>
         <WelcomeSection />
         <div className={css.trackerSection}>
-          <Calendar data={data} currentMonth={currentMonth} currentDay={currentDay} currentYear={currentYear} />
+          <Calendar data={data} today={today} />
         </div>
       </Page>
     </Container>

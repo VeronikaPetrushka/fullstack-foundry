@@ -19,7 +19,7 @@
   font-size: 20px;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  color: var(--grey);
+  color: var(--color-darkblue);
 }
 
 .calendarBody{

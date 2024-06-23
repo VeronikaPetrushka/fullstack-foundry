@@ -25,17 +25,17 @@
   letter-spacing: -0.01em;
   text-align: center;
 }
-.btnDay.full{
-  color: var(--gray);
-  background-color: var(--white);
+.full{
+  color: var(--color-darkblue);
+  background-color: var(--color-white);
 }
-.btnDay.part{
-  color: var(--gray);
+.part{
+  color: var(--color-darkblue);
   background-color: rgba(50, 63, 71, 0.2);
 }
-.btnDay.current{
-  color: var(--accent);
-  background-color: var(--gray);
+.current{
+  color: var(--color-lightgreen);
+  background-color: var(--color-darkblue);
 }
 .btnProcent{
   text-align: center;
