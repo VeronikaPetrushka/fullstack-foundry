@@ -1,5 +1,5 @@
 import css from './AdvantagesSection.module.css';
-import '../../styles/styles.scss';
+
 // import user1 from '../../img/user1.png';
 // import user2 from '../../img/user2.png';
 // import user3 from '../../img/user3.png';
