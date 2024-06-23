@@ -7,10 +7,24 @@ import icons from '../assets/logo.svg';
 import { useDispatch } from 'react-redux';
 //import { addContact } from '../../redux/contactsSlice';
 
+const initialValues = {
+  username: '',
+  email: '',
+  number: '',
+  file: '',
+};
+
 const schema = yup
-  .object({
-    firstName: yup.string().required(),
-    age: yup.number().positive().integer().required(),
+  .object()
+  .shape({
+    username: yup
+      .string()
+      .min(2, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Name is required!'),
+    email: yup.string().email('Must be a valid email!').required('Required'),
+    number: yup.number().positive().integer().required(),
+    file: yup.mixed().required('Required'),
   })
   .required();
 
@@ -18,7 +32,7 @@ export default function UserSettingsForm() {
   //const dispatch = useDispatch();
 
   const {
-    register,
+    register = { initialValues },
     handleSubmit,
     formState: { errors },
   } = useForm(schema);
@@ -30,7 +44,6 @@ export default function UserSettingsForm() {
         <label>
           <input type="file" {...register('file', { required: true })} />
         </label>
-        {errors.option && <p>{errors.option.message}</p>}
         <button type="submit">
           <img src={icons.upload} alt="upload" />
           Upload a photo
@@ -53,7 +66,7 @@ export default function UserSettingsForm() {
       <div>
         <label>
           <h2>Your name</h2>
-          <input type="text" {...register('name')} />
+          <input type="text" {...register('username')} />
         </label>
 
         <label>
@@ -88,11 +101,28 @@ export default function UserSettingsForm() {
         </p>
       </div>
 
-      <input {...register('firstName')} />
-      <p>{errors.firstName?.message}</p>
+      <div>
+        <label>
+          Your weight in kilograms:
+          <input type="text" {...register('number')} />
+        </label>
 
-      <input {...register('age')} />
-      <p>{errors.age?.message}</p>
+        <label>
+          The time of active participation in sports:
+          <input type="text" {...register('number')} />
+        </label>
+      </div>
+
+      <div>
+        <p>
+          The required amount of water in liters per day:
+          <span>1.8 L</span>
+        </p>
+        <label>
+          <h2>Write down how much water you will drink:</h2>
+          <input {...register('number')} />
+        </label>
+      </div>
 
       <button type="submit">Save</button>
     </form>
