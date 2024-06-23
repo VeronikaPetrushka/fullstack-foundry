@@ -1,5 +1,5 @@
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
-import css 
+import css from './UserSettingsModal.module.css';
 
 const UserSettingsModal = () => {
   return (
