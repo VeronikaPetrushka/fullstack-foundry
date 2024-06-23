@@ -26,7 +26,6 @@ export default function UserSettingsForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h1>Setting</h1>
       <div>
         <label>
           <input type="file" {...register('file', { required: true })} />
@@ -44,12 +43,49 @@ export default function UserSettingsForm() {
           <input type="radio" value="Woman" {...register('option')} />
           Woman
         </label>
-
         <label>
           <input type="radio" value="Man" {...register('option')} />
           Man
         </label>
         {errors.option && <p>{errors.option.message}</p>}
+      </div>
+
+      <div>
+        <label>
+          <h2>Your name</h2>
+          <input type="text" {...register('name')} />
+        </label>
+
+        <label>
+          <h2>Email</h2>
+          <input type="email" {...register('email')} />
+        </label>
+        {errors.option && <p>{errors.option.message}</p>}
+      </div>
+
+      <div>
+        <h2>My daily norma</h2>
+        <p>
+          For woman:
+          <span>V=(M*0,03) + (T*0,4)</span>
+        </p>
+
+        <p>
+          For man:
+          <span>V=(M*0,04) + (T*0,6)</span>
+        </p>
+
+        <p>
+          <span>*</span> V is the volume of the water norm in liters per day, M
+          is your body weight, T is the time of active sports, or another type
+          of activity commensurate in terms of loads (in the absence of these,
+          you must set 0)
+        </p>
+
+        <p>
+          <span>!</span>
+          Active time in hours
+        </p>
       </div>
 
       <input {...register('firstName')} />
