@@ -1,7 +1,7 @@
 import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
 
-const AddWaterBtn = ({ isBig = false }) => {
+const AddWaterBtn = ({ isBig = true }) => {
   return (
     <div className={css.addBtnWrap}>
       <button
