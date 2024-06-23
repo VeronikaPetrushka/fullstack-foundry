@@ -1,6 +1,8 @@
 import Modal from 'react-modal';
-import css from './Modal.module.css';
-import Icon from '../../components/Icon/Icon';
+import css from './BasicModal.module.css';
+import Icon from '../Icon/Icon';
+import PropTypes from 'prop-types';
+
 
 
 Modal.setAppElement('#root');
@@ -22,4 +24,8 @@ export const BasicModal = ({ isOpen, onClose, children }) => {
   );
 };
 
-
+BasicModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node,
+};

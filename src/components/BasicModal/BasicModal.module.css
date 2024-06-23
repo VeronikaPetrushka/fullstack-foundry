@@ -1,16 +1,7 @@
 .modal {
     position: relative;
-    /* width: 343px; */
-    /* background: #fff;
-    border-radius: 15px; */
   }
-  
-  /* @media screen and (min-width: 768px) {
-        .modal {
-          width: 520px;
-        }
-      } */
-  
+
   .overlay {
     display: flex;
     justify-content: center;
