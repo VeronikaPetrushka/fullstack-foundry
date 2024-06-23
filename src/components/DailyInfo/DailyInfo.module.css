@@ -1,0 +1,32 @@
+.dailyInfo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 30px;
+    background: rgb(240, 239, 244);
+  }
+  
+  .dailyHeader {
+    display: flex;
+    justify-content: space-between;
+  margin-bottom: 24px;
+    
+  }
+
+  .title {   
+font-family: Poppins;
+font-size: 20px;
+font-weight: 700;
+  }
+
+  .dailyContent {
+    display: flex;
+    
+  }
+
+  .button {
+    border: none;
+    
+  }
