@@ -3,7 +3,7 @@ import * as M from '../../constants/month.js';
 import Icon from '../Icon/Icon.jsx'
 import css from './CalendarPagination.module.css';
 
-export const CalendarPagination = ({today, selectedDate, handlePrevMonth, handleNextMonth}) => {
+const CalendarPagination = ({today, selectedDate, handlePrevMonth, handleNextMonth}) => {
 
   const showNextMonth = selectedDate.month === today.month && selectedDate.year === today.year ? true : false;
   return (
@@ -18,6 +18,8 @@ export const CalendarPagination = ({today, selectedDate, handlePrevMonth, handle
       </div>
   )
 }
+
+export default CalendarPagination;
 
 CalendarPagination.propTypes = {
   today: PropTypes.object,
