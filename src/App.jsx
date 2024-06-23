@@ -7,15 +7,14 @@ import { Route, Routes } from 'react-router-dom';
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 // const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
 // const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
-// const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
+const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
 
 const App = () => {
-
   return (
     // <SharedLayout>
-       <Routes>
-        <Route path="/" element={<HomePage />} />
-        {/* <Route
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      {/* <Route
           path="/signup"
           element={
             <RestrictedRoute redirectTo="/" component={<SignUpPage />} />
@@ -33,7 +32,8 @@ const App = () => {
             <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
           }
         /> */}
-       </Routes>
+      <Route path="/tracker" element={<TrackerPage />} />
+    </Routes>
     //  {/* </SharedLayout> */}
   );
 };
