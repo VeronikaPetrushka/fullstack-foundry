@@ -1,6 +1,3 @@
-@import-normalize; /* bring in normalize.css styles */
-
-
 :root {
   /* Colors */
   --color-white: #ffffff;
@@ -15,7 +12,7 @@
   /* Animation */
   --animation: 150ms ease-in;
 
-  
+
 }
 
 
