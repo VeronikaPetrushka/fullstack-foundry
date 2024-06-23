@@ -2,7 +2,7 @@ import { WelcomeSection } from '../../components/WelcomeSection/WelcomeSection';
 import { Calendar } from '../../components/Calendar/Calendar';
 import Container from '../../components/Container/Container';
 import Page from '../../components/Page/Page';
-import '../../styles/styles.scss';
+import '../../index.css';
 import css from './TrackerPage.module.css';
 
 function daysInMonth(month, year) {
@@ -50,9 +50,6 @@ const TrackerPage = () => {
     { day: 25, procent: 100 },
     { day: 26, procent: 100 },
     { day: 27, procent: 100 },
-    { day: 28, procent: 100 },
-    { day: 29, procent: 100 },
-    { day: 30, procent: 100 },
   ];
 
   return (

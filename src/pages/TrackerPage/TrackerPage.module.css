@@ -1,6 +1,6 @@
 .trackerSection {
   border-radius: 30px;
-  background: var(--color-lightgray);
+  background: var(--light);
   padding: 40px 20px;
   margin-bottom: 16px;
 }
