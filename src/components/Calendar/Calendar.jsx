@@ -4,7 +4,7 @@ import { CalendarItem } from '../CalendarItem/CalendarItem';
 import Icon from '../Icon/Icon.jsx';
 import css from './Calendar.module.css';
 
-export const Calendar = ({ data = [], today }) => {
+export const Calendar = ({ data = [], today, selectedDate, handlePrevMonth, handleNextMonth }) => {
   const days = [];
   for (let i = 1; i <= today.dayInMonth; i++) {
     let record = data.find(day => day.day === i);
@@ -20,8 +20,10 @@ export const Calendar = ({ data = [], today }) => {
       <div className={css.calendarHead}>
         <div className={css.calendarTitle}>Month</div>
         <div className={css.calendarSwitcher}>
-          <CalendarPagination today={today} />
-          <Icon iconName="pie-chart" width="20" height="20" />
+          <CalendarPagination today={today} selectedDate={selectedDate} handleNextMonth={handleNextMonth} handlePrevMonth={handlePrevMonth} />
+          <button type='button' className={css.calendarTypeBtn}>
+          <Icon iconName="pie-chart" width='18' height='18' styles={css.calendarTypeIcon} />
+          </button>
         </div>
       </div>
       <div className={css.calendarBody}>
@@ -38,4 +40,7 @@ export const Calendar = ({ data = [], today }) => {
 Calendar.propTypes = {
   data: PropTypes.array,
   today: PropTypes.object,
+  selectedDate: PropTypes.object,
+  handlePrevMonth: PropTypes.func,
+  handleNextMonth: PropTypes.func
 };

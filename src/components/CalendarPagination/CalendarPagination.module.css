@@ -1,4 +1,4 @@
-.calendarPaginator{
+.calendarPaginator {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -14,11 +14,11 @@
   color: #323f47;
   text-align: center;
 }
-.calendarPageBtn{
+.calendarPageBtn {
   width: 18px;
   height: 18px;
   background: transparent;
-  border:none;
+  border: none;
   outline: none;
   cursor: pointer;
   padding: 0;
@@ -28,4 +28,17 @@
   stroke: #323f47;
   width: 18px;
   height: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .calendarPaginator {
+    gap: 20px;
+  }
+  .calendarMonth {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (min-width: 1440px) {
 }
