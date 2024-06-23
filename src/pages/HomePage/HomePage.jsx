@@ -3,7 +3,6 @@ import { AdvantagesSection } from '../../components/AdvantagesSection/Advantages
 import Container from '../../components/Container/Container';
 import Page from '../../components/Page/Page';
 
-
 const Homepage = () => {
   return (
     <Container>
