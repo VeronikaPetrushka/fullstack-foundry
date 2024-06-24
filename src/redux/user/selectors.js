@@ -1,33 +1,13 @@
-import { createSelector } from '@reduxjs/toolkit';
+export const selectUserName = state => state.name;
 
-const selectUser = state => state.user;
+export const selectUserEmail = state => state.email;
 
-export const selectUserName = createSelector(
-  [selectUser],
-  user => user.data?.name
-);
+export const selectDailyNorma = state => state.dailyNorma;
 
-export const selectUserEmail = createSelector(
-  [selectUser],
-  user => user.data?.email
-);
+export const selectGender = state => state.gender;
 
-export const selectDailyNorma = createSelector(
-  [selectUser],
-  user => user.data?.dailyNorma
-);
+export const selectWeight = state => state.weight;
 
-export const selectGender = createSelector(
-  [selectUser],
-  user => user.data?.gender
-);
+export const selectTimeActivity = state => state.timeActivity;
 
-export const selectWeight = createSelector(
-  [selectUser],
-  user => user.data?.weight
-);
-
-export const selectTimeActivity = createSelector(
-  [selectUser],
-  user => user.data?.timeActivity
-);
+export const selectAvatar = state => state.avatar;
