@@ -20,7 +20,7 @@ const UserBar = () => {
                     <img src={avatar} className={css.avatarImg} />
                 </div> : 
                 <div className={css.avatarBox}>
-                    <img src="src\img\avatar-default.jpg" className={css.avatarImg}/>
+                    <img src="src\assets\img\avatar-default.jpg" className={css.avatarImg}/>
                 </div>}
         {/* <UserBarPopover /> */}
         </div>
