@@ -8,7 +8,7 @@ import {
 } from './operations.js';
 
 const initialState = {
-  waterRecords: [],
+  water: {},
   isLoading: false,
   isError: null,
 };
@@ -35,10 +35,7 @@ const waterSlice = createSlice({
     builder.addCase(dailyActivity.pending, handlePending);
     builder.addCase(dailyActivity.fulfilled, (state, action) => {
       state.isLoading = false;
-      state._id = action.payload._id;
-      state.amount = action.payload.amount;
-      state.owner = action.payload.owner;
-      state.date = action.payload.date;
+      state.water = action.payload.water;
     });
     builder.addCase(dailyActivity.rejected, handleRejected);
 
@@ -46,10 +43,7 @@ const waterSlice = createSlice({
     builder.addCase(monthActivity.pending, handlePending);
     builder.addCase(monthActivity.fulfilled, (state, action) => {
       state.isLoading = false;
-      state._id = action.payload._id;
-      state.amount = action.payload.amount;
-      state.owner = action.payload.owner;
-      state.date = action.payload.date;
+      state.water = action.payload.water;
     });
     builder.addCase(monthActivity.rejected, handleRejected);
 
@@ -57,7 +51,7 @@ const waterSlice = createSlice({
     builder.addCase(addWater.pending, handlePending);
     builder.addCase(addWater.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.waterRecords.push(action.payload);
+      state.water.push(action.payload);
     });
     builder.addCase(addWater.rejected, handleRejected);
 
@@ -65,7 +59,7 @@ const waterSlice = createSlice({
     builder.addCase(editWater.pending, handlePending);
     builder.addCase(editWater.fulfilled, (state, action) => {
       state.isLoading = false;
-      const index = state.waterRecords.findIndex(
+      const index = state.water.findIndex(
         record => record._id === action.payload._id
       );
       if (index !== -1) {
@@ -78,7 +72,7 @@ const waterSlice = createSlice({
     builder.addCase(deleteWater.pending, handlePending);
     builder.addCase(deleteWater.fulfilled, (state, action) => {
       state.isLoading = false;
-      const index = state.waterRecords.findIndex(
+      const index = state.water.findIndex(
         record => record._id === action.payload._id
       );
       state.items.splice(index, 1);
