@@ -12,7 +12,7 @@ import {
 } from '../services/aquatrackApi.js';
 import { setAuthHeader, clearAuthHeader } from '../services/aquatrackApi.js';
 
-export const register = createAsyncThunk(
+export const signup = createAsyncThunk(
   'auth/register',
   async (formData, thunkAPI) => {
     try {
