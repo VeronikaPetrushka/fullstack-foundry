@@ -5,7 +5,7 @@
     background-color: var(--light);
   
     
-    background-image: url(../../img/homePage.jpg);
+    background-image: url(../../../assets/img/HomePage/HomePageGirl-min.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -13,7 +13,7 @@
   }
   @media only screen and (min-resolution: 192dpi) {
     .advantagesSection {
-      background-image: url(../../img/homePage-2x.jpg);
+      background-image: url(../../../assets/img/HomePage/HomePageGirl2x-min.png);
     }
   }
 
