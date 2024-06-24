@@ -32,7 +32,14 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const { data } = await instance.get('/auth/refresh');
+        const { data } = await axios.get('https://aquatrack-api-myzh.onrender.com/api/auth/refresh', {
+          withCredentials: false,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          }
+        });
+        console.log(data);
 
         localStorage.setItem('token', data.token);
 
