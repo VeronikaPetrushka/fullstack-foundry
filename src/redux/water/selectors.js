@@ -1,23 +1,7 @@
-import { createSelector } from '@reduxjs/toolkit';
+export const selectWaterAmount = state => state.amount;
 
-const selectWater = state => state.water;
+export const selectWaterDate = state => state.date;
 
-export const selectWaterAmount = createSelector(
-  [selectWater],
-  user => user.data?.amount
-);
+export const selectWaterId = state => state._id;
 
-export const selectWaterDate = createSelector(
-  [selectWater],
-  user => user.data?.date
-);
-
-export const selectWaterId = createSelector(
-  [selectWater],
-  user => user.data?._id
-);
-
-export const selectWaterOwner = createSelector(
-  [selectWater],
-  user => user.data?.owner
-);
+export const selectWaterOwner = state => state.owner;
