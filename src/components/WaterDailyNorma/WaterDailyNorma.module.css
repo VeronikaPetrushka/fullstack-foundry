@@ -1,0 +1,20 @@
+.dailyNormaWrap {
+  padding: 12px;
+  background-color: var(--white);
+  position: absolute;
+  left: 16px;
+  top: 122px;
+  border-radius: 15px;
+}
+.quantity {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 6px;
+  color: var(--grey);
+}
+.desc {
+  font-size: 10px;
+  line-height: 1;
+  color: var(--lightGrey);
+}
