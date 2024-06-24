@@ -7,9 +7,9 @@
   --lightGreenHover: #87d28d;
   --light: #F0EFF4;
   --white: #FFFFFF;
-  
-    /* Animation */
-    --animation: 150ms ease-in;
+
+  /* Animation */
+  --animation: 150ms ease-in;
 
   max-width: 1440px;
   margin: 0 auto;
@@ -102,8 +102,8 @@ main {
 
 body {
   line-height: 1;
- 
- 
+
+
 }
 
 ol,
@@ -131,4 +131,10 @@ table {
 
 input {
   border-radius: 0;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 }
