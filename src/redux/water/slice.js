@@ -8,7 +8,9 @@ import {
 } from './operations.js';
 
 const initialState = {
-  water: {},
+  waterRecords: [],
+  waterDaily: [],
+  waterMonthly: [],
   isLoading: false,
   isError: null,
 };
@@ -35,7 +37,7 @@ const waterSlice = createSlice({
     builder.addCase(dailyActivity.pending, handlePending);
     builder.addCase(dailyActivity.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.water = action.payload.water;
+      state.waterDaily = action.payload.waterDaily;
     });
     builder.addCase(dailyActivity.rejected, handleRejected);
 
@@ -43,7 +45,7 @@ const waterSlice = createSlice({
     builder.addCase(monthActivity.pending, handlePending);
     builder.addCase(monthActivity.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.water = action.payload.water;
+      state.waterMonthly = action.payload.waterMonthly;
     });
     builder.addCase(monthActivity.rejected, handleRejected);
 
@@ -51,7 +53,7 @@ const waterSlice = createSlice({
     builder.addCase(addWater.pending, handlePending);
     builder.addCase(addWater.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.water.push(action.payload);
+      state.waterRecords.push(action.payload);
     });
     builder.addCase(addWater.rejected, handleRejected);
 
@@ -59,7 +61,7 @@ const waterSlice = createSlice({
     builder.addCase(editWater.pending, handlePending);
     builder.addCase(editWater.fulfilled, (state, action) => {
       state.isLoading = false;
-      const index = state.water.findIndex(
+      const index = state.waterRecords.findIndex(
         record => record._id === action.payload._id
       );
       if (index !== -1) {
@@ -72,7 +74,7 @@ const waterSlice = createSlice({
     builder.addCase(deleteWater.pending, handlePending);
     builder.addCase(deleteWater.fulfilled, (state, action) => {
       state.isLoading = false;
-      const index = state.water.findIndex(
+      const index = state.waterRecords.findIndex(
         record => record._id === action.payload._id
       );
       state.items.splice(index, 1);

@@ -1,14 +1,14 @@
 import css from './UserPanel.module.css'
 import { useSelector } from 'react-redux';
-import { selectUserName } from '../../redux/user/selectors';
+import { selectUserInfo } from '../../redux/user/selectors';
 
 const UserPanel = () => {
-    const userName = useSelector(selectUserName)
+  const user = useSelector(selectUserInfo);
     return (
         <div className={css.hiUserWrapper}>
             <h1 className={css.hiUser}>Hello,
-                {userName ? (
-                    <span className={css.userName}> {userName}</span>
+                {user.userName ? (
+                    <span className={css.userName}> {user.userName}</span>
                 ) : (
                     <span className={css.userName}> You</span>
                 )}

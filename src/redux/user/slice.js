@@ -29,7 +29,7 @@ const usersSlice = createSlice({
     builder.addCase(userInfo.pending, handlePending);
     builder.addCase(userInfo.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.user = action.payload.user;
+      state.user = action.payload;
     });
     builder.addCase(userInfo.rejected, handleRejected);
 
@@ -37,7 +37,7 @@ const usersSlice = createSlice({
     builder.addCase(updateUserSettings.pending, handlePending);
     builder.addCase(updateUserSettings.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.user = action.payload.user;
+      state.user = action.payload;
     });
     builder.addCase(updateUserSettings.rejected, handleRejected);
 
