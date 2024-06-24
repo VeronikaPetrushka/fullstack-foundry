@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
-  register,
+  signup,
   login,
   loginGoogle,
   tokenRefresh,
@@ -59,7 +59,7 @@ const authSlice = createSlice({
       })
       .addCase(logout.rejected, handleRejected)
       // REGISTER
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(signup.fulfilled, (state, action) => {
         state.isLoading = false;
         state.userData = action.payload.user;
         state.token = action.payload.token;
@@ -72,8 +72,8 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isSignedIn = true;
       })
-      .addMatcher(isAnyOf(register.pending, login.pending), handlePending)
-      .addMatcher(isAnyOf(register.rejected, login.rejected), handleRejected);
+      .addMatcher(isAnyOf(signup.pending, login.pending), handlePending)
+      .addMatcher(isAnyOf(signup.rejected, login.rejected), handleRejected);
   },
 });
 

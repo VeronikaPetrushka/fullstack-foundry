@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { login } from 'redux/auth/operations';
+import { login } from '../../redux/auth/operations';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
