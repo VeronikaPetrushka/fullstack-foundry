@@ -10,8 +10,6 @@ import {
 const INITIAL_STATE = {
   user: {
     email: null,
-    password: null,
-    repeatPassword: null,
   },
   token: null,
   isSignedIn: false,
@@ -67,6 +65,7 @@ const authSlice = createSlice({
       })
       //LOGIN
       .addCase(login.fulfilled, (state, action) => {
+        localStorage.setItem('token', action.payload.token);
         state.isLoading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;

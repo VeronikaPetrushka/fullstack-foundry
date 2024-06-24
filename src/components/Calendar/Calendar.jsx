@@ -1,11 +1,18 @@
 import CalendarPagination from '../CalendarPagination/CalendarPagination';
 import CalendarItem from '../CalendarItem/CalendarItem';
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { userInfo } from '../../redux/user/operations';
+
 
 import Icon from '../Icon/Icon.jsx';
 import css from './Calendar.module.css';
 
  const Calendar = () => {
+
+  // test for token refreshing
+  const dispatch = useDispatch();
+  dispatch(userInfo());
 
   function daysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
