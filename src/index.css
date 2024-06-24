@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 :root {
-  --dark-grey: #2F2F2F;
-  --grey: #323F47;
-  --green: #9BE1A0;
+  --dark-grey: #2f2f2f;
+  --grey: #323f47;
+  --green: #9be1a0;
   --lightGreenHover: #87d28d;
-  --light: #F0EFF4;
-  --white: #FFFFFF;
-
+  --light: #f0eff4;
+  --white: #ffffff;
+  --lightGrey: #2f2f2f99;
   /* Animation */
   --animation: 150ms ease-in;
 
@@ -17,7 +17,7 @@
   color: var(--grey);
   background-color: var(--white);
 
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -102,8 +102,6 @@ main {
 
 body {
   line-height: 1;
-
-
 }
 
 ol,
