@@ -11,7 +11,7 @@ const CalendarPagination = ({
   handleNextMonth,
 }) => {
   const showPrevMonth =
-    minDay.month === minDay.month && selectedDate.year === minDay.year
+  selectedDate.month === minDay.month && selectedDate.year === minDay.year
       ? true
       : false;
   const showNextMonth =
