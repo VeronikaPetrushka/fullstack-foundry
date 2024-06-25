@@ -11,7 +11,6 @@ const SignUpPage = () => {
         <title>AQUATRACK: Create your account</title>
       </Helmet>
       <Page>
-        <title>Sign Up Page</title>
         <SignUpForm />
         <div className={css.divDesktopOnly}>
           <AdvantagesSection />
