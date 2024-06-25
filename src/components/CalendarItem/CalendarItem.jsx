@@ -3,7 +3,7 @@ import css from './CalendarItem.module.css';
 
 let dayClass;
 
-const CalendarItem = ({ day, today }) => {
+const CalendarItem = ({ day, today, handleClick }) => {
   if (day.percentageOfNorma < 100) {
     dayClass = css.part;
   } else if (day.day === today.day) {
@@ -15,7 +15,7 @@ const CalendarItem = ({ day, today }) => {
   const activeBtn = day.percentageOfNorma > 0 ? false : true;
 
   return (
-    <button type="button" className={css.calendarBtn} disabled={activeBtn}>
+    <button type="button" className={css.calendarBtn} disabled={activeBtn} onClick={() => {handleClick(day.date)}}>
       <span className={classNames.join(' ')}>{day.day}</span>
       <span className={css.btnProcent}>
         {day.percentageOfNorma === 0 ? '' : day.percentageOfNorma + '%'}
@@ -29,4 +29,5 @@ export default CalendarItem;
 CalendarItem.propTypes = {
   day: PropTypes.object.isRequired,
   today: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };

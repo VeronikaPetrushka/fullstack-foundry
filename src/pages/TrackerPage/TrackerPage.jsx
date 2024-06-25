@@ -13,12 +13,16 @@ const TrackerPage = () => {
     dispatch(userInfo());
   });
 
+  const handleCalendarBtnClick = (selectedDate) => {
+    console.log(selectedDate);
+  };
+
   return (
     <Page>
       <WaterMainInfo />
       <section className={css.trackerSection}>
         <WaterDetailedInfo />
-        <Calendar />
+        <Calendar handleClick={handleCalendarBtnClick} />
       </section>
     </Page>
   );

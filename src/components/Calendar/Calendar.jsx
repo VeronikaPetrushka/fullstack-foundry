@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import CalendarPagination from '../CalendarPagination/CalendarPagination';
 import CalendarItem from '../CalendarItem/CalendarItem';
 import { useState, useEffect } from 'react';
@@ -10,7 +11,7 @@ import { selectUserInfo } from '../../redux/user/selectors';
 import Icon from '../Icon/Icon.jsx';
 import css from './Calendar.module.css';
 
-const Calendar = () => {
+const Calendar = ({handleClick}) => {
   const today = getDateObject();
 
   const [selectedDate, setSelectedDate] = useState(today);
@@ -73,12 +74,12 @@ const Calendar = () => {
 
   const days = [];
   for (let i = 1; i <= today.dayInMonth; i++) {
-    days[i] = { day: i, percentageOfNorma: 0, amount: 0 };
+    days[i] = { day: i, percentageOfNorma: 0, totalAmount: 0, date: '' };
   }
   for (const day of monthData) {
-    let obj = new Date(day.date).getDate();
-    days[obj].percentageOfNorma = day.percentageOfNorma;
-    days[obj].amount = day.totalAmount;
+    let dayNumber = new Date(day.date).getDate();
+    day.percentageOfNorma > 100 ? (day.percentageOfNorma = 100) : day.percentageOfNorma;
+    days[dayNumber] = {...days[dayNumber], ...day};
   }
 
   return (
@@ -106,7 +107,7 @@ const Calendar = () => {
       <div className={css.calendarBody}>
         {days.map(day => (
           <div className={css.calendarItem} key={day.day}>
-            <CalendarItem day={day} today={today} />
+            <CalendarItem day={day} today={today} handleClick={handleClick} />
           </div>
         ))}
       </div>
@@ -115,3 +116,7 @@ const Calendar = () => {
 };
 
 export default Calendar;
+
+Calendar.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};
