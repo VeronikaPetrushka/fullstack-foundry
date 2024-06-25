@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+const API_URL = 'https://aquatrack-api-myzh.onrender.com/api';
+// const API_URL = 'http://localhost:8080/api';
+
 const instance = axios.create({
-  baseURL: 'https://aquatrack-api-myzh.onrender.com/api',
-  withCredentials: false,
+  baseURL: API_URL,
+  withCredentials: true,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -32,8 +35,8 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const { data } = await axios.get('https://aquatrack-api-myzh.onrender.com/api/auth/refresh', {
-          withCredentials: false,
+        const { data } = await axios.get(`${API_URL}/auth/refresh`, {
+          withCredentials: true,
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
