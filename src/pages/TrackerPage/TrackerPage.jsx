@@ -9,6 +9,7 @@ import Calendar from '../../components/Calendar/Calendar';
 import css from './TrackerPage.module.css';
 
 const TrackerPage = () => {
+
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
   const [selectedDate, setSelectedDate] = useState(getDateObject());
 
@@ -19,8 +20,8 @@ const TrackerPage = () => {
 
   const handleCalendarBtnClick = (btnDate) => {
     setSelectedDate(getDateObject(btnDate));
-    console.log(selectedDate);
   };
+  console.log(selectedDate);
 
   return (
     <Page>
