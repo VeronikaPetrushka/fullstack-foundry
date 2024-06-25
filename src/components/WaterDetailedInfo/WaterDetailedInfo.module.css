@@ -1,0 +1,9 @@
+.waterDetailedInfoWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+  gap: 15px;
+}

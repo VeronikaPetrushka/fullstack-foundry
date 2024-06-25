@@ -10,14 +10,16 @@ import {
   requestResetPassword,
   requestSendVerify,
 } from '../services/aquatrackApi.js';
+import { setAuthHeader, clearAuthHeader } from '../services/aquatrackApi.js';
 
-export const register = createAsyncThunk(
+export const signup = createAsyncThunk(
   'auth/register',
   async (formData, thunkAPI) => {
     try {
-      const response = await requestRegister(formData);
+      const res = await requestRegister(formData);
 
-      return response;
+      setAuthHeader(res.token);
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -28,9 +30,10 @@ export const login = createAsyncThunk(
   'auth/login',
   async (formData, thunkAPI) => {
     try {
-      const response = await requestLogin(formData);
+      const res = await requestLogin(formData);
 
-      return response;
+      setAuthHeader(res.token);
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -43,9 +46,10 @@ export const loginGoogle = createAsyncThunk(
   'auth/loginGoogle',
   async (formData, thunkAPI) => {
     try {
-      const response = await requestGoogleLogin(formData);
+      const res = await requestGoogleLogin(formData);
 
-      return response;
+      setAuthHeader(res.token);
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -56,9 +60,10 @@ export const tokenRefresh = createAsyncThunk(
   'auth/refresh',
   async (formData, thunkAPI) => {
     try {
-      const response = await refreshToken(formData);
+      const res = await refreshToken(formData);
 
-      return response;
+      setAuthHeader(res.token);
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -70,6 +75,8 @@ export const logout = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       await requestLogout(formData);
+
+      clearAuthHeader();
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -80,9 +87,9 @@ export const sendVerify = createAsyncThunk(
   'auth/verify',
   async ({ verificationToken, formData }, thunkAPI) => {
     try {
-      const response = await requestSendVerify(verificationToken, formData);
+      const res = await requestSendVerify(verificationToken, formData);
 
-      return response;
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -93,9 +100,9 @@ export const resendVerify = createAsyncThunk(
   'auth/re-verify',
   async (formData, thunkAPI) => {
     try {
-      const response = await requestResendVerify(formData);
+      const res = await requestResendVerify(formData);
 
-      return response;
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -106,9 +113,9 @@ export const forgotPassword = createAsyncThunk(
   'auth/forgot-password',
   async (formData, thunkAPI) => {
     try {
-      const response = await requestForgotPassword(formData);
+      const res = await requestForgotPassword(formData);
 
-      return response;
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -119,9 +126,9 @@ export const resetPassword = createAsyncThunk(
   'auth/reset-password',
   async (formData, thunkAPI) => {
     try {
-      const response = await requestResetPassword(formData);
+      const res = await requestResetPassword(formData);
 
-      return response;
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }

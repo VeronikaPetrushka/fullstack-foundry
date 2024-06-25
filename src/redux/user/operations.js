@@ -4,12 +4,13 @@ import {
   updateUserProfile,
   uploadUserAvatar,
 } from '../services/aquatrackApi.js';
+import { setAuthHeader } from '../services/aquatrackApi.js';
 
 export const userInfo = createAsyncThunk('users/current', async thunkAPI => {
   try {
-    const response = await requestUserInfo();
+    const res = await requestUserInfo();
 
-    return response;
+    return res;
   } catch (err) {
     return thunkAPI.rejectWithValue(err.message);
   }
@@ -18,10 +19,19 @@ export const userInfo = createAsyncThunk('users/current', async thunkAPI => {
 export const updateUserSettings = createAsyncThunk(
   'users/update-user',
   async (formData, thunkAPI) => {
-    try {
-      const response = await updateUserProfile(formData);
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
 
-      return response;
+    if (!persistedToken) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+
+    try {
+      setAuthHeader(persistedToken);
+
+      const res = await updateUserProfile(formData);
+
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -32,9 +42,9 @@ export const uploadAvatar = createAsyncThunk(
   'users/avatar',
   async (formData, thunkAPI) => {
     try {
-      const response = await uploadUserAvatar(formData);
+      const res = await uploadUserAvatar(formData);
 
-      return response;
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }

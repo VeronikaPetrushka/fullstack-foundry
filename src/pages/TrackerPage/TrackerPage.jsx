@@ -1,11 +1,23 @@
-import DailyInfo from "components/DailyInfo/DailyInfo";
+import Page from '../../components/Page/Page';
+import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
+import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
 
-const TrackerPage = () => {
+import Calendar from '../../components/Calendar/Calendar';
+import '../../index.css';
+import css from './TrackerPage.module.css';
+
+  const TrackerPage = () => {
+
+
   return (
-    <div>
-<DailyInfo />
-    </div>
-  )
-}
+      <Page>
+        <WaterMainInfo />
+        <section className={css.trackerSection}>
+          <WaterDetailedInfo />
+          <Calendar />
+        </section>
+      </Page>
+  );
+};
 
 export default TrackerPage;
