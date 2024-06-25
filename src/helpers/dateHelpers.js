@@ -28,6 +28,7 @@ export const getDateObject = (date = null) => {
       currentDate.getFullYear()
     ),
     month_name: months_en[currentDate.getMonth() + 1],
+    fullDate: currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'),
   };
   return today;
 };

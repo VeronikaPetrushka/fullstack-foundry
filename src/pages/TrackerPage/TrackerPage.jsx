@@ -12,23 +12,23 @@ const TrackerPage = () => {
 
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
   const [selectedDate, setSelectedDate] = useState(getDateObject());
+  const handleCalendarBtnClick = (btnDate) => {
+    setSelectedDate(getDateObject(btnDate));
+  };
+  // console.log(selectedDate);
+
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(userInfo());
   });
 
-  const handleCalendarBtnClick = (btnDate) => {
-    setSelectedDate(getDateObject(btnDate));
-  };
-  console.log(selectedDate);
-
   return (
     <Page>
       <WaterMainInfo />
       <section className={css.trackerSection}>
         <WaterDetailedInfo />
-        <Calendar handleClick={handleCalendarBtnClick} />
+        <Calendar selectedDate={selectedDate} handleClick={handleCalendarBtnClick} />
       </section>
     </Page>
   );
