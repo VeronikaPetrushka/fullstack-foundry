@@ -4,7 +4,7 @@ import css from './CalendarItem.module.css';
 let dayClass;
 
 const CalendarItem = ({ day, today }) => {
-  if (day.procent < 100) {
+  if (day.percentageOfNorma < 100) {
     dayClass = css.part;
   } else if (day.day === today.day) {
     dayClass = css.current;
@@ -12,13 +12,13 @@ const CalendarItem = ({ day, today }) => {
     dayClass = css.full;
   }
   const classNames = [css.btnDay, dayClass];
-  const activeBtn = day.day > 0 ? false : true;
+  const activeBtn = day.percentageOfNorma > 0 ? false : true;
 
   return (
     <button type="button" className={css.calendarBtn} disabled={activeBtn}>
       <span className={classNames.join(' ')}>{day.day}</span>
       <span className={css.btnProcent}>
-        {day.procent === 0 ? '' : day.procent + '%'}
+        {day.percentageOfNorma === 0 ? '' : day.percentageOfNorma + '%'}
       </span>
     </button>
   );

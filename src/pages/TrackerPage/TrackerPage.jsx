@@ -1,22 +1,26 @@
 import Page from '../../components/Page/Page';
 import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
 import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
-
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { userInfo } from '../../redux/user/operations';
 import Calendar from '../../components/Calendar/Calendar';
-import '../../index.css';
 import css from './TrackerPage.module.css';
 
-  const TrackerPage = () => {
-
+const TrackerPage = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(userInfo());
+  });
 
   return (
-      <Page>
-        <WaterMainInfo />
-        <section className={css.trackerSection}>
-          <WaterDetailedInfo />
-          <Calendar />
-        </section>
-      </Page>
+    <Page>
+      <WaterMainInfo />
+      <section className={css.trackerSection}>
+        <WaterDetailedInfo />
+        <Calendar />
+      </section>
+    </Page>
   );
 };
 
