@@ -31,6 +31,7 @@
 }
 
 .input {
+  font-family: inherit;
   border: 1px solid rgba(47, 47, 47, 0.2);
   border-radius: 15px;
   outline: none;
@@ -58,6 +59,7 @@
 }
 
 .input::placeholder {
+  font-family: inherit;
   font-weight: 400;
   font-size: 14px;
   line-height: 18.06px;
@@ -86,6 +88,7 @@
   font-weight: 700;
   line-height: 1.29;
   letter-spacing: -0.14px;
+  text-wrap: nowrap;
   transition: background-color var(--animation);
   margin-bottom: 16px;
 }
@@ -118,7 +121,7 @@
   }
 
   .form {
-    max-width: 436px;
+    min-width: 436px;
     margin: auto;
   }
 
@@ -139,7 +142,7 @@
     margin-bottom: 20px;
   }
 
-  ::placeholder {
+  .input::placeholder {
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.16px;

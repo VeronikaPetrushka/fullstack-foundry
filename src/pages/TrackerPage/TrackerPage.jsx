@@ -1,4 +1,3 @@
-import Container from '../../components/Container/Container';
 import Page from '../../components/Page/Page';
 import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
 import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
@@ -11,7 +10,6 @@ import css from './TrackerPage.module.css';
 
 
   return (
-    <Container>
       <Page>
         <WaterMainInfo />
         <section className={css.trackerSection}>
@@ -19,7 +17,6 @@ import css from './TrackerPage.module.css';
           <Calendar />
         </section>
       </Page>
-    </Container>
   );
 };
 

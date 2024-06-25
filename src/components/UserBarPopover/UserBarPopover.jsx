@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Icon from "../Icon/Icon";
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal';
 import { LogOutModal } from '../LogOutModal/LogOutModal';
+import { BasicModal } from '../BasicModal/BasicModal';
 
 const UserBarPopover = () => {
     const [activeModal, setActiveModal] = useState(null);
@@ -34,8 +35,16 @@ const UserBarPopover = () => {
                 Log out
             </button>
 
-            {activeModal === 'settings' && <UserSettingsModal onClose={closeModal} />}
-            {activeModal === 'log-out' && <LogOutModal onClose={closeModal} />}
+              {activeModal === 'settings' && (
+                <BasicModal isOpen onClose={closeModal}>
+                    <UserSettingsModal onClose={closeModal} />
+                </BasicModal>
+            )}
+            {activeModal === 'log-out' && (
+                <BasicModal isOpen onClose={closeModal}>
+                    <LogOutModal onClose={closeModal} />
+                </BasicModal>
+            )}
         </div>
     );
 }

@@ -1,11 +1,11 @@
 import { Suspense } from 'react';
-import css from './SharedLayout.module.css'
+import Container from './Container/Container';
 
 const SharedLayout = ({children}) => {
     return (
-    <div className={css.SharedLayout}>
+   <Container>
       <Suspense fallback={null}>{children}</Suspense>
-    </div>
+   </Container>
     )
 }
 
