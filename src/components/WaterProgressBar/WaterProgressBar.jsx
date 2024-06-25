@@ -2,26 +2,37 @@ import Icon from '../Icon/Icon.jsx';
 import css from './WaterProgressBar.module.css';
 
 const WaterProgressBar = () => {
+  const percentage = 35;
   return (
     <div className={css.progressBarContainer}>
-      <div>
-        <div className={css.nameBar}>Today</div>
+      <div className={css.nameBar}>
+        <div>Today</div>
+      </div>
+      <div className={css.percentDynamicContainer}>
+        <div
+          className={css.percentDynamic}
+          style={{
+            left: percentage < 20 ? `${percentage - 2}%` : `${percentage - 4}%`,
+          }}
+        >
+          {`${percentage}%`}
+        </div>
       </div>
       <div className={css.progressBar}>
-        <div className={css.progress} style={{ width: `40%` }}>
+        <div className={css.progress} style={{ width: `${percentage}%` }}>
           <Icon
             iconName="circle"
             width="12"
             height="12"
             styles={css.circle}
-            style={{ left: `40% ` }}
+            style={{ left: `${percentage}%` }}
           />
         </div>
       </div>
       <div className={css.percentContainer}>
-        <span className={css.percentNumber}>0%</span>
-        <span className={css.percentNumber}>50%</span>
-        <span className={css.percentNumber}>100%</span>
+        <span>0%</span>
+        <span className={css.percent50}>50%</span>
+        <span>100%</span>
       </div>
     </div>
   );

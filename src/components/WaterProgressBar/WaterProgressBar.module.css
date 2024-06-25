@@ -1,77 +1,79 @@
 .progressBarContainer {
   position: absolute;
-  margin: 0 auto;
   top: 225px;
   width: 198px;
-  height: 70px;
   border-radius: 15px;
-  padding: 12px;
+  padding: 12px 14px;
   background-color: var(--white);
 }
 
 .nameBar {
   color: var(--grey);
   font-size: 14px;
-  text-align: left;
   font-weight: bold;
-  line-height: 1;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
+.percentDynamicContainer {
+  position: relative;
+  width: 100%;
+  height: 12px;
+}
+.percentDynamic {
+  position: absolute;
+  font-size: 8px;
+  color: var(--green);
+}
 .progressBar {
   width: 100%;
   height: 6px;
   position: relative;
   background-color: var(--light);
   border-radius: 9px;
-  overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+}
+
+.progress {
+  height: 100%;
+  border-radius: 9px;
+  background-color: var(--green);
 }
 .circle {
   position: absolute;
   top: 52%;
-  width: 12px;
-  height: 12px;
   transform: translateX(-50%) translateY(-50%);
 }
-.progress {
-  height: 100%;
-  background-color: var(--accent);
-}
 
-.staticBar {
+.percentContainer {
   display: flex;
   justify-content: space-between;
-  margin-top: 5px;
-  font-size: 14px;
-  color: grey;
+  color: var(--lightGrey);
+  font-size: 10px;
 }
 
-.staticNumber {
-  color: var(--main-text);
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 10px;
+.percent50 {
+  margin-left: 10px;
 }
 
 @media screen and (min-width: 768px) {
   .progressBarContainer {
     width: 295px;
+    left: 204px;
+    top: 322px;
+    padding: 20px;
   }
-  .nameBar {
-    color: var(--main);
-    font-size: 14px;
-    font-weight: var(--bold);
-    line-height: 14px;
 
-    margin-bottom: 10px;
-  }
   .nameBar {
     font-size: 15px;
-    line-height: 22.4px;
   }
-  .percentContainer {
-    width: 100%;
+  .percentDynamicContainer {
+    height: 14px;
+  }
+  .percentDynamic {
+    font-size: 10px;
+  }
+
+  .progressBar {
     height: 8px;
   }
   .circle {
@@ -79,8 +81,17 @@
     width: 14px;
     height: 14px;
   }
-  .percentNumber {
+  .percentContainer {
     font-size: 12px;
-    line-height: 22.4px;
+  }
+  .percent50 {
+    margin-left: 15px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .progressBarContainer {
+    left: 188px;
+    top: 450px;
   }
 }
