@@ -10,7 +10,7 @@ const instance = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-  }
+  },
 });
 
 instance.interceptors.request.use(
@@ -41,7 +41,7 @@ instance.interceptors.response.use(
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-          }
+          },
         });
 
         localStorage.setItem('token', data.token);

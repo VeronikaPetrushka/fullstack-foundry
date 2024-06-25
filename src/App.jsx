@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SharedLayout from './components/SharedLayout';
-// import { PrivateRoute } from './components/PrivateRoute';
+import { PrivateRoute } from './components/PrivateRoute';
 import { RestrictedRoute } from './components/RestrictedRoute';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
@@ -26,13 +26,12 @@ const App = () => {
             <RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />
           }
         />
-        {/* <Route
+        <Route
           path="/tracker"
           element={
             <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
           }
-        /> */}
-      <Route path="/tracker" element={<TrackerPage />} />
+        />
     </Routes>
     </SharedLayout>
   );
