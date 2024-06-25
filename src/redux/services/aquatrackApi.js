@@ -95,14 +95,14 @@ export const uploadUserAvatar = async formData => {
 
 // WATER
 
-export const requestDailyActivity = async () => {
-  const { data } = await instance.post('/water/day');
+export const requestDailyActivity = async (formData) => {
+  const { data } = await instance.post('/water/day', formData);
 
   return data;
 };
 
-export const requestMonthActivity = async () => {
-  const { data } = await instance.post('/water/month');
+export const requestMonthActivity = async (formData) => {
+  const { data } = await instance.post('/water/month', formData);
 
   return data;
 };

@@ -1,7 +1,7 @@
 import css from './SignInForm.module.css';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth/operations';
@@ -15,6 +15,8 @@ const schema = yup.object().shape({
 });
 
 const SignInForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -29,6 +31,7 @@ const SignInForm = () => {
   const onSubmit = async formData => {
     dispatch(login(formData));
     reset();
+    navigate('/tracker');
   };
 
   return (

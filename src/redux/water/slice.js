@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   addWater,
-  dailyActivity,
-  deleteWater,
   editWater,
+  deleteWater,
+  dailyActivity,
   monthActivity,
 } from './operations.js';
 
@@ -37,7 +37,7 @@ const waterSlice = createSlice({
     builder.addCase(dailyActivity.pending, handlePending);
     builder.addCase(dailyActivity.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.waterDaily = action.payload.waterDaily;
+      state.waterDaily = action.payload;
     });
     builder.addCase(dailyActivity.rejected, handleRejected);
 
@@ -45,7 +45,7 @@ const waterSlice = createSlice({
     builder.addCase(monthActivity.pending, handlePending);
     builder.addCase(monthActivity.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.waterMonthly = action.payload.waterMonthly;
+      state.waterMonthly = action.payload;
     });
     builder.addCase(monthActivity.rejected, handleRejected);
 
