@@ -24,12 +24,7 @@ const Calendar = ({handleClick}) => {
 
   const user = useSelector(selectUserInfo);
 
-  const minDate = new Date(user.createdAt);
-  const minDay = {
-    day: minDate.getDate(),
-    month: minDate.getMonth() + 1,
-    year: minDate.getFullYear(),
-  };
+  const minDay = getDateObject(user.createdAt);
 
   const handlePrevMonth = () => {
     if (selectedDate.month === 1) {
