@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import * as M from '../../constants/month.js';
 
 import Icon from '../Icon/Icon.jsx';
 import css from './CalendarPagination.module.css';
@@ -36,7 +35,7 @@ const CalendarPagination = ({
         />
       </button>
       <div className={css.calendarMonth}>
-        {M.months_en[selectedDate.month]} {selectedDate.year}
+        {today.month_name} {selectedDate.year}
       </div>
       <button
         type="button"

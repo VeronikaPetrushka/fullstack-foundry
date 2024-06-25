@@ -4,11 +4,13 @@ import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedI
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { userInfo } from '../../redux/user/operations';
+import { getDateObject } from '../../helpers/dateHelpers';
 import Calendar from '../../components/Calendar/Calendar';
 import css from './TrackerPage.module.css';
 
 const TrackerPage = () => {
-  const [selectedDate, setSelectedDate] = useState();
+  // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
+  const [selectedDate, setSelectedDate] = useState(getDateObject());
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,7 +18,7 @@ const TrackerPage = () => {
   });
 
   const handleCalendarBtnClick = (btnDate) => {
-    setSelectedDate(btnDate);
+    setSelectedDate(getDateObject(btnDate));
     console.log(selectedDate);
   };
 
