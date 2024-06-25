@@ -36,6 +36,7 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
+        
         const { data } = await axios.get(`${API_URI}/auth/refresh`, {
           withCredentials: true,
           headers: {
