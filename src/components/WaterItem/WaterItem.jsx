@@ -1,27 +1,52 @@
 
 import css from './WaterItem.module.css';
+import Icon from '../../components/Icon/Icon';
 
 
 const WaterItem = () => {
     // const { id, date, volume } = item;
     return (
-           <div>
-            <div className={css.item}>
-            <div className={css.itemVolume}>
+           <div className={css.item}>
+             <Icon
+              
+              width={38} 
+              height={38} 
+              iconName="glass" 
+              styles={css.icon} 
+            />
+             <div className={css.itemContent}>
+                <div className={css.itemAmount}>
                     <p>250 ml</p>
                 </div>
                 <div className={css.itemDate}>
                     <p>7:00 AM</p>
                 </div>
-                
+             </div>   
             
-            <button type="button" className={css.deleteBtn} 
-            // onClick={() => deleteWater(id)}
-            >Delete</button>
-            <button type="button" className={css.editBtn}
-            //  onClick={() => editWater(id)}
-             >Edit</button>
-             </div>
+            <div className={css.btns}>
+            <button type="button" className={css.changeBtn}
+            //  onClick={handleEdit}
+             >
+                 <Icon 
+              width={14} 
+              height={14} 
+              iconName="edit" 
+              styles={css.btnIcon} 
+            />
+             </button>
+            <button type="button" className={css.changeBtn} 
+            // onClick={handleDelete}
+            >
+                <Icon 
+            width={14} 
+            height={14} 
+            iconName="trash" 
+            styles={css.btnIcon} 
+          />
+          </button>
+            
+            </div>
+             
            </div>
          
     )
