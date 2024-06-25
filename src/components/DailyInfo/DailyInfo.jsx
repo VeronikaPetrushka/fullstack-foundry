@@ -4,8 +4,7 @@ import Icon from '../../components/Icon/Icon';
 
 
 const DailyInfo = () => {
-    return (
-        
+    return (       
 
 <div className={css.dailyInfo}>
   <div className={css.dailyHeader}>
@@ -23,8 +22,8 @@ const DailyInfo = () => {
       </button>
   </div>
   <div className={css.dailyContent}>
-<WaterList/>
 
+<WaterList/>
 
   </div>  
 </div>

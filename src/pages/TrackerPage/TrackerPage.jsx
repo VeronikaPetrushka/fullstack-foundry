@@ -5,6 +5,7 @@ import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedI
 import Calendar from '../../components/Calendar/Calendar';
 import '../../index.css';
 import css from './TrackerPage.module.css';
+import DailyInfo from 'components/DailyInfo/DailyInfo';
 
   const TrackerPage = () => {
 
@@ -14,6 +15,7 @@ import css from './TrackerPage.module.css';
         <WaterMainInfo />
         <section className={css.trackerSection}>
           <WaterDetailedInfo />
+          <DailyInfo />
           <Calendar />
         </section>
       </Page>

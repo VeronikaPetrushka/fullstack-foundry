@@ -8,7 +8,7 @@
     padding: 20px;
     /* padding-right: 0; */
     border-radius: 30px;
-    background: rgb(240, 239, 244);
+    /* background: rgb(240, 239, 244); */
     min-height: 200px;
     z-index: 1;
     /* background from page */
@@ -31,11 +31,11 @@
   }
 
   .title {   
-font-family: Poppins;
-font-size: 20px;
-font-weight: 700;
-letter-spacing: -0.2px;
-line-height: 24px;
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    line-height: 24px;
   }
 
   @media screen and (min-width: 768px) {
@@ -59,12 +59,12 @@ line-height: 24px;
     width: 124px;
     height: 30px;
     font-size: 16px;
-font-weight: 700;
-padding: 0;
-color: var(--grey);
-cursor: pointer;
-letter-spacing: -0.2px;
-line-height: 1.5em;
+    font-weight: 700;
+    padding: 0;
+    color: var(--grey);
+    cursor: pointer;
+    letter-spacing: -0.2px;
+    line-height: 1.5em;
 
   }
 

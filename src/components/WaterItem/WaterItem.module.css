@@ -1,5 +1,5 @@
 .item {
-    background-color: #fff;
+    background-color: var(--white);
     width: 150px;
     height: 74px;
     display: flex;
@@ -18,16 +18,11 @@
     
 }
 
-/* .item:hover {
-    transform: scale(1.05);
-    transition: 0.3s;
-} */
-
 .itemContent {
-display: flex;
-flex-direction: column;
-gap: 6px;
-justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
 
 }
 
@@ -87,7 +82,7 @@ letter-spacing: 0;
     font-size: 12px;
     font-weight: 400;
     line-height: 12px;
-    color: var(--light-grey);
+    color: var(--lightGrey);
 }
 
 @media screen and (min-width: 768px) {
