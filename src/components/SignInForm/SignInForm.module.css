@@ -3,6 +3,8 @@
   background: var(--light);
   padding: 170px 16px 0 16px;
   height: 780px;
+  max-width: 672px;
+  min-width: 288px;
 }
 
 .form {
