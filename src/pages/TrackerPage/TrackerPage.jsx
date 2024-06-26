@@ -29,10 +29,13 @@ const TrackerPage = () => {
         <title>AQUATRACK: Record daily water intake and track</title>
       </Helmet>
       <Page>
-        <WaterMainInfo />
+        <WaterMainInfo selectedDate={selectedDate} />
         <section className={css.trackerSection}>
           <WaterDetailedInfo />
-          <Calendar selectedDate={selectedDate} handleClick={handleCalendarBtnClick} />
+          <Calendar
+            selectedDate={selectedDate}
+            handleClick={handleCalendarBtnClick}
+          />
         </section>
       </Page>
     </>
