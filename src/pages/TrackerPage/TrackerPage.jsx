@@ -7,6 +7,7 @@ import { userInfo } from '../../redux/user/operations';
 import { getDateObject } from '../../helpers/dateHelpers';
 import Calendar from '../../components/Calendar/Calendar';
 import css from './TrackerPage.module.css';
+import DailyInfo from '../../components/DailyInfo/DailyInfo';
 
 const TrackerPage = () => {
 
@@ -28,6 +29,7 @@ const TrackerPage = () => {
       <WaterMainInfo />
       <section className={css.trackerSection}>
         <WaterDetailedInfo />
+        <DailyInfo selectedDate={selectedDate} />
         <Calendar handleClick={handleCalendarBtnClick} />
       </section>
     </Page>
