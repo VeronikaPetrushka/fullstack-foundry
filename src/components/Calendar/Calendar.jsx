@@ -7,6 +7,7 @@ import { monthActivity } from '../../redux/water/operations';
 import { selectWaterMonthly, selectIsError, selectIsLoading } from '../../redux/water/selectors';
 import { getDateObject } from '../../helpers/dateHelpers';
 import { selectUserInfo } from '../../redux/user/selectors';
+import Chart  from './Chart';
 
 import Icon from '../Icon/Icon.jsx';
 import css from './Calendar.module.css';
@@ -22,6 +23,8 @@ const Calendar = ({selectedDate, handleClick}) => {
 
   const [selectedMonth, setselectedMonth] = useState(today);
 
+  const [showChart, setShowChart] = useState(false);
+
   const [monthDate, setMonthDate] = useState(null);
 
   const dispatch = useDispatch();
@@ -31,6 +34,10 @@ const Calendar = ({selectedDate, handleClick}) => {
   const user = useSelector(selectUserInfo);
 
   const minDay = getDateObject(user.createdAt);
+
+  const handleShowChart = () => {
+    setShowChart(prevState => !prevState);
+  }
 
   const handlePrevMonth = () => {
     if (selectedMonth.month === 1) {
@@ -105,7 +112,7 @@ const Calendar = ({selectedDate, handleClick}) => {
             handleNextMonth={handleNextMonth}
             handlePrevMonth={handlePrevMonth}
           />
-          <button type="button" className={css.calendarTypeBtn}>
+          <button type="button" className={css.calendarTypeBtn} onClick={handleShowChart}>
             <Icon
               iconName="pie-chart"
               width="18"
@@ -115,13 +122,17 @@ const Calendar = ({selectedDate, handleClick}) => {
           </button>
         </div>
       </div>
-      <div className={css.calendarBody}>
-        {daysOfSelectedMonth.map(day => (
-          <div className={css.calendarItem} key={day.day}>
-            <CalendarItem key={day.fullDate} selectedDate={selectedDate} dayOfMonth={day} minDay={minDay} today={today} handleClick={handleClick} />
-          </div>
-        ))}
-      </div>
+      {showChart ?
+        <Chart dataForSelectedMonth={dataForSelectedMonth} />
+        :
+        <div className={css.calendarBody}>
+          {daysOfSelectedMonth.map(day => (
+            <div className={css.calendarItem} key={day.day}>
+              <CalendarItem key={day.fullDate} selectedDate={selectedDate} dayOfMonth={day} minDay={minDay} today={today} handleClick={handleClick} />
+            </div>
+          ))}
+        </div>
+      }
     </div>
   );
 };
