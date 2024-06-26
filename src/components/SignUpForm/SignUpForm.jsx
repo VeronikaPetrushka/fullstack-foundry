@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { signup } from '../../redux/auth/operations';
 import icon from '../../assets/icons.svg';
+import { toast, Toaster } from 'react-hot-toast';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -39,11 +40,12 @@ const SignUpForm = () => {
 
   const onSubmit = async formData => {
     try {
-      await dispatch(signup(formData));
+      await dispatch(signup(formData)).unwrap();
+      toast.success('Successfully registered!');
       reset();
       navigate('/signin');
     } catch (error) {
-      console.error('Failed to sign up:', error);
+      toast.error(error || 'Failed to sign up');
     }
   };
 
@@ -63,6 +65,7 @@ const SignUpForm = () => {
 
   return (
     <div className={css.signUpWrap}>
+      <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <h2 className={css.formTitle}>Sign Up</h2>
         <label className={css.label}>Email</label>

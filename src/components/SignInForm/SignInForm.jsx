@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth/operations';
 import { selectIsSignedIn } from '../../redux/auth/selectors';
 import icon from '../../assets/icons.svg';
+import { toast, Toaster } from 'react-hot-toast';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -34,8 +35,14 @@ const SignInForm = () => {
   });
 
   const onSubmit = async formData => {
-    await dispatch(login(formData));
-    reset();
+    try {
+      await dispatch(login(formData)).unwrap();
+      toast.success('Successfully signed in!');
+      reset();
+      navigate('/tracker');
+    } catch (error) {
+      toast.error(error || 'Failed to sign in. Please try again later.');
+    }
   };
 
   useEffect(() => {
@@ -53,6 +60,7 @@ const SignInForm = () => {
 
   return (
     <div className={css.signUpWrap}>
+      <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <h2 className={css.formTitle}>Sign In</h2>
         <label className={css.label}>Email</label>
