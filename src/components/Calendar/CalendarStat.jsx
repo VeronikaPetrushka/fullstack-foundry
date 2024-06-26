@@ -9,6 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import CalendarPagination from '../CalendarPagination/CalendarPagination';
 import Calendar from './Calendar';
 import Chart  from './Chart';
+import Loader from '../Loader/Loader'
 
 import Icon from '../Icon/Icon.jsx';
 import css from './Calendar.module.css';
@@ -125,7 +126,7 @@ const CalendarStat = ({selectedDate, handleClick}) => {
       {showChart ?
         <Chart dataForSelectedMonth={dataForSelectedMonth} />
         :
-        (isLoadingWaterMonth ? <div>Loading...</div> :
+        (isLoadingWaterMonth ? <Loader addClass={css.monthDataLoader} /> :
         <Calendar daysOfSelectedMonth={daysOfSelectedMonth} selectedDate={selectedDate} minDay={minDay} today={today} handleClick={handleClick} />
         )
       }

@@ -94,3 +94,7 @@
     width: calc((100% - 301px) / 8);
   }
 }
+
+.monthDataLoader{
+  margin:70px auto;
+}
