@@ -4,7 +4,6 @@ import {
   updateUserProfile,
   uploadUserAvatar,
 } from '../services/aquatrackApi.js';
-import { setAuthHeader } from '../services/aquatrackApi.js';
 
 export const userInfo = createAsyncThunk('users/current', async thunkAPI => {
   try {
@@ -27,7 +26,6 @@ export const updateUserSettings = createAsyncThunk(
     }
 
     try {
-      setAuthHeader(persistedToken);
 
       const res = await updateUserProfile(formData);
 

@@ -1,17 +1,18 @@
 import axios from 'axios';
 
 const API_URI = 'https://aquatrack-api-myzh.onrender.com/api';
-  // const API_URI = 'http://localhost:8080/api';
+// const API_URI = 'http://localhost:8080/api';
 
-
-const instance = axios.create({
-  baseURL: API_URI,
+const headerConfig = {
   withCredentials: true,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
-});
+};
+
+export const publicInstance = axios.create({ ...headerConfig, baseURL: API_URI });
+export const instance = axios.create({ ...headerConfig, baseURL: API_URI });
 
 instance.interceptors.request.use(
   config => {
@@ -36,13 +37,10 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const { data } = await axios.get(`${API_URI}/auth/refresh`, {
-          withCredentials: true,
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-        });
+        const { data } = await axios.get(
+          `${API_URI}/auth/refresh`,
+          headerConfig
+        );
 
         localStorage.setItem('token', data.token);
 
@@ -59,4 +57,4 @@ instance.interceptors.response.use(
   }
 );
 
-export default instance;
+// export default instance;

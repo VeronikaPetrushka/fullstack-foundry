@@ -73,8 +73,9 @@ const Calendar = ({handleClick}) => {
   }
   for (const day of monthData) {
     let dayNumber = new Date(day.date).getDate();
-    day.percentageOfNorma > 100 ? (day.percentageOfNorma = 100) : day.percentageOfNorma;
     days[dayNumber] = {...days[dayNumber], ...day};
+    if(day.percentageOfNorma > 100) days[dayNumber].percentageOfNorma = 100;
+    else days[dayNumber].percentageOfNorma = Number(day.percentageOfNorma).toFixed(0);
   }
 
   return (

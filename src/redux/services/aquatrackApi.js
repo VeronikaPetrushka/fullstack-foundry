@@ -1,29 +1,15 @@
-import axios from 'axios';
-import instance from './instance';
+import { instance, publicInstance } from './instance';
 
-//////////////////////////////////////////////////////////////////////////////////
-
-// Utility to add JWT
-export const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-// Utility to remove JWT
-export const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
-
-/////////////////////////////////////////////////////////////////////////////////
 
 //AUTH
 export const requestRegister = async formData => {
-  const { data } = await instance.post('/auth/register', formData);
+  const { data } = await publicInstance.post('/auth/register', formData);
 
   return data;
 };
 
 export const requestLogin = async formData => {
-  const { data } = await instance.post('/auth/login', formData);
+  const { data } = await publicInstance.post('/auth/login', formData);
 
   return data;
 };
@@ -34,14 +20,14 @@ export const requestGoogleLogin = async formData => {
   return data;
 };
 
-export const refreshToken = async formData => {
-  const { data } = await instance.get('/auth/refresh', formData);
+export const refreshToken = async () => {
+  const { data } = await publicInstance.get('/auth/refresh');
 
   return data;
 };
 
-export const requestLogout = async formData => {
-  const { data } = await instance.post('/auth/logout', formData);
+export const requestLogout = async () => {
+  const { data } = await instance.post('/auth/logout');
 
   return data;
 };
