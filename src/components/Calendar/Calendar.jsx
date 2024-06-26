@@ -4,9 +4,10 @@ import CalendarItem from '../CalendarItem/CalendarItem';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { monthActivity } from '../../redux/water/operations';
-import { selectWaterMonthly } from '../../redux/water/selectors';
+import { selectWaterMonthly, selectIsError, selectIsLoading } from '../../redux/water/selectors';
 import { getDateObject } from '../../helpers/dateHelpers';
 import { selectUserInfo } from '../../redux/user/selectors';
+import Chart  from './Chart';
 
 import Icon from '../Icon/Icon.jsx';
 import css from './Calendar.module.css';
@@ -15,17 +16,28 @@ const Calendar = ({selectedDate, handleClick}) => {
 
   const today = getDateObject();
 
+  const isLoadingWaterMonth = useSelector(selectIsLoading);
+  const isErrorWaterMonth = useSelector(selectIsError);
+
+
+
   const [selectedMonth, setselectedMonth] = useState(today);
+
+  const [showChart, setShowChart] = useState(false);
 
   const [monthDate, setMonthDate] = useState(null);
 
   const dispatch = useDispatch();
 
-  const monthData = useSelector(selectWaterMonthly);
+  const dataForSelectedMonth = useSelector(selectWaterMonthly);
 
   const user = useSelector(selectUserInfo);
 
   const minDay = getDateObject(user.createdAt);
+
+  const handleShowChart = () => {
+    setShowChart(prevState => !prevState);
+  }
 
   const handlePrevMonth = () => {
     if (selectedMonth.month === 1) {
@@ -68,18 +80,26 @@ const Calendar = ({selectedDate, handleClick}) => {
     }
   }, [dispatch, monthDate]);
 
-  const days = [];
+  const daysOfSelectedMonth = [];
   for (let i = 1; i <= today.dayInMonth; i++) {
-    days[i] = { day: i, percentageOfNorma: 0, totalAmount: 0, date: '' };
+    daysOfSelectedMonth[i] = {
+      day: i,
+      percentageOfNorma: 0,
+      totalAmount: 0,
+      date: '',
+      fullDate: `${selectedMonth.year}-${selectedMonth.month.toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`
+    };
   }
-  for (const day of monthData) {
+  for (const day of dataForSelectedMonth) {
     let dayNumber = new Date(day.date).getDate();
-    days[dayNumber] = {...days[dayNumber], ...day};
-    if(day.percentageOfNorma > 100) days[dayNumber].percentageOfNorma = 100;
-    else days[dayNumber].percentageOfNorma = Number(day.percentageOfNorma).toFixed(0);
+    daysOfSelectedMonth[dayNumber] = {...daysOfSelectedMonth[dayNumber], ...day};
+    if(day.percentageOfNorma > 100) daysOfSelectedMonth[dayNumber].percentageOfNorma = 100;
+    else daysOfSelectedMonth[dayNumber].percentageOfNorma = Number(day.percentageOfNorma.toFixed(0));
   }
 
-  return (
+  return isErrorWaterMonth ? (<div>Error occured! Rsresh page and try again.</div>) :
+  isLoadingWaterMonth ? (<div>Loading data...</div>) :
+  (
     <div className={css.calendar}>
       <div className={css.calendarHead}>
         <div className={css.calendarTitle}>Month</div>
@@ -92,7 +112,7 @@ const Calendar = ({selectedDate, handleClick}) => {
             handleNextMonth={handleNextMonth}
             handlePrevMonth={handlePrevMonth}
           />
-          <button type="button" className={css.calendarTypeBtn}>
+          <button type="button" className={css.calendarTypeBtn} onClick={handleShowChart}>
             <Icon
               iconName="pie-chart"
               width="18"
@@ -102,13 +122,17 @@ const Calendar = ({selectedDate, handleClick}) => {
           </button>
         </div>
       </div>
-      <div className={css.calendarBody}>
-        {days.map(day => (
-          <div className={css.calendarItem} key={day.day}>
-            <CalendarItem key={day.fullDate} selectedDate={selectedDate} day={day} today={today} handleClick={handleClick} />
-          </div>
-        ))}
-      </div>
+      {showChart ?
+        <Chart dataForSelectedMonth={dataForSelectedMonth} />
+        :
+        <div className={css.calendarBody}>
+          {daysOfSelectedMonth.map(day => (
+            <div className={css.calendarItem} key={day.day}>
+              <CalendarItem key={day.fullDate} selectedDate={selectedDate} dayOfMonth={day} minDay={minDay} today={today} handleClick={handleClick} />
+            </div>
+          ))}
+        </div>
+      }
     </div>
   );
 };

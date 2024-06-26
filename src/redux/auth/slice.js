@@ -43,13 +43,17 @@ const authSlice = createSlice({
       // TOKEN REFRESH
       .addCase(tokenRefresh.pending, handlePending)
       .addCase(tokenRefresh.fulfilled, (state, action) => {
+        localStorage.setItem('token', action.payload.token);
         state.isLoading = false;
+        state.user = action.payload.user;
         state.token = action.payload.token;
+        state.isSignedIn = true;
       })
       .addCase(tokenRefresh.rejected, handleRejected)
       // LOGOUT
       .addCase(logout.pending, handlePending)
       .addCase(logout.fulfilled, state => {
+        localStorage.removeItem('token');
         state.isLoading = false;
         state.user = INITIAL_STATE.user;
         state.token = null;

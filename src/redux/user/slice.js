@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userInfo, updateUserSettings, uploadAvatar } from './operations.js';
+import { userInfo, updateUserSettings, uploadAvatar, getTotalUsers } from './operations.js';
 
 const initialState = {
   user: {},
+  totalUsers: null,
   isLoading: false,
   isError: null,
 };
@@ -48,6 +49,13 @@ const usersSlice = createSlice({
       state.user.avatar = action.payload.avatar;
     });
     builder.addCase(uploadAvatar.rejected, handleRejected);
+
+    // Handling total users request
+    builder.addCase(getTotalUsers.pending, handlePending );
+    builder.addCase(getTotalUsers.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.totalUsers = action.payload.totalUsers;
+    })
   },
 });
 

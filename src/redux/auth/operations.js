@@ -10,7 +10,6 @@ import {
   requestResetPassword,
   requestSendVerify,
 } from '../services/aquatrackApi.js';
-import { setAuthHeader, clearAuthHeader } from '../services/aquatrackApi.js';
 
 export const signup = createAsyncThunk(
   'auth/register',
@@ -18,7 +17,6 @@ export const signup = createAsyncThunk(
     try {
       const res = await requestRegister(formData);
 
-      setAuthHeader(res.token);
       return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
@@ -32,7 +30,6 @@ export const login = createAsyncThunk(
     try {
       const res = await requestLogin(formData);
 
-      setAuthHeader(res.token);
       return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
@@ -48,7 +45,6 @@ export const loginGoogle = createAsyncThunk(
     try {
       const res = await requestGoogleLogin(formData);
 
-      setAuthHeader(res.token);
       return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
@@ -58,11 +54,10 @@ export const loginGoogle = createAsyncThunk(
 
 export const tokenRefresh = createAsyncThunk(
   'auth/refresh',
-  async (formData, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
-      const res = await refreshToken(formData);
+      const res = await refreshToken();
 
-      setAuthHeader(res.token);
       return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
@@ -76,7 +71,6 @@ export const logout = createAsyncThunk(
     try {
       await requestLogout(formData);
 
-      clearAuthHeader();
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
