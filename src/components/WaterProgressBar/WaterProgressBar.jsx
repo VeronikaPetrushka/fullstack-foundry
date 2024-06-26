@@ -1,12 +1,20 @@
 import Icon from '../Icon/Icon.jsx';
 import css from './WaterProgressBar.module.css';
+import { getDateObject } from '../../helpers/dateHelpers.js';
 
-const WaterProgressBar = () => {
+const WaterProgressBar = ({ selectedDate }) => {
+  const currentDay = selectedDate.fullDate;
+  const today = getDateObject();
+
   const percentage = 35;
   return (
     <div className={css.progressBarContainer}>
       <div className={css.nameBar}>
-        <div>Today</div>
+        {currentDay === today.fullDate ? (
+          <div>Today</div>
+        ) : (
+          <div>{`${selectedDate.day}, ${selectedDate.month_name}`}</div>
+        )}
       </div>
       <div className={css.percentDynamicContainer}>
         <div
