@@ -6,16 +6,16 @@ import css from './CalendarPagination.module.css';
 const CalendarPagination = ({
   today,
   minDay,
-  selectedDate,
+  selectedMonth,
   handlePrevMonth,
   handleNextMonth,
 }) => {
   const showPrevMonth =
-  selectedDate.month === minDay.month && selectedDate.year === minDay.year
+  selectedMonth.month === minDay.month && selectedMonth.year === minDay.year
       ? true
       : false;
   const showNextMonth =
-    selectedDate.month === today.month && selectedDate.year === today.year
+    selectedMonth.month === today.month && selectedMonth.year === today.year
       ? true
       : false;
 
@@ -35,7 +35,7 @@ const CalendarPagination = ({
         />
       </button>
       <div className={css.calendarMonth}>
-        {today.month_name} {selectedDate.year}
+        {today.month_name} {selectedMonth.year}
       </div>
       <button
         type="button"
@@ -59,7 +59,7 @@ export default CalendarPagination;
 CalendarPagination.propTypes = {
   today: PropTypes.object,
   minDay: PropTypes.object,
-  selectedDate: PropTypes.object,
+  selectedMonth: PropTypes.object,
   handlePrevMonth: PropTypes.func,
   handleNextMonth: PropTypes.func,
 };
