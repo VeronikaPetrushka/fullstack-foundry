@@ -9,8 +9,8 @@ const WaterItem = () => {
            <div className={css.item}>
              <Icon
               
-              width={38} 
-              height={38} 
+              width={'38'} 
+              height={'38'} 
               iconName="glass" 
               styles={css.icon} 
             />
@@ -28,8 +28,8 @@ const WaterItem = () => {
             //  onClick={handleEdit}
              >
                  <Icon 
-              width={14} 
-              height={14} 
+              width={'14'} 
+              height={'14'} 
               iconName="edit" 
               styles={css.btnIcon} 
             />
@@ -38,8 +38,8 @@ const WaterItem = () => {
             // onClick={handleDelete}
             >
                 <Icon 
-            width={14} 
-            height={14} 
+            width={'14'} 
+            height={'14'} 
             iconName="trash" 
             styles={css.btnIcon} 
           />
