@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { userInfo } from '../../redux/user/operations';
 import { getDateObject } from '../../helpers/dateHelpers';
-import Calendar from '../../components/Calendar/Calendar';
+import CalendarStat from '../../components/Calendar/CalendarStat';
 import { Helmet } from 'react-helmet-async';
 import css from './TrackerPage.module.css';
 import DailyInfo from '../../components/DailyInfo/DailyInfo';
@@ -14,7 +14,7 @@ const TrackerPage = () => {
 
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
   const [selectedDate, setSelectedDate] = useState(getDateObject());
-  
+
   const handleCalendarBtnClick = (btnDate) => {
     setSelectedDate(getDateObject(btnDate));
   };
@@ -36,7 +36,7 @@ const TrackerPage = () => {
         <section className={css.trackerSection}>
           <WaterDetailedInfo />
           <DailyInfo selectedDate={selectedDate} />
-          <Calendar selectedDate={selectedDate} handleClick={handleCalendarBtnClick} />
+          <CalendarStat selectedDate={selectedDate} handleClick={handleCalendarBtnClick} />
         </section>
       </Page>
     </>
