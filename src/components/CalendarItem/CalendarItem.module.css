@@ -29,10 +29,6 @@
   letter-spacing: -0.01em;
   text-align: center;
 }
-.full {
-  color: #323f47;
-  background-color: #fff;
-}
 .part {
   color: #323f47;
   background-color: rgba(50, 63, 71, 0.2);
@@ -40,6 +36,10 @@
 .current {
   color: #9be1a0;
   background-color: #323f47;
+}
+.full {
+  color: #323f47;
+  background-color: #fff;
 }
 .btnProcent {
   text-align: center;

@@ -11,10 +11,11 @@ import { selectUserInfo } from '../../redux/user/selectors';
 import Icon from '../Icon/Icon.jsx';
 import css from './Calendar.module.css';
 
-const Calendar = ({handleClick}) => {
+const Calendar = ({selectedDate, handleClick}) => {
+
   const today = getDateObject();
 
-  const [selectedDate, setSelectedDate] = useState(today);
+  const [selectedMonth, setselectedMonth] = useState(today);
 
   const [monthDate, setMonthDate] = useState(null);
 
@@ -27,39 +28,39 @@ const Calendar = ({handleClick}) => {
   const minDay = getDateObject(user.createdAt);
 
   const handlePrevMonth = () => {
-    if (selectedDate.month === 1) {
-      setSelectedDate({
-        ...selectedDate,
-        year: selectedDate.year - 1,
+    if (selectedMonth.month === 1) {
+      setselectedMonth({
+        ...selectedMonth,
+        year: selectedMonth.year - 1,
         month: 12,
       });
     } else {
-      setSelectedDate({ ...selectedDate, month: selectedDate.month - 1 });
+      setselectedMonth({ ...selectedMonth, month: selectedMonth.month - 1 });
     }
   };
   const handleNextMonth = () => {
-    if (selectedDate.month === 12) {
-      setSelectedDate({
-        ...selectedDate,
-        year: selectedDate.year + 1,
+    if (selectedMonth.month === 12) {
+      setselectedMonth({
+        ...selectedMonth,
+        year: selectedMonth.year + 1,
         month: 1,
       });
     } else {
-      setSelectedDate({ ...selectedDate, month: selectedDate.month + 1 });
+      setselectedMonth({ ...selectedMonth, month: selectedMonth.month + 1 });
     }
   };
 
   useEffect(() => {
-    const waterMonthStart = `${selectedDate.year}-${selectedDate.month
+    const waterMonthStart = `${selectedMonth.year}-${selectedMonth.month
       .toString()
       .padStart(2, '0')}-01`;
-    const waterMonthEnd = `${selectedDate.year}-${selectedDate.month
+    const waterMonthEnd = `${selectedMonth.year}-${selectedMonth.month
       .toString()
-      .padStart(2, '0')}-${selectedDate.dayInMonth
+      .padStart(2, '0')}-${selectedMonth.dayInMonth
       .toString()
       .padStart(2, '0')}`;
     setMonthDate({ startDate: waterMonthStart, endDate: waterMonthEnd });
-  }, [selectedDate]);
+  }, [selectedMonth]);
 
   useEffect(() => {
     if (monthDate) {
@@ -86,6 +87,7 @@ const Calendar = ({handleClick}) => {
           <CalendarPagination
             today={today}
             minDay={minDay}
+            selectedMonth={selectedMonth}
             selectedDate={selectedDate}
             handleNextMonth={handleNextMonth}
             handlePrevMonth={handlePrevMonth}
@@ -103,7 +105,7 @@ const Calendar = ({handleClick}) => {
       <div className={css.calendarBody}>
         {days.map(day => (
           <div className={css.calendarItem} key={day.day}>
-            <CalendarItem day={day} today={today} handleClick={handleClick} />
+            <CalendarItem key={day.fullDate} selectedDate={selectedDate} day={day} today={today} handleClick={handleClick} />
           </div>
         ))}
       </div>

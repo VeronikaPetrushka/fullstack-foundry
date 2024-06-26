@@ -77,6 +77,9 @@ d="M16 6.667v18.667"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3"
 d="M6.667 16h18.667"></path>
 </symbol>
+<symbol id="circle" viewBox="0 0 32 32">
+<path fill="#fff" style="fill: var(--color1, #fff); stroke: var(--color2, #9be1a0)" stroke="#9be1a0" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.6667" d="M30.667 16c0 8.1-6.567 14.667-14.667 14.667s-14.667-6.566-14.667-14.667c0-8.1 6.566-14.667 14.667-14.667s14.667 6.566 14.667 14.667z"></path>
+</symbol>
 <symbol id="google" viewBox="0 0 32 32">
 <path fill="#4285f4" style="fill: var(--color1, #4285f4)"
 d="M31.619 16.299c0-1.311-0.106-2.268-0.337-3.26h-14.971v5.917h8.787c-0.177 1.471-1.134 3.685-3.26 5.173l-0.030 0.198 4.733 3.667 0.328 0.033c3.012-2.782 4.748-6.874 4.748-11.729z">
