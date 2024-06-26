@@ -23,7 +23,7 @@ const CalendarStat = ({selectedDate, handleClick}) => {
 
 
 
-  const [selectedMonth, setselectedMonth] = useState(today);
+  const [selectedMonth, setSelectedMonth] = useState(today);
 
   const [showChart, setShowChart] = useState(false);
 
@@ -42,26 +42,27 @@ const CalendarStat = ({selectedDate, handleClick}) => {
   }
 
   const handlePrevMonth = () => {
-    if (selectedMonth.month === 1) {
-      setselectedMonth({
-        ...selectedMonth,
-        year: selectedMonth.year - 1,
-        month: 12,
-      });
-    } else {
-      setselectedMonth({ ...selectedMonth, month: selectedMonth.month - 1 });
-    }
+    setSelectedMonth(prevSelectedMonth => {
+      let newSelectedMonth;
+      if (prevSelectedMonth.month === 1) {
+        newSelectedMonth = `${prevSelectedMonth.year - 1}-12-${prevSelectedMonth.day}`;
+      } else {
+        newSelectedMonth = `${prevSelectedMonth.year}-${prevSelectedMonth.month - 1}-${prevSelectedMonth.day}`;
+      }
+
+      return getDateObject(newSelectedMonth);
+    });
   };
   const handleNextMonth = () => {
-    if (selectedMonth.month === 12) {
-      setselectedMonth({
-        ...selectedMonth,
-        year: selectedMonth.year + 1,
-        month: 1,
-      });
-    } else {
-      setselectedMonth({ ...selectedMonth, month: selectedMonth.month + 1 });
-    }
+    setSelectedMonth(prevSelectedMonth => {
+      let newSelectedMonth;
+      if (selectedMonth.month === 12) {
+        newSelectedMonth = `${prevSelectedMonth.year + 1}-01-${prevSelectedMonth.day}`;
+      }else{
+        newSelectedMonth = `${prevSelectedMonth.year}-${prevSelectedMonth.month + 1}-${prevSelectedMonth.day}`;
+      }
+      return getDateObject(newSelectedMonth);
+    })
   };
 
   useEffect(() => {
@@ -126,8 +127,9 @@ const CalendarStat = ({selectedDate, handleClick}) => {
       {showChart ?
         <Chart dataForSelectedMonth={dataForSelectedMonth} />
         :
-        (<>{isLoadingWaterMonth && (<div className={css.loaderBg}><Loader addClass={css.monthDataLoader} /></div>)}
-        <Calendar daysOfSelectedMonth={daysOfSelectedMonth} selectedDate={selectedDate} minDay={minDay} today={today} handleClick={handleClick} />
+        (<>
+          {isLoadingWaterMonth && (<div className={css.loaderBg}><Loader addClass={css.monthDataLoader} /></div>)}
+          <Calendar daysOfSelectedMonth={daysOfSelectedMonth} selectedDate={selectedDate} minDay={minDay} today={today} handleClick={handleClick} />
         </>)
       }
     </div>
