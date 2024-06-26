@@ -22,7 +22,7 @@ const SignInForm = () => {
   const dispatch = useDispatch();
   const isSignedIn = useSelector(selectIsSignedIn);
   const [inputTypePassword, setTypePassword] = useState('password');
-  const [iconPassword, setIconPassword] = useState('eye');
+  const [iconPassword, setIconPassword] = useState('eye-off');
 
   const {
     register,
@@ -48,7 +48,7 @@ const SignInForm = () => {
     setTypePassword(prevType =>
       prevType === 'password' ? 'text' : 'password'
     );
-    setIconPassword(prevIcon => (prevIcon === 'eye' ? 'eye-off' : 'eye'));
+    setIconPassword(prevIcon => (prevIcon === 'eye-off' ? 'eye' : 'eye-off'));
   };
 
   return (

@@ -24,8 +24,8 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
   const [inputTypePassword, setTypePassword] = useState('password');
   const [inputTypeRePassword, setTypeRePassword] = useState('password');
-  const [iconPassword, setIconPassword] = useState('eye');
-  const [iconRePassword, setIconRePassword] = useState('eye');
+  const [iconPassword, setIconPassword] = useState('eye-off');
+  const [iconRePassword, setIconRePassword] = useState('eye-off');
 
   const navigate = useNavigate();
   const {
@@ -51,14 +51,14 @@ const SignUpForm = () => {
     setTypePassword(prevType =>
       prevType === 'password' ? 'text' : 'password'
     );
-    setIconPassword(prevIcon => (prevIcon === 'eye' ? 'eye-off' : 'eye'));
+    setIconPassword(prevIcon => (prevIcon === 'eye-off' ? 'eye' : 'eye-off'));
   };
 
   const toggleShowRePassword = () => {
     setTypeRePassword(prevType =>
       prevType === 'password' ? 'text' : 'password'
     );
-    setIconRePassword(prevIcon => (prevIcon === 'eye' ? 'eye-off' : 'eye'));
+    setIconRePassword(prevIcon => (prevIcon === 'eye-off' ? 'eye' : 'eye-off'));
   };
 
   return (
