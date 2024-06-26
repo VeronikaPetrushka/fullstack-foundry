@@ -26,7 +26,7 @@ const Calendar = ({selectedDate, handleClick}) => {
 
   const dispatch = useDispatch();
 
-  const monthData = useSelector(selectWaterMonthly);
+  const dataForSelectedMonth = useSelector(selectWaterMonthly);
 
   const user = useSelector(selectUserInfo);
 
@@ -83,7 +83,7 @@ const Calendar = ({selectedDate, handleClick}) => {
       fullDate: `${selectedMonth.year}-${selectedMonth.month.toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`
     };
   }
-  for (const day of monthData) {
+  for (const day of dataForSelectedMonth) {
     let dayNumber = new Date(day.date).getDate();
     daysOfSelectedMonth[dayNumber] = {...daysOfSelectedMonth[dayNumber], ...day};
     if(day.percentageOfNorma > 100) daysOfSelectedMonth[dayNumber].percentageOfNorma = 100;
