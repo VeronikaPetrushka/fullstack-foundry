@@ -4,7 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { signup } from '../../redux/auth/operations';
+import icon from '../../assets/icons.svg';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -19,6 +21,12 @@ const schema = yup.object().shape({
 });
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+  const [inputTypePassword, setTypePassword] = useState('password');
+  const [inputTypeRePassword, setTypeRePassword] = useState('password');
+  const [iconPassword, setIconPassword] = useState('eye-off');
+  const [iconRePassword, setIconRePassword] = useState('eye-off');
+
   const navigate = useNavigate();
   const {
     register,
@@ -29,8 +37,6 @@ const SignUpForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const dispatch = useDispatch();
-
   const onSubmit = async formData => {
     try {
       await dispatch(signup(formData));
@@ -39,6 +45,20 @@ const SignUpForm = () => {
     } catch (error) {
       console.error('Failed to sign up:', error);
     }
+  };
+
+  const toggleShowPassword = () => {
+    setTypePassword(prevType =>
+      prevType === 'password' ? 'text' : 'password'
+    );
+    setIconPassword(prevIcon => (prevIcon === 'eye-off' ? 'eye' : 'eye-off'));
+  };
+
+  const toggleShowRePassword = () => {
+    setTypeRePassword(prevType =>
+      prevType === 'password' ? 'text' : 'password'
+    );
+    setIconRePassword(prevIcon => (prevIcon === 'eye-off' ? 'eye' : 'eye-off'));
   };
 
   return (
@@ -56,25 +76,59 @@ const SignUpForm = () => {
         )}
 
         <label className={css.label}>Password</label>
-        <input
-          className={`${css.input} ${errors.password ? css.inputError : ''}`}
-          {...register('password')}
-          type="password"
-          placeholder="Enter your password"
-        />
+        <div className={css.inputWrapper}>
+          <input
+            className={`${css.input} ${errors.password ? css.inputError : ''}`}
+            {...register('password')}
+            type={inputTypePassword}
+            placeholder="Enter your password"
+          />
+          <button
+            type="button"
+            onClick={toggleShowPassword}
+            className={css.iconButton}
+          >
+            {iconPassword === 'eye' ? (
+              <svg className={css.icon}>
+                <use href={`${icon}#eye`} />
+              </svg>
+            ) : (
+              <svg className={css.icon}>
+                <use href={`${icon}#eye-off`} />
+              </svg>
+            )}
+          </button>
+        </div>
         {errors.password && (
           <p className={css.errorMessage}>{errors.password.message}</p>
         )}
 
         <label className={css.label}>Repeat password</label>
-        <input
-          className={`${css.input} ${
-            errors.repeatPassword ? css.inputError : ''
-          }`}
-          {...register('repeatPassword')}
-          type="password"
-          placeholder="Repeat password"
-        />
+        <div className={css.inputWrapper}>
+          <input
+            className={`${css.input} ${
+              errors.repeatPassword ? css.inputError : ''
+            }`}
+            {...register('repeatPassword')}
+            type={inputTypeRePassword}
+            placeholder="Repeat password"
+          />
+          <button
+            type="button"
+            onClick={toggleShowRePassword}
+            className={css.iconButton}
+          >
+            {iconRePassword === 'eye' ? (
+              <svg className={css.icon}>
+                <use href={`${icon}#eye`} />
+              </svg>
+            ) : (
+              <svg className={css.icon}>
+                <use href={`${icon}#eye-off`} />
+              </svg>
+            )}
+          </button>
+        </div>
         {errors.repeatPassword && (
           <p className={css.errorMessage}>{errors.repeatPassword.message}</p>
         )}
