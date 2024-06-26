@@ -8,6 +8,7 @@ import { getDateObject } from '../../helpers/dateHelpers';
 import Calendar from '../../components/Calendar/Calendar';
 import { Helmet } from 'react-helmet-async';
 import css from './TrackerPage.module.css';
+import ChooseDate from '../../components/ChooseDate/ChooseDate';
 
 const TrackerPage = () => {
 
@@ -34,7 +35,8 @@ const TrackerPage = () => {
         <WaterMainInfo selectedDate={selectedDate} />
         <section className={css.trackerSection}>
           <WaterDetailedInfo />
-          <Calendar handleClick={handleCalendarBtnClick} selectedDate={selectedDate} />
+          <ChooseDate  selectedDate={selectedDate}/>
+          <Calendar selectedDate={selectedDate} handleClick={handleCalendarBtnClick} />
         </section>
       </Page>
     </>
