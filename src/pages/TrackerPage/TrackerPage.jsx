@@ -8,6 +8,9 @@ import { getDateObject } from '../../helpers/dateHelpers';
 import Calendar from '../../components/Calendar/Calendar';
 import { Helmet } from 'react-helmet-async';
 import css from './TrackerPage.module.css';
+
+import DailyInfo from '../../components/DailyInfo/DailyInfo';
+
 import ChooseDate from '../../components/ChooseDate/ChooseDate';
 
 const TrackerPage = () => {
