@@ -97,7 +97,7 @@ const Calendar = ({selectedDate, handleClick}) => {
     else daysOfSelectedMonth[dayNumber].percentageOfNorma = Number(day.percentageOfNorma.toFixed(0));
   }
 
-  return isErrorWaterMonth ? (<div>Error occured! Rsresh page and try again.</div>) :
+  return isErrorWaterMonth ? (<div>Error occured! Refresh page and try again.</div>) :
   isLoadingWaterMonth ? (<div>Loading data...</div>) :
   (
     <div className={css.calendar}>
