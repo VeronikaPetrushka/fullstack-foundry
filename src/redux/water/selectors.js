@@ -1,7 +1,3 @@
-export const selectWaterAmount = state => state.amount;
+export const selectWaterDaily = state => state.water.waterDaily;
 
-export const selectWaterDate = state => state.date;
-
-export const selectWaterId = state => state._id;
-
-export const selectWaterOwner = state => state.owner;
+export const selectWaterMonthly = state => state.water.waterMonthly;

@@ -1,85 +1,82 @@
+import PropTypes from 'prop-types';
 import CalendarPagination from '../CalendarPagination/CalendarPagination';
 import CalendarItem from '../CalendarItem/CalendarItem';
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { monthActivity } from '../../redux/water/operations';
+import { selectWaterMonthly } from '../../redux/water/selectors';
+import { getDateObject } from '../../helpers/dateHelpers';
+import { selectUserInfo } from '../../redux/user/selectors';
 
 import Icon from '../Icon/Icon.jsx';
 import css from './Calendar.module.css';
 
- const Calendar = () => {
+const Calendar = ({selectedDate, handleClick}) => {
 
-  function daysInMonth(month, year) {
-    return new Date(year, month, 0).getDate();
-  }
+  const today = getDateObject();
 
-  const testData = [
-    { day: 1, procent: 100 },
-    { day: 2, procent: 100 },
-    { day: 3, procent: 100 },
-    { day: 4, procent: 65 },
-    { day: 5, procent: 100 },
-    { day: 6, procent: 100 },
-    { day: 7, procent: 100 },
-    { day: 8, procent: 100 },
-    { day: 9, procent: 100 },
-    { day: 10, procent: 90 },
-    { day: 11, procent: 100 },
-    { day: 12, procent: 100 },
-    { day: 13, procent: 100 },
-    { day: 14, procent: 80 },
-    { day: 15, procent: 100 },
-    { day: 16, procent: 100 },
-    { day: 17, procent: 100 },
-    { day: 18, procent: 100 },
-    { day: 19, procent: 100 },
-    { day: 20, procent: 100 },
-    { day: 21, procent: 95 },
-    { day: 22, procent: 100 },
-    { day: 23, procent: 100 },
-    { day: 24, procent: 100 },
-    { day: 25, procent: 100 },
-    { day: 26, procent: 100 },
-    { day: 27, procent: 100 },
-  ];
+  const [selectedMonth, setselectedMonth] = useState(today);
 
-    const currentDate = new Date();
-    const today = {
-      day: currentDate.getDate(),
-      month: currentDate.getMonth() + 1,
-      year: currentDate.getFullYear(),
-      dayInMonth: daysInMonth(currentDate.getMonth() + 1, currentDate.getFullYear()),
+  const [monthDate, setMonthDate] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const monthData = useSelector(selectWaterMonthly);
+
+  const user = useSelector(selectUserInfo);
+
+  const minDay = getDateObject(user.createdAt);
+
+  const handlePrevMonth = () => {
+    if (selectedMonth.month === 1) {
+      setselectedMonth({
+        ...selectedMonth,
+        year: selectedMonth.year - 1,
+        month: 12,
+      });
+    } else {
+      setselectedMonth({ ...selectedMonth, month: selectedMonth.month - 1 });
     }
-
-    const [selectedDate, setSelectedDate] = useState(today);
-    const [data, setData] = useState(testData);
-
-    const handlePrevMonth = () => {
-      if (selectedDate.month === 1) {
-        setSelectedDate({ ...selectedDate, year: selectedDate.year - 1, month: 12 });
-      } else {
-        setSelectedDate({ ...selectedDate, month: selectedDate.month - 1 });
-      }
+  };
+  const handleNextMonth = () => {
+    if (selectedMonth.month === 12) {
+      setselectedMonth({
+        ...selectedMonth,
+        year: selectedMonth.year + 1,
+        month: 1,
+      });
+    } else {
+      setselectedMonth({ ...selectedMonth, month: selectedMonth.month + 1 });
     }
-    const handleNextMonth = () => {
-      if (selectedDate.month === 12) {
-        setSelectedDate({ ...selectedDate, year: selectedDate.year + 1, month: 1 });
-      } else {
-        setSelectedDate({ ...selectedDate, month: selectedDate.month + 1 });
-      }
+  };
+
+  useEffect(() => {
+    const waterMonthStart = `${selectedMonth.year}-${selectedMonth.month
+      .toString()
+      .padStart(2, '0')}-01`;
+    const waterMonthEnd = `${selectedMonth.year}-${selectedMonth.month
+      .toString()
+      .padStart(2, '0')}-${selectedMonth.dayInMonth
+      .toString()
+      .padStart(2, '0')}`;
+    setMonthDate({ startDate: waterMonthStart, endDate: waterMonthEnd });
+  }, [selectedMonth]);
+
+  useEffect(() => {
+    if (monthDate) {
+      dispatch(monthActivity(monthDate));
     }
-
-    useEffect(() => {
-      //request to API /water/month
-    }, [selectedDate]);
-
+  }, [dispatch, monthDate]);
 
   const days = [];
   for (let i = 1; i <= today.dayInMonth; i++) {
-    let record = data.find(day => day.day === i);
-    let procent = 0;
-    if (record) {
-      procent = record.procent;
-    }
-    days[i] = { day: i, procent };
+    days[i] = { day: i, percentageOfNorma: 0, totalAmount: 0, date: '' };
+  }
+  for (const day of monthData) {
+    let dayNumber = new Date(day.date).getDate();
+    days[dayNumber] = {...days[dayNumber], ...day};
+    if(day.percentageOfNorma > 100) days[dayNumber].percentageOfNorma = 100;
+    else days[dayNumber].percentageOfNorma = Number(day.percentageOfNorma).toFixed(0);
   }
 
   return (
@@ -87,16 +84,28 @@ import css from './Calendar.module.css';
       <div className={css.calendarHead}>
         <div className={css.calendarTitle}>Month</div>
         <div className={css.calendarSwitcher}>
-          <CalendarPagination today={today} selectedDate={selectedDate} handleNextMonth={handleNextMonth} handlePrevMonth={handlePrevMonth} />
-          <button type='button' className={css.calendarTypeBtn}>
-          <Icon iconName="pie-chart" width='18' height='18' styles={css.calendarTypeIcon} />
+          <CalendarPagination
+            today={today}
+            minDay={minDay}
+            selectedMonth={selectedMonth}
+            selectedDate={selectedDate}
+            handleNextMonth={handleNextMonth}
+            handlePrevMonth={handlePrevMonth}
+          />
+          <button type="button" className={css.calendarTypeBtn}>
+            <Icon
+              iconName="pie-chart"
+              width="18"
+              height="18"
+              styles={css.calendarTypeIcon}
+            />
           </button>
         </div>
       </div>
       <div className={css.calendarBody}>
         {days.map(day => (
           <div className={css.calendarItem} key={day.day}>
-            <CalendarItem day={day} today={today} />
+            <CalendarItem key={day.fullDate} selectedDate={selectedDate} day={day} today={today} handleClick={handleClick} />
           </div>
         ))}
       </div>
@@ -105,3 +114,7 @@ import css from './Calendar.module.css';
 };
 
 export default Calendar;
+
+Calendar.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};

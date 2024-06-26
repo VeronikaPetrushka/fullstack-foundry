@@ -1,13 +1,21 @@
 import axios from 'axios';
 
+const API_URI = 'https://aquatrack-api-myzh.onrender.com/api';
+  // const API_URI = 'http://localhost:8080/api';
+
+
 const instance = axios.create({
-  baseURL: 'https://aquatrack-api-myzh.onrender.com/api',
+  baseURL: API_URI,
+  withCredentials: true,
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
 });
 
-// Request interceptor to set the token
 instance.interceptors.request.use(
   config => {
-    const token = localStorage.getItem('token'); // Get token from local storage or any other storage method you use
+    const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -18,9 +26,9 @@ instance.interceptors.request.use(
   }
 );
 
-// Response interceptor to handle token refreshing
 instance.interceptors.response.use(
   response => response,
+
   async error => {
     const originalRequest = error.config;
 
@@ -28,23 +36,22 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const { data } = await instance.post('/auth/refresh', { refreshToken });
+        const { data } = await axios.get(`${API_URI}/auth/refresh`, {
+          withCredentials: true,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        });
 
-        // Update the tokens in local storage
         localStorage.setItem('token', data.token);
-        localStorage.setItem('refreshToken', data.refreshToken);
 
-        // Set the new token to the original request and retry it
         originalRequest.headers.Authorization = `Bearer ${data.token}`;
         return instance(originalRequest);
       } catch (refreshError) {
-        // Handle refresh token failure (e.g., redirect to login)
         console.error('Refresh token failed', refreshError);
-        // Optionally remove the tokens and redirect to the login page
         localStorage.removeItem('token');
-        localStorage.removeItem('refreshToken');
-        window.location.href = '/login';
+        window.location.href = '/signin';
       }
     }
 

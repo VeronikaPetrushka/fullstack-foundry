@@ -3,22 +3,24 @@ import css from './CalendarItem.module.css';
 
 let dayClass;
 
-const CalendarItem = ({ day, today }) => {
-  if (day.procent < 100) {
+const CalendarItem = ({ selectedDate, day, today, handleClick }) => {
+
+  if (day.percentageOfNorma < 100) {
     dayClass = css.part;
-  } else if (day.day === today.day) {
-    dayClass = css.current;
-  } else {
+  }else{
     dayClass = css.full;
   }
-  const classNames = [css.btnDay, dayClass];
-  const activeBtn = day.day > 0 ? false : true;
+  if (day.date === today.fullDate+"T00:00:00.000Z" || day.date === selectedDate.fullDate+"T00:00:00.000Z") {
+    dayClass = css.current;
+  }
+
+  const activeBtn = day.percentageOfNorma > 0 ? false : true;
 
   return (
-    <button type="button" className={css.calendarBtn} disabled={activeBtn}>
-      <span className={classNames.join(' ')}>{day.day}</span>
+    <button type="button" className={css.calendarBtn} disabled={activeBtn} onClick={() => {handleClick(day.date)}}>
+      <span className={[css.btnDay, dayClass].join(' ')}>{day.day}</span>
       <span className={css.btnProcent}>
-        {day.procent === 0 ? '' : day.procent + '%'}
+        {day.percentageOfNorma === 0 ? '' : day.percentageOfNorma + '%'}
       </span>
     </button>
   );
@@ -27,6 +29,9 @@ const CalendarItem = ({ day, today }) => {
 export default CalendarItem;
 
 CalendarItem.propTypes = {
+  selectedDate: PropTypes.object,
+  selectedMonth: PropTypes.object,
   day: PropTypes.object.isRequired,
   today: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
