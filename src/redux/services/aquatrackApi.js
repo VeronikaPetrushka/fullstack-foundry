@@ -1,53 +1,39 @@
-import axios from 'axios';
-import instance from './instance';
+import { instance, publicInstance } from './instance';
 
-//////////////////////////////////////////////////////////////////////////////////
-
-// Utility to add JWT
-export const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-// Utility to remove JWT
-export const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
-
-/////////////////////////////////////////////////////////////////////////////////
 
 //AUTH
 export const requestRegister = async formData => {
-  const { data } = await instance.post('/auth/register', formData);
+  const { data } = await publicInstance.post('/auth/register', formData);
 
   return data;
 };
 
 export const requestLogin = async formData => {
-  const { data } = await instance.post('/auth/login', formData);
+  const { data } = await publicInstance.post('/auth/login', formData);
 
   return data;
 };
 
 export const requestGoogleLogin = async formData => {
-  const { data } = await instance.get('/auth/google', { params: formData });
+  const { data } = await publicInstance.get('/auth/google', { params: formData });
 
   return data;
 };
 
-export const refreshToken = async formData => {
-  const { data } = await instance.get('/auth/refresh', formData);
+export const refreshToken = async () => {
+  const { data } = await publicInstance.get('/auth/refresh');
 
   return data;
 };
 
-export const requestLogout = async formData => {
-  const { data } = await instance.post('/auth/logout', formData);
+export const requestLogout = async () => {
+  const { data } = await instance.post('/auth/logout');
 
   return data;
 };
 
 export const requestSendVerify = async (verificationToken, formData) => {
-  const { data } = await instance.post(
+  const { data } = await publicInstance.post(
     `/auth/verify/${verificationToken}`,
     formData
   );
@@ -56,24 +42,28 @@ export const requestSendVerify = async (verificationToken, formData) => {
 };
 
 export const requestResendVerify = async formData => {
-  const { data } = await instance.post('/auth/verify', formData);
+  const { data } = await publicInstance.post('/auth/verify', formData);
 
   return data;
 };
 
 export const requestForgotPassword = async formData => {
-  const { data } = await instance.post('/auth/forgot-password', formData);
+  const { data } = await publicInstance.post('/auth/forgot-password', formData);
 
   return data;
 };
 
 export const requestResetPassword = async formData => {
-  const { data } = await instance.post('/auth/reset-password', formData);
+  const { data } = await publicInstance.post('/auth/reset-password', formData);
 
   return data;
 };
 
 // USER
+export const requestTotalUsers = async () => {
+  const { data } = await publicInstance.get('users/count-users');
+  return data;
+}
 
 export const requestUserInfo = async () => {
   const { data } = await instance.get('/users/current');

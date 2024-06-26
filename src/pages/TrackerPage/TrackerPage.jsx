@@ -11,18 +11,20 @@ import css from './TrackerPage.module.css';
 import ChooseDate from '../../components/ChooseDate/ChooseDate';
 
 const TrackerPage = () => {
+
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
   const [selectedDate, setSelectedDate] = useState(getDateObject());
+  
+  const handleCalendarBtnClick = (btnDate) => {
+    setSelectedDate(getDateObject(btnDate));
+  };
+
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(userInfo());
-  });
-
-  const handleCalendarBtnClick = btnDate => {
-    setSelectedDate(getDateObject(btnDate));
-  };
-  console.log(selectedDate);
+  }, [dispatch]);
+  // console.log(selectedDate);
 
   return (
     <>
@@ -30,7 +32,7 @@ const TrackerPage = () => {
         <title>AQUATRACK: Record daily water intake and track</title>
       </Helmet>
       <Page>
-        <WaterMainInfo />
+        <WaterMainInfo selectedDate={selectedDate} />
         <section className={css.trackerSection}>
           <WaterDetailedInfo />
           <ChooseDate  selectedDate={selectedDate}/>

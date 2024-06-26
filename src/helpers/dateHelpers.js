@@ -32,3 +32,51 @@ export const getDateObject = (date = null) => {
   };
   return today;
 };
+
+export const compareDates = (d1, d2) => {
+  let date1 = new Date(d1).getTime();
+  let date2 = new Date(d2).getTime();
+
+  if(isNaN(date1) || isNaN(date2)) {
+    return false;
+  }
+  if (date1 < date2) {
+    return "<";
+  } else if (date1 > date2) {
+    return ">";
+  } else {
+    return "=";
+  }
+};
+
+export const dateIsEqual = (d1, d2) => {
+  let date1 = new Date(d1).getTime();
+  let date2 = new Date(d2).getTime();
+
+  if(isNaN(date1) || isNaN(date2)) {
+    return false;
+  }
+  if (date1 === date2) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
+export const dateIsBetween = (d, d1, d2) => {
+  let date = new Date(d).getTime();
+  let date1 = new Date(d1).getTime();
+  let date2 = new Date(d2).getTime();
+  if(isNaN(date) || isNaN(date1) || isNaN(date2)) {
+    return null;
+  }
+
+  if(date >= date1 && date <= date2){
+    return true;
+  }else{
+    return false;
+  }
+
+
+}
