@@ -4,7 +4,7 @@ import CalendarItem from '../CalendarItem/CalendarItem';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { monthActivity } from '../../redux/water/operations';
-import { selectWaterMonthly } from '../../redux/water/selectors';
+import { selectWaterMonthly, selectIsError, selectIsLoading } from '../../redux/water/selectors';
 import { getDateObject } from '../../helpers/dateHelpers';
 import { selectUserInfo } from '../../redux/user/selectors';
 
@@ -14,6 +14,11 @@ import css from './Calendar.module.css';
 const Calendar = ({selectedDate, handleClick}) => {
 
   const today = getDateObject();
+
+  const isLoadingWaterMonth = useSelector(selectIsLoading);
+  const isErrorWaterMonth = useSelector(selectIsError);
+
+
 
   const [selectedMonth, setselectedMonth] = useState(today);
 
@@ -85,7 +90,10 @@ const Calendar = ({selectedDate, handleClick}) => {
     else daysOfSelectedMonth[dayNumber].percentageOfNorma = Number(day.percentageOfNorma.toFixed(0));
   }
 
-  return (
+  return isErrorWaterMonth ? (<div>Error occured</div>) :
+  isLoadingWaterMonth ? (
+    <div>Loading data...</div>
+  ) : (
     <div className={css.calendar}>
       <div className={css.calendarHead}>
         <div className={css.calendarTitle}>Month</div>
