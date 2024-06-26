@@ -8,6 +8,7 @@ import { getDateObject } from '../../helpers/dateHelpers';
 import Calendar from '../../components/Calendar/Calendar';
 import { Helmet } from 'react-helmet-async';
 import css from './TrackerPage.module.css';
+import ChooseDate from '../../components/ChooseDate/ChooseDate';
 
 const TrackerPage = () => {
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
@@ -32,6 +33,7 @@ const TrackerPage = () => {
         <WaterMainInfo />
         <section className={css.trackerSection}>
           <WaterDetailedInfo />
+          <ChooseDate  selectedDate={selectedDate}/>
           <Calendar selectedDate={selectedDate} handleClick={handleCalendarBtnClick} />
         </section>
       </Page>
