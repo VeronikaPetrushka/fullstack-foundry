@@ -13,7 +13,7 @@ const TrackerPage = () => {
 
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
   const [selectedDate, setSelectedDate] = useState(getDateObject());
-  
+
   const handleCalendarBtnClick = (btnDate) => {
     setSelectedDate(getDateObject(btnDate));
   };
@@ -23,7 +23,7 @@ const TrackerPage = () => {
   useEffect(() => {
     dispatch(userInfo());
   }, [dispatch]);
-  // console.log(selectedDate);
+  // console.log("Selected date: ", selectedDate);
 
   return (
     <>

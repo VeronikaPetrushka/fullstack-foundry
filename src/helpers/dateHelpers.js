@@ -4,15 +4,15 @@ function daysInMonth(month, year) {
 
 export const getDateObject = (date = null) => {
   const currentDate = date ? new Date(date) : new Date();
+  const month = currentDate.getMonth() + 1;
+
   const today = {
+    date: date,
     day: currentDate.getDate(),
-    month: currentDate.getMonth() + 1,
+    month: month,
     year: currentDate.getFullYear(),
-    dayInMonth: daysInMonth(
-      currentDate.getMonth() + 1,
-      currentDate.getFullYear()
-    ),
-    fullDate: currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'),
+    dayInMonth: daysInMonth(month, currentDate.getFullYear()),
+    fullDate: currentDate.getFullYear() + '-' + month.toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'),
     monthName: currentDate.toLocaleString('en', { month: 'long' }),
     full: currentDate,
   };

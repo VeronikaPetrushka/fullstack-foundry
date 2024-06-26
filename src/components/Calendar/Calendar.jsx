@@ -40,26 +40,27 @@ const Calendar = ({selectedDate, handleClick}) => {
   }
 
   const handlePrevMonth = () => {
-    if (selectedMonth.month === 1) {
-      setSelectedMonth({
-        ...selectedMonth,
-        year: selectedMonth.year - 1,
-        month: 12,
-      });
-    } else {
-      setSelectedMonth({ ...selectedMonth, month: selectedMonth.month - 1 });
-    }
+    setSelectedMonth(prevSelectedMonth => {
+      let newSelectedMonth;
+      if (prevSelectedMonth.month === 1) {
+        newSelectedMonth = `${prevSelectedMonth.year - 1}-12-${prevSelectedMonth.day}`;
+      } else {
+        newSelectedMonth = `${prevSelectedMonth.year}-${prevSelectedMonth.month - 1}-${prevSelectedMonth.day}`;
+      }
+
+      return getDateObject(newSelectedMonth);
+    });
   };
   const handleNextMonth = () => {
-    if (selectedMonth.month === 12) {
-      setSelectedMonth({
-        ...selectedMonth,
-        year: selectedMonth.year + 1,
-        month: 1,
-      });
-    } else {
-      setSelectedMonth({ ...selectedMonth, month: selectedMonth.month + 1 });
-    }
+    setSelectedMonth(prevSelectedMonth => {
+      let newSelectedMonth;
+      if (selectedMonth.month === 12) {
+        newSelectedMonth = `${prevSelectedMonth.year + 1}-01-${prevSelectedMonth.day}`;
+      }else{
+        newSelectedMonth = `${prevSelectedMonth.year}-${prevSelectedMonth.month + 1}-${prevSelectedMonth.day}`;
+      }
+      return getDateObject(newSelectedMonth);
+    })
   };
 
   useEffect(() => {
