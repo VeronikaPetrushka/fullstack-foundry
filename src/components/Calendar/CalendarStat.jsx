@@ -126,12 +126,12 @@ const CalendarStat = ({selectedDate, handleClick}) => {
       {showChart ?
         <Chart dataForSelectedMonth={dataForSelectedMonth} />
         :
-        (isLoadingWaterMonth ? <Loader addClass={css.monthDataLoader} /> :
+        (<>{isLoadingWaterMonth && (<div className={css.loaderBg}><Loader addClass={css.monthDataLoader} /></div>)}
         <Calendar daysOfSelectedMonth={daysOfSelectedMonth} selectedDate={selectedDate} minDay={minDay} today={today} handleClick={handleClick} />
-        )
+        </>)
       }
     </div>
-  );
+    );
 };
 
 export default CalendarStat;
