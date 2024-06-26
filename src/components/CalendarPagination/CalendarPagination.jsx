@@ -10,6 +10,7 @@ const CalendarPagination = ({
   handlePrevMonth,
   handleNextMonth,
 }) => {
+
   const showPrevMonth =
   selectedMonth.month === minDay.month && selectedMonth.year === minDay.year
       ? true
@@ -35,7 +36,7 @@ const CalendarPagination = ({
         />
       </button>
       <div className={css.calendarMonth}>
-        {today.month_name} {selectedMonth.year}
+        {selectedMonth.monthName} {selectedMonth.year}
       </div>
       <button
         type="button"

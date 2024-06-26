@@ -21,7 +21,7 @@ const Calendar = ({selectedDate, handleClick}) => {
 
 
 
-  const [selectedMonth, setselectedMonth] = useState(today);
+  const [selectedMonth, setSelectedMonth] = useState(today);
 
   const [showChart, setShowChart] = useState(false);
 
@@ -41,24 +41,24 @@ const Calendar = ({selectedDate, handleClick}) => {
 
   const handlePrevMonth = () => {
     if (selectedMonth.month === 1) {
-      setselectedMonth({
+      setSelectedMonth({
         ...selectedMonth,
         year: selectedMonth.year - 1,
         month: 12,
       });
     } else {
-      setselectedMonth({ ...selectedMonth, month: selectedMonth.month - 1 });
+      setSelectedMonth({ ...selectedMonth, month: selectedMonth.month - 1 });
     }
   };
   const handleNextMonth = () => {
     if (selectedMonth.month === 12) {
-      setselectedMonth({
+      setSelectedMonth({
         ...selectedMonth,
         year: selectedMonth.year + 1,
         month: 1,
       });
     } else {
-      setselectedMonth({ ...selectedMonth, month: selectedMonth.month + 1 });
+      setSelectedMonth({ ...selectedMonth, month: selectedMonth.month + 1 });
     }
   };
 
