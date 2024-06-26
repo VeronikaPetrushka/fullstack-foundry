@@ -4,7 +4,6 @@ import css from './WaterDailyNorma.module.css';
 
 const WaterDailyNorma = () => {
   const user = useSelector(selectUserInfo);
-  // console.log(dailyNorma);
 
   return (
     <div className={css.dailyNormaWrap}>
