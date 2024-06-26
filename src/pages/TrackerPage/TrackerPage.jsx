@@ -8,21 +8,23 @@ import { getDateObject } from '../../helpers/dateHelpers';
 import Calendar from '../../components/Calendar/Calendar';
 import { Helmet } from 'react-helmet-async';
 import css from './TrackerPage.module.css';
-import ChooseDate from '../../components/ChooseDate/ChooseDate';
+import DailyInfo from '../../components/DailyInfo/DailyInfo';
 
 const TrackerPage = () => {
+
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
   const [selectedDate, setSelectedDate] = useState(getDateObject());
+  
+  const handleCalendarBtnClick = (btnDate) => {
+    setSelectedDate(getDateObject(btnDate));
+  };
+
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(userInfo());
-  });
-
-  const handleCalendarBtnClick = btnDate => {
-    setSelectedDate(getDateObject(btnDate));
-  };
-  console.log(selectedDate);
+  }, [dispatch]);
+  // console.log(selectedDate);
 
   return (
     <>
@@ -30,10 +32,10 @@ const TrackerPage = () => {
         <title>AQUATRACK: Record daily water intake and track</title>
       </Helmet>
       <Page>
-        <WaterMainInfo />
+        <WaterMainInfo selectedDate={selectedDate} />
         <section className={css.trackerSection}>
           <WaterDetailedInfo />
-          <ChooseDate  selectedDate={selectedDate}/>
+          <DailyInfo selectedDate={selectedDate} />
           <Calendar selectedDate={selectedDate} handleClick={handleCalendarBtnClick} />
         </section>
       </Page>
