@@ -24,7 +24,7 @@ const TrackerPage = () => {
   useEffect(() => {
     dispatch(userInfo());
   }, [dispatch]);
-  // console.log(selectedDate);
+  // console.log("Selected date: ", selectedDate);
 
   return (
     <>

@@ -35,5 +35,4 @@ Calendar.propTypes = {
   minDay: PropTypes.object.isRequired,
   today: PropTypes.object.isRequired,
   handleClick: PropTypes.func.isRequired,
-}
-  
+};
