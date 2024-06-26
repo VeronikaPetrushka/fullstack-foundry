@@ -11,8 +11,8 @@ const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
 const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
 
 const App = () => {
-  const [isSignedIn] = useRefreshUser();
-console.log(isSignedIn);
+
+  useRefreshUser();
 
   return (
     <SharedLayout>

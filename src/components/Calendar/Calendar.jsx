@@ -68,15 +68,21 @@ const Calendar = ({selectedDate, handleClick}) => {
     }
   }, [dispatch, monthDate]);
 
-  const days = [];
+  const daysOfSelectedMonth = [];
   for (let i = 1; i <= today.dayInMonth; i++) {
-    days[i] = { day: i, percentageOfNorma: 0, totalAmount: 0, date: '' };
+    daysOfSelectedMonth[i] = {
+      day: i,
+      percentageOfNorma: 0,
+      totalAmount: 0,
+      date: '',
+      fullDate: `${selectedMonth.year}-${selectedMonth.month.toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`
+    };
   }
   for (const day of monthData) {
     let dayNumber = new Date(day.date).getDate();
-    days[dayNumber] = {...days[dayNumber], ...day};
-    if(day.percentageOfNorma > 100) days[dayNumber].percentageOfNorma = 100;
-    else days[dayNumber].percentageOfNorma = Number(day.percentageOfNorma).toFixed(0);
+    daysOfSelectedMonth[dayNumber] = {...daysOfSelectedMonth[dayNumber], ...day};
+    if(day.percentageOfNorma > 100) daysOfSelectedMonth[dayNumber].percentageOfNorma = 100;
+    else daysOfSelectedMonth[dayNumber].percentageOfNorma = Number(day.percentageOfNorma.toFixed(0));
   }
 
   return (
@@ -103,9 +109,9 @@ const Calendar = ({selectedDate, handleClick}) => {
         </div>
       </div>
       <div className={css.calendarBody}>
-        {days.map(day => (
+        {daysOfSelectedMonth.map(day => (
           <div className={css.calendarItem} key={day.day}>
-            <CalendarItem key={day.fullDate} selectedDate={selectedDate} day={day} today={today} handleClick={handleClick} />
+            <CalendarItem key={day.fullDate} selectedDate={selectedDate} dayOfMonth={day} minDay={minDay} today={today} handleClick={handleClick} />
           </div>
         ))}
       </div>

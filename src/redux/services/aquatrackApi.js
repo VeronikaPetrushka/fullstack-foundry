@@ -15,7 +15,7 @@ export const requestLogin = async formData => {
 };
 
 export const requestGoogleLogin = async formData => {
-  const { data } = await instance.get('/auth/google', { params: formData });
+  const { data } = await publicInstance.get('/auth/google', { params: formData });
 
   return data;
 };
@@ -33,7 +33,7 @@ export const requestLogout = async () => {
 };
 
 export const requestSendVerify = async (verificationToken, formData) => {
-  const { data } = await instance.post(
+  const { data } = await publicInstance.post(
     `/auth/verify/${verificationToken}`,
     formData
   );
@@ -42,24 +42,28 @@ export const requestSendVerify = async (verificationToken, formData) => {
 };
 
 export const requestResendVerify = async formData => {
-  const { data } = await instance.post('/auth/verify', formData);
+  const { data } = await publicInstance.post('/auth/verify', formData);
 
   return data;
 };
 
 export const requestForgotPassword = async formData => {
-  const { data } = await instance.post('/auth/forgot-password', formData);
+  const { data } = await publicInstance.post('/auth/forgot-password', formData);
 
   return data;
 };
 
 export const requestResetPassword = async formData => {
-  const { data } = await instance.post('/auth/reset-password', formData);
+  const { data } = await publicInstance.post('/auth/reset-password', formData);
 
   return data;
 };
 
 // USER
+export const requestTotalUsers = async () => {
+  const { data } = await publicInstance.get('users/count-users');
+  return data;
+}
 
 export const requestUserInfo = async () => {
   const { data } = await instance.get('/users/current');

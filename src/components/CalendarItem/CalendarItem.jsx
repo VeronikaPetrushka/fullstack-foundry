@@ -1,26 +1,28 @@
 import PropTypes from 'prop-types';
 import css from './CalendarItem.module.css';
+import { dateIsBetween, dateIsEqual } from '../../helpers/dateHelpers';
 
 let dayClass;
 
-const CalendarItem = ({ selectedDate, day, today, handleClick }) => {
+const CalendarItem = ({ selectedDate, dayOfMonth, minDay, today, handleClick }) => {
 
-  if (day.percentageOfNorma < 100) {
+  if (dayOfMonth.percentageOfNorma < 100) {
     dayClass = css.part;
   }else{
     dayClass = css.full;
   }
-  if (day.date === today.fullDate+"T00:00:00.000Z" || day.date === selectedDate.fullDate+"T00:00:00.000Z") {
+
+  if (dateIsEqual(dayOfMonth.fullDate, today.fullDate) || dateIsEqual(dayOfMonth.fullDate, selectedDate.fullDate)) {
     dayClass = css.current;
   }
 
-  const activeBtn = day.percentageOfNorma > 0 ? false : true;
+  const activeBtn = dateIsBetween(dayOfMonth.fullDate, minDay.fullDate, today.fullDate) ? true : false;
 
   return (
-    <button type="button" className={css.calendarBtn} disabled={activeBtn} onClick={() => {handleClick(day.date)}}>
-      <span className={[css.btnDay, dayClass].join(' ')}>{day.day}</span>
+    <button type="button" className={css.calendarBtn} disabled={!activeBtn} onClick={() => {handleClick(dayOfMonth.fullDate)}}>
+      <span className={[css.btnDay, dayClass].join(' ')}>{dayOfMonth.day}</span>
       <span className={css.btnProcent}>
-        {day.percentageOfNorma === 0 ? '' : day.percentageOfNorma + '%'}
+        {dayOfMonth.percentageOfNorma === 0 ? '' : dayOfMonth.percentageOfNorma + '%'}
       </span>
     </button>
   );
@@ -29,9 +31,10 @@ const CalendarItem = ({ selectedDate, day, today, handleClick }) => {
 export default CalendarItem;
 
 CalendarItem.propTypes = {
+  minDay: PropTypes.object,
   selectedDate: PropTypes.object,
   selectedMonth: PropTypes.object,
-  day: PropTypes.object.isRequired,
+  dayOfMonth: PropTypes.object.isRequired,
   today: PropTypes.object.isRequired,
   handleClick: PropTypes.func.isRequired,
 };

@@ -53,6 +53,7 @@ const authSlice = createSlice({
       // LOGOUT
       .addCase(logout.pending, handlePending)
       .addCase(logout.fulfilled, state => {
+        localStorage.removeItem('token');
         state.isLoading = false;
         state.user = INITIAL_STATE.user;
         state.token = null;

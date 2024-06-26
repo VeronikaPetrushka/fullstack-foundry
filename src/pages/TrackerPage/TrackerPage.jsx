@@ -10,23 +10,18 @@ import { Helmet } from 'react-helmet-async';
 import css from './TrackerPage.module.css';
 
 const TrackerPage = () => {
+
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
   const [selectedDate, setSelectedDate] = useState(getDateObject());
   const handleCalendarBtnClick = (btnDate) => {
     setSelectedDate(getDateObject(btnDate));
   };
-  // console.log(selectedDate);
-
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(userInfo());
-  });
-
-  const handleCalendarBtnClick = btnDate => {
-    setSelectedDate(getDateObject(btnDate));
-  };
-  console.log(selectedDate);
+  }, [dispatch]);
+  // console.log(selectedDate);
 
   return (
     <>
@@ -37,7 +32,7 @@ const TrackerPage = () => {
         <WaterMainInfo />
         <section className={css.trackerSection}>
           <WaterDetailedInfo />
-          <Calendar handleClick={handleCalendarBtnClick} />
+          <Calendar handleClick={handleCalendarBtnClick} selectedDate={selectedDate} />
         </section>
       </Page>
     </>

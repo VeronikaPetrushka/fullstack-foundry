@@ -3,6 +3,7 @@ import {
   requestUserInfo,
   updateUserProfile,
   uploadUserAvatar,
+  requestTotalUsers,
 } from '../services/aquatrackApi.js';
 
 export const userInfo = createAsyncThunk('users/current', async thunkAPI => {
@@ -48,3 +49,15 @@ export const uploadAvatar = createAsyncThunk(
     }
   }
 );
+
+export const getTotalUsers = createAsyncThunk(
+  'users/count-users',
+  async (_, thunkAPI) => {
+    try {
+      const res = await requestTotalUsers();
+      return res;
+    }catch (err){
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+)
