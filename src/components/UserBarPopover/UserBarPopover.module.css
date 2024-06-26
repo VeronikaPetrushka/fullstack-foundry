@@ -1,0 +1,33 @@
+.popoverBtnWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    border-radius: 15px;
+    background-color: var(--white);
+}
+
+.popoverBtn {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--grey);
+    border: none;
+    background-color: transparent;
+    opacity: 0.5;
+}
+
+.popoverIcon {
+    fill: none;
+    stroke: var(--grey)
+}
+
+.popoverBtn:hover,
+.popoverBtn.isActive {
+    opacity: 1;
+}

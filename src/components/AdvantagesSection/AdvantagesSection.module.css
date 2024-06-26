@@ -1,11 +1,10 @@
 .advantagesSection {
-  width: 343px;
+  min-width: 288px;
   height: 363px;
   border-radius: 30px;
   background-color: var(--light);
 
-
-  background-image: url(../../img/homePage.jpg);
+  background-image: url(../../assets/img/HomePageGirl-min.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -13,8 +12,8 @@
 }
 
 @media only screen and (min-resolution: 192dpi) {
-  .advantages_main {
-    background-image: url(../../assets/img/baner@2x.jpg);
+  .advantagesSection {
+    background-image: url(../../assets/img/HomePageGirl2x-min.png);
   }
 }
 
@@ -82,13 +81,7 @@
   letter-spacing: -0.08px;
 }
 
-
-
-
-
-
 @media (min-width: 768px) {
-
   .group {
     position: absolute;
     right: 32px;
@@ -131,44 +124,13 @@
     line-height: 1;
     letter-spacing: -0.12px;
   }
-
-
-
 }
 
 @media (min-width: 1440px) {
-
   .group {
     bottom: 64px;
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media screen and (min-width: 768px) {
   .advantagesSection {

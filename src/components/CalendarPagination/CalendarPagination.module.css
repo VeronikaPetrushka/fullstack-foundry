@@ -1,0 +1,48 @@
+.calendarPaginator {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.calendarMonth {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+  text-align: center;
+}
+.calendarPageBtn {
+  width: 18px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+}
+.calendarPageBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.calendarArrow {
+  fill: none;
+  stroke: #323f47;
+  width: 18px;
+  height: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .calendarPaginator {
+    gap: 20px;
+  }
+  .calendarMonth {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+}
