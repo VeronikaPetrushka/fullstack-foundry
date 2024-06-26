@@ -6,9 +6,9 @@ import {
   requestMonthActivity,
 } from '../services/aquatrackApi.js';
 
-export const dailyActivity = createAsyncThunk('water/day', async thunkAPI => {
+export const dailyActivity = createAsyncThunk('water/day', async (data, thunkAPI) => {
   try {
-    const res = await requestDailyActivity();
+    const res = await requestDailyActivity(data);
 
     return res;
   } catch (err) {
@@ -16,9 +16,9 @@ export const dailyActivity = createAsyncThunk('water/day', async thunkAPI => {
   }
 });
 
-export const monthActivity = createAsyncThunk('water/month', async thunkAPI => {
+export const monthActivity = createAsyncThunk('water/month', async (data, thunkAPI) => {
   try {
-    const res = await requestMonthActivity();
+    const res = await requestMonthActivity(data);
 
     return res;
   } catch (err) {

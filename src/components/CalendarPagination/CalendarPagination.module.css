@@ -23,6 +23,10 @@
   cursor: pointer;
   padding: 0;
 }
+.calendarPageBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
 .calendarArrow {
   fill: none;
   stroke: #323f47;

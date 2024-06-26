@@ -1,10 +1,13 @@
+import { useEffect } from 'react';
 import css from './SignInForm.module.css';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth/operations';
+import { selectIsSignedIn } from '../../redux/auth/selectors';
+
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -15,6 +18,10 @@ const schema = yup.object().shape({
 });
 
 const SignInForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isSignedIn = useSelector(selectIsSignedIn);
+
   const {
     register,
     handleSubmit,
@@ -24,12 +31,16 @@ const SignInForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const dispatch = useDispatch();
-
   const onSubmit = async formData => {
-    dispatch(login(formData));
+    await dispatch(login(formData));
     reset();
   };
+
+  useEffect(() => {
+    if (isSignedIn) {
+      navigate('/tracker');
+    }
+  }, [isSignedIn, navigate]);
 
   return (
     <div className={css.signUpWrap}>

@@ -1,9 +1,17 @@
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import css from "./LogOutModal.module.css";
 import { logout } from "../../redux/auth/operations";
 
 export const LogOutModal = ({ onClose }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await dispatch(logout());
+    navigate('/');
+    onClose();
+  };
 
   return (
     <div className={css.modalBox}>
@@ -12,10 +20,7 @@ export const LogOutModal = ({ onClose }) => {
       <div className={css.btnBox}>
         <button
           className={css.logOutBtn}
-          onClick={() => {
-            dispatch(logout());
-            onClose();
-          }}
+          onClick={handleLogout}
         >
           Log out
         </button>
