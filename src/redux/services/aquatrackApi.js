@@ -49,7 +49,7 @@ export const requestResendVerify = async formData => {
 
 export const requestForgotPassword = async formData => {
   const { data } = await publicInstance.post('/auth/forgot-password', formData);
-
+console.log(data);
   return data;
 };
 

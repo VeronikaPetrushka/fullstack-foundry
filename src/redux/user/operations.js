@@ -12,7 +12,7 @@ export const userInfo = createAsyncThunk('users/current', async thunkAPI => {
 
     return res;
   } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
+    return thunkAPI.rejectWithValue(err.response.data.message || err.message);
   }
 });
 
@@ -32,7 +32,7 @@ export const updateUserSettings = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
@@ -45,7 +45,7 @@ export const uploadAvatar = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
@@ -57,7 +57,7 @@ export const getTotalUsers = createAsyncThunk(
       const res = await requestTotalUsers();
       return res;
     }catch (err){
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 )

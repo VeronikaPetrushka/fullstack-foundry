@@ -34,7 +34,7 @@ const ForgotPassword = () => {
       setSendResult('Check your email! We sent you a link to reset your password.');
       reset();
     } catch (error) {
-      toast.error('User with this email does not exist!');
+      toast.error(error || 'User with this email does not exist!');
     }
   };
 
