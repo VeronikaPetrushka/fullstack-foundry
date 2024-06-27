@@ -6,25 +6,44 @@ import {
   requestMonthActivity,
 } from '../services/aquatrackApi.js';
 
-export const dailyActivity = createAsyncThunk('water/day', async (data, thunkAPI) => {
-  try {
-    const res = await requestDailyActivity(data);
+export const dailyActivity = createAsyncThunk(
+  'water/day',
+  async (data, thunkAPI) => {
+    try {
+      const res = await requestDailyActivity(data);
 
-    return res;
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data.message || err.message);
+      return res;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
+    }
   }
-});
+);
 
-export const monthActivity = createAsyncThunk('water/month', async (data, thunkAPI) => {
-  try {
-    const res = await requestMonthActivity(data);
+export const monthActivity = createAsyncThunk(
+  'water/month',
+  async (data, thunkAPI) => {
+    try {
+      const res = await requestMonthActivity(data);
 
-    return res;
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data.message || err.message);
+      return res;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
+    }
   }
-});
+);
+
+export const weekActivity = createAsyncThunk(
+  'water/week',
+  async (data, thunkAPI) => {
+    try {
+      const res = await requestMonthActivity(data);
+
+      return res;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
+    }
+  }
+);
 
 export const addWater = createAsyncThunk(
   'water/add',
