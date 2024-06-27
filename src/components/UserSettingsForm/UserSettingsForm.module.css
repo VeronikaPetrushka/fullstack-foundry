@@ -1,0 +1,283 @@
+.uploadBtn {
+  display: flex;
+  margin-bottom: 40px;
+}
+.uploadBtn p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  margin-bottom: 40px;
+}
+/* ================= */
+.settingBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.titleHender {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--main);
+  margin-bottom: 5px;
+}
+@media (min-width: 1440px) {
+  .titleHender {
+    font-size: 18px;
+    line-height: 1.33333;
+  }
+}
+/* ====================== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 1440px) {
+  .form {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .form section {
+    width: 400px;
+  }
+
+  .sectionBox {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+  }
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.box input {
+  margin-bottom: 20px;
+}
+.labelName {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+@media (min-width: 1440px) {
+  .labelName {
+    font-size: 18px;
+    line-height: 1.33333;
+  }
+}
+form input {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  /* padding: 14px 337px 14px 16px; */
+  width: 100%;
+  height: 46px;
+  font-size: 14px;
+  padding-left: 10px;
+}
+@media (min-width: 768px) {
+  form input {
+    height: 56px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+/* ======================== */
+.titleNormaFormula {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--main);
+  margin-bottom: 15px;
+}
+
+.listFormula {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* margin-bottom: 15px; */
+}
+
+@media (min-width: 768px) {
+  .listFormula {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+.listFormula li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+.listFormula span {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+@media (min-width: 1440px) {
+  .titleNormaFormula {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+  .listFormula li {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .listFormula span {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+.textBox {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px;
+  width: 100%;
+  height: 140px;
+}
+@media (min-width: 1440px) {
+  .textBox {
+    height: 152px;
+  }
+}
+.textBox span {
+  color: #9be1a0;
+}
+.textBox p {
+  text-align: justify;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.071em;
+  color: rgba(47, 47, 47, 0.6);
+  margin-bottom: 15px;
+}
+@media (min-width: 768px) {
+  .textBox p {
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+}
+/* ===================== */
+.formKilo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.formKilo label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.05em;
+  color: var(--main-text);
+}
+.amountWater {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.05em;
+  color: var(--main-text);
+  margin-bottom: 20px;
+}
+.youWater {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--main);
+  margin-bottom: 20px;
+}
+.amount {
+  margin-left: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: var(--accent);
+}
+.formMuch {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+.btnSave {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 40px;
+  width: 116px;
+  height: 46px;
+  background: var(--accent);
+  margin-top: 20px;
+  transition: var(--animation);
+}
+
+.btnSave:hover {
+  background-color: var(--hover);
+}
+.error {
+  margin-left: 16px;
+  color: red;
+  margin: 7px 0 10px 16px;
+  font-size: 14px;
+}
+.btnSave span {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
+}
+.vectorItem {
+  margin-bottom: 24px;
+}
+.vector {
+  color: var(--accent);
+  margin-right: 5px;
+  font-size: 25px;
+}
+.spBtn {
+  height: 120px;
+}
+
+@media (min-width: 1440px) {
+  .formKilo label {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .amountWater {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .youWater {
+    font-size: 18px;
+    line-height: 1.333;
+  }
+  .spBtn {
+    height: 70px;
+  }
+  .vectorItem {
+    margin-bottom: 0;
+  }
+}
