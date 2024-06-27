@@ -63,6 +63,11 @@ const SignInForm = () => {
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <h2 className={css.formTitle}>Sign In</h2>
+        <div className={css.loginWithGoogleBtnContainer}>
+        <a className={css.loginWithGoogleBtn} href='https://aquatrack-api-myzh.onrender.com/api/auth/google'>
+          Sign in with Google
+        </a>
+        </div>
         <label className={css.label}>Email</label>
         <input
           className={`${css.input} ${errors.email ? css.inputError : ''}`}
@@ -111,6 +116,7 @@ const SignInForm = () => {
           <span className={css.spanLink}>Sign Up</span>
         </Link>
       </p>
+      <p className={css.text}><Link to="/forgot-password"><span className={css.spanLink}>Forgot password?</span></Link></p>
     </div>
   );
 };
