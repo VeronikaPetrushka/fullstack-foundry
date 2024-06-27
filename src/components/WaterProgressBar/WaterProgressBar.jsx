@@ -24,9 +24,7 @@ const WaterProgressBar = ({ selectedDate }) => {
   }, [dispatch, currentDate]);
 
   const dayWater = useSelector(selectWaterMonthly);
-
   const percentage = dayWater.length > 0 ? dayWater[0].percentageOfNorma : 0;
-  console.log(percentage);
   const today = getDateObject();
 
   return (
