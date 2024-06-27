@@ -230,7 +230,7 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 
   width: 100%;
-  height: 50px;
+  height: 60px;
 
   text-wrap: nowrap;
 
@@ -245,7 +245,7 @@
 
   font-family: inherit;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 18.06px;
   letter-spacing: -0.14px;
   color: rgba(47, 47, 47, 0.6);
