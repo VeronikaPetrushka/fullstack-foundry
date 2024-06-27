@@ -135,11 +135,11 @@ const SignUpForm = () => {
         {errors.repeatPassword && (
           <p className={css.errorMessage}>{errors.repeatPassword.message}</p>
         )}
-      </form>
-      <button className={css.button} type="submit">
-        Sign Up
-      </button>
 
+        <button className={css.signUpButton} type="submit">
+          Sign Up
+        </button>
+      </form>
       <p className={css.text}>
         Already have an account?{' '}
         <Link to="/signin">
