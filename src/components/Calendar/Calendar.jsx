@@ -21,16 +21,14 @@ const Calendar = ({
       "amount": 150,
       "date": "2024-06-27T11:30"
     }
-    const res = await dispatch(addWater(data));
-    console.log(res);
+    await dispatch(addWater(data));
 }
 
   const handleDeleteWater = async () => {
     const data = {
       "id": "667d8cc5b09b9391fee4618f"
     }
-    const res = await dispatch(deleteWater(data));
-    console.log(res);
+    await dispatch(deleteWater(data));
 }
 
 

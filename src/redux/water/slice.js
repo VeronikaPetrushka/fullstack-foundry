@@ -53,9 +53,9 @@ const waterSlice = createSlice({
     builder.addCase(addWater.fulfilled, (state, action) => {
       state.isLoading = false;
       state.waterDaily.push(action.payload);
-      const totalAmount = state.waterDaily.reduce((total, record) => {total + record.amount; return total;}, 0);
-      const index = state.waterMonthly.find(
-        record => record.date === action.payload.createdAt.slice(0, 9)
+      const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
+      const index = state.waterMonthly.findIndex(
+        record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
       );
       if (index) {
         state.waterMonthly[index].totalAmount = totalAmount;
@@ -75,6 +75,15 @@ const waterSlice = createSlice({
       if (index !== -1) {
         state.waterDaily[index] = action.payload;
       }
+
+      const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
+      const mIndex = state.waterMonthly.findIndex(
+        record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
+      );
+      if (mIndex) {
+        state.waterMonthly[index].totalAmount = totalAmount;
+        // TODO: зберігати waterNorma в слайсі води
+      }
     });
     builder.addCase(editWater.rejected, handleRejected);
 
@@ -86,6 +95,14 @@ const waterSlice = createSlice({
         record => record._id === action.meta.arg.id
       );
       state.waterDaily.splice(index, 1);
+      const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
+      const mIndex = state.waterMonthly.findIndex(
+        record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
+      );
+      if (mIndex) {
+        state.waterMonthly[index].totalAmount = totalAmount;
+        // TODO: зберігати waterNorma в слайсі води
+      }
     });
     builder.addCase(deleteWater.rejected, handleRejected);
   },
