@@ -7,7 +7,6 @@ export const getDateObject = (date = null) => {
   const month = currentDate.getMonth() + 1;
 
   const today = {
-    date: date,
     day: currentDate.getDate(),
     month: month,
     year: currentDate.getFullYear(),
