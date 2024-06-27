@@ -83,9 +83,9 @@ const waterSlice = createSlice({
     builder.addCase(deleteWater.fulfilled, (state, action) => {
       state.isLoading = false;
       const index = state.waterDaily.findIndex(
-        record => record._id === action.payload._id
+        record => record._id === action.meta.arg.id
       );
-      state.items.splice(index, 1);
+      state.waterDaily.splice(index, 1);
     });
     builder.addCase(deleteWater.rejected, handleRejected);
   },
