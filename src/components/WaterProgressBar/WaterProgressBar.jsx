@@ -1,19 +1,41 @@
 import Icon from '../Icon/Icon.jsx';
+import { useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { monthActivity } from '../../redux/water/operations.js';
 import css from './WaterProgressBar.module.css';
 import { getDateObject } from '../../helpers/dateHelpers.js';
+import { selectWaterMonthly } from '../../redux/water/selectors.js';
 
 const WaterProgressBar = ({ selectedDate }) => {
-  const currentDay = selectedDate.fullDate;
+  const { day, month_name, fullDate } = selectedDate;
+
+  const currentDate = useMemo(
+    () => ({
+      startDate: fullDate,
+      endDate: fullDate,
+    }),
+    [fullDate]
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (currentDate) {
+      dispatch(monthActivity(currentDate));
+    }
+  }, [dispatch, currentDate]);
+
+  const dayWater = useSelector(selectWaterMonthly);
+
+  const percentage = dayWater.length > 0 ? dayWater[0].percentageOfNorma : 0;
+  console.log(percentage);
   const today = getDateObject();
 
-  const percentage = 35;
   return (
     <div className={css.progressBarContainer}>
       <div className={css.nameBar}>
-        {currentDay === today.fullDate ? (
+        {fullDate === today.fullDate ? (
           <div>Today</div>
         ) : (
-          <div>{`${selectedDate.day}, ${selectedDate.month_name}`}</div>
+          <div>{`${day}, ${month_name}`}</div>
         )}
       </div>
       <div className={css.percentDynamicContainer}>
