@@ -97,10 +97,6 @@
 }
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> frontend
 .loaderBg{
   position: absolute;
   top:0;
@@ -114,11 +110,5 @@
   position: absolute;
   top:50%;
   left:50%;
-<<<<<<< HEAD
-  transition: transformY(50%);
-  transition: transformX(50%);
-  background-color: aqua;
-=======
-  transform: translateX(-50%) translateY(-50%);
->>>>>>> frontend
+  transform: translate(-50%, -50%);
 }
