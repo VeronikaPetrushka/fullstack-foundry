@@ -1,0 +1,114 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+}
+
+.calendarHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 24px;
+}
+
+.calendarTitle {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  text-align: left;
+  letter-spacing: -0.01em;
+  color: #323f47;
+}
+.calendarSwitcher {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+}
+.calendarTypeBtn {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.calendarTypeBtn.active{
+  opacity: 1;
+}
+.calendarTypeIcon {
+  width: 20px;
+  height: 20px;
+}
+.calendarBody {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 18px;
+  row-gap: 20px;
+}
+
+.calendarItem {
+  display: flex;
+  justify-content: center;
+  width: calc((100% - 108px) / 7);
+}
+
+@media screen and (min-width: 768px) {
+  .calendarTitle {
+    font-size: 28px;
+    line-height: 1.14;
+  }
+  .calendarTypeBtn {
+    width: 24px;
+    height: 24px;
+  }
+  .calendarTypeIcon {
+    width: 24px;
+    height: 24px;
+  }
+  .calendarBody {
+    gap: 48px;
+    row-gap: 15px;
+  }
+
+  .calendarItem {
+    width: calc((100% - 336px) / 8);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .calendarBody {
+    gap: 43px;
+    row-gap: 15px;
+  }
+
+  .calendarItem {
+    width: calc((100% - 301px) / 8);
+  }
+}
+
+
+.loaderBg{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 2;
+}
+.monthDataLoader{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}

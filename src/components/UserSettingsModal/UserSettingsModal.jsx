@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import css from './UserSettingsModal.module.css';
-//import { selectUser } from '../../../redux/auth/selectors';
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
 
 export default function UserSettingsModal({ closeModal, modIsOpen }) {
@@ -27,3 +26,11 @@ export default function UserSettingsModal({ closeModal, modIsOpen }) {
     </>
   );
 }
+=======
+const UserSettingsModal = () => {
+    return (
+        <div></div>
+    )
+}
+
+export default UserSettingsModal

@@ -1,21 +1,29 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-// import SharedLayout from './components/SharedLayout/SharedLayout';
-// import { PrivateRoute } from './components/PrivateRoute';
-// import { RestrictedRoute } from './components/RestrictedRoute';
+import SharedLayout from './components/SharedLayout';
+import { PrivateRoute } from './components/PrivateRoute';
+import { RestrictedRoute } from './components/RestrictedRoute';
+import { useRefreshUser } from './hooks/RefreshUser';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
-// const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
-// const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
-// const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
+const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
+const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
+const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage/ForgotPasswordPage'));
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage/ResetPasswordPage'));
 
 const App = () => {
 
+  useRefreshUser();
+
   return (
-    // <SharedLayout>
-       <Routes>
-        <Route path="/" element={<HomePage />} />
-        {/* <Route
+    <SharedLayout>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+      <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+      <Route
           path="/signup"
           element={
             <RestrictedRoute redirectTo="/" component={<SignUpPage />} />
@@ -32,9 +40,9 @@ const App = () => {
           element={
             <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
           }
-        /> */}
-       </Routes>
-    //  {/* </SharedLayout> */}
+        />
+    </Routes>
+    </SharedLayout>
   );
 };
 
