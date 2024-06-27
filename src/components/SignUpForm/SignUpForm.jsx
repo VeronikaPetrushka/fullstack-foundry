@@ -135,22 +135,26 @@ const SignUpForm = () => {
         {errors.repeatPassword && (
           <p className={css.errorMessage}>{errors.repeatPassword.message}</p>
         )}
-
-        <button className={css.button} type="submit">
-          Sign Up
-        </button>
       </form>
+      <button className={css.button} type="submit">
+        Sign Up
+      </button>
+
       <p className={css.text}>
         Already have an account?{' '}
         <Link to="/signin">
           <span className={css.spanLink}>Sign In</span>
         </Link>
       </p>
+      <div className={css.line}></div>
       <div className={css.loginWithGoogleBtnContainer}>
-        <a className={css.loginWithGoogleBtn} href='https://aquatrack-api-myzh.onrender.com/api/auth/google'>
+        <a
+          className={css.loginWithGoogleBtn}
+          href="https://aquatrack-api-myzh.onrender.com/api/auth/google"
+        >
           Sign up with Google
         </a>
-        </div>
+      </div>
     </div>
   );
 };

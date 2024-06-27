@@ -73,57 +73,73 @@ const SignInForm = () => {
           <p className={css.errorMessage}>{errors.email.message}</p>
         )}
 
-        <div style={{marginBottom: 25, display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
-
+        <div
+          style={{
+            marginBottom: 25,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+          }}
+        >
           <label className={css.label}>Password</label>
-        <div className={css.inputWrapper}>
-          <input
-            className={`${css.input} ${errors.password ? css.inputError : ''}`}
-            {...register('password')}
-            type={inputTypePassword}
-            placeholder="Enter your password"
-          />
-          <button
-            type="button"
-            onClick={toggleShowPassword}
-            className={css.iconButton}
-          >
-            {iconPassword === 'eye' ? (
-              <svg className={css.icon}>
-                <use href={`${icon}#eye`} />
-              </svg>
-            ) : (
-              <svg className={css.icon}>
-                <use href={`${icon}#eye-off`} />
-              </svg>
-            )}
-          </button>
+          <div className={css.inputWrapper}>
+            <input
+              className={`${css.input} ${
+                errors.password ? css.inputError : ''
+              }`}
+              {...register('password')}
+              type={inputTypePassword}
+              placeholder="Enter your password"
+            />
+            <button
+              type="button"
+              onClick={toggleShowPassword}
+              className={css.iconButton}
+            >
+              {iconPassword === 'eye' ? (
+                <svg className={css.icon}>
+                  <use href={`${icon}#eye`} />
+                </svg>
+              ) : (
+                <svg className={css.icon}>
+                  <use href={`${icon}#eye-off`} />
+                </svg>
+              )}
+            </button>
+          </div>
+
+          {errors.password && (
+            <p className={css.errorMessage}>{errors.password.message}</p>
+          )}
+
+          <p className={css.text}>
+            <Link to="/forgot-password">
+              <span className={css.spanLink} style={{ fontSize: 14 }}>
+                Forgot password?
+              </span>
+            </Link>
+          </p>
         </div>
-
-        {errors.password && (
-          <p className={css.errorMessage}>{errors.password.message}</p>
-        )}
-
-        <p className={css.text}><Link to="/forgot-password"><span className={css.spanLink} style={{fontSize:14}}>Forgot password?</span></Link></p>
-
-
-        </div>
-
-        <button className={css.button} type="submit">
-          Sign In
-        </button>
       </form>
+      <button className={css.button} type="submit">
+        Sign In
+      </button>
+
       <p className={css.text}>
         Don’t have an account?{' '}
         <Link to="/signup">
           <span className={css.spanLink}>Sign Up</span>
         </Link>
       </p>
+      <div className={css.line}></div>
       <div className={css.loginWithGoogleBtnContainer}>
-        <a className={css.loginWithGoogleBtn} href='https://aquatrack-api-myzh.onrender.com/api/auth/google'>
+        <a
+          className={css.loginWithGoogleBtn}
+          href="https://aquatrack-api-myzh.onrender.com/api/auth/google"
+        >
           Sign in with Google
         </a>
-        </div>
+      </div>
     </div>
   );
 };
