@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import Icon from '../Icon/Icon.jsx';
 import css from './CalendarPagination.module.css';
 

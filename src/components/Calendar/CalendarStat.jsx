@@ -99,8 +99,8 @@ const CalendarStat = ({selectedDate, handleClick}) => {
     if(day.percentageOfNorma > 100) daysOfSelectedMonth[dayNumber].percentageOfNorma = 100;
     else daysOfSelectedMonth[dayNumber].percentageOfNorma = Number(day.percentageOfNorma.toFixed(0));
   }
-  toast('Sorry, error occured! Try later...');
-  return isErrorWaterMonth ? (<Toaster position="top-center" toastOptions={{style:{background:'#363636', color:'#ffffff'}}} />) :
+  toast.error(isErrorWaterMonth || 'Sorry, error occured! Try later...');
+  return isErrorWaterMonth ? (<Toaster position="top-center" />) :
   (
     <div className={css.calendar}>
       <div className={css.calendarHead}>
