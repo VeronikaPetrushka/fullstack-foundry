@@ -63,11 +63,6 @@ const SignInForm = () => {
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <h2 className={css.formTitle}>Sign In</h2>
-        <div className={css.loginWithGoogleBtnContainer}>
-        <a className={css.loginWithGoogleBtn} href='https://aquatrack-api-myzh.onrender.com/api/auth/google'>
-          Sign in with Google
-        </a>
-        </div>
         <label className={css.label}>Email</label>
         <input
           className={`${css.input} ${errors.email ? css.inputError : ''}`}
@@ -77,8 +72,9 @@ const SignInForm = () => {
         {errors.email && (
           <p className={css.errorMessage}>{errors.email.message}</p>
         )}
+        <div style={{marginBottom: 25, display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
 
-        <label className={css.label}>Password</label>
+          <label className={css.label}>Password</label>
         <div className={css.inputWrapper}>
           <input
             className={`${css.input} ${errors.password ? css.inputError : ''}`}
@@ -102,6 +98,10 @@ const SignInForm = () => {
             )}
           </button>
         </div>
+
+        <p className={css.text}><Link to="/forgot-password"><span className={css.spanLink} style={{fontSize:14}}>Forgot password?</span></Link></p>
+
+        </div>
         {errors.password && (
           <p className={css.errorMessage}>{errors.password.message}</p>
         )}
@@ -116,7 +116,11 @@ const SignInForm = () => {
           <span className={css.spanLink}>Sign Up</span>
         </Link>
       </p>
-      <p className={css.text}><Link to="/forgot-password"><span className={css.spanLink}>Forgot password?</span></Link></p>
+      <div className={css.loginWithGoogleBtnContainer}>
+        <a className={css.loginWithGoogleBtn} href='https://aquatrack-api-myzh.onrender.com/api/auth/google'>
+          Sign in with Google
+        </a>
+        </div>
     </div>
   );
 };
