@@ -1,18 +1,18 @@
 import { Controller } from 'react-hook-form';
 import css from './AvatarInput.module.css';
-import icons from '../../../asset/icons.svg';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectAvatar } from '../../../redux/user/selectors';
+import { selectUserInfo } from '../../../redux/user/selectors';
+import Icon from '../../Icon/Icon'
 
 export default function AvatarInput({ control, register, setMyAvatar }) {
   const [inputImg, setInputImage] = useState(false);
-  const userAvatar = useSelector(selectAvatar);
+  const user = useSelector(selectUserInfo);
 
   const avatarUser = (
     <img
       className={css.photo}
-      src={inputImg ? inputImg : userAvatar}
+      src={inputImg ? inputImg : user.avatarURL}
       width="100%"
       height="100%"
       alt="Avatar"
@@ -22,7 +22,7 @@ export default function AvatarInput({ control, register, setMyAvatar }) {
   const avatarDefault = (
     <img
       className={css.photo}
-      src="./default-avatar.jpg"
+      src="src\assets\img\avatar-default.jpg"
       width="100%"
       height="100%"
       alt="Avatar"
@@ -42,7 +42,7 @@ export default function AvatarInput({ control, register, setMyAvatar }) {
   return (
     <div className={css.avatarInput}>
       <div className={css.avatarBox}>
-        {userAvatar || inputImg ? avatarUser : avatarDefault}
+        {user.avatarURL || inputImg ? avatarUser : avatarDefault}
       </div>
 
       <Controller
@@ -61,9 +61,7 @@ export default function AvatarInput({ control, register, setMyAvatar }) {
       />
       <label htmlFor="file-input">
         <div className={css.upLoad}>
-          <svg fill="var(--main)" className={css.svgAvatarBtn}>
-            <use href={`${icons}#upload`}></use>
-          </svg>
+          <Icon width={'16'} height={'16'}  iconName={'upload'} styles={css.svgAvatarBtn} style />
           <p>Upload a photo</p>
         </div>
       </label>
