@@ -47,7 +47,7 @@ export const loginGoogle = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
@@ -60,7 +60,7 @@ export const tokenRefresh = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
@@ -71,7 +71,7 @@ export const logout = createAsyncThunk(
     try {
       await requestLogout(formData);
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
@@ -84,7 +84,7 @@ export const sendVerify = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
@@ -97,7 +97,7 @@ export const resendVerify = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
@@ -110,7 +110,7 @@ export const forgotPassword = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
@@ -123,7 +123,7 @@ export const resetPassword = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );

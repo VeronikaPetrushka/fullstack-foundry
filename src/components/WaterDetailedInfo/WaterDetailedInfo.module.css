@@ -2,8 +2,8 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: top;
-  margin-bottom: 44px;
+  align-items: center;
+  margin-bottom: 41px;
   flex-wrap: wrap;
   gap: 15px;
 }

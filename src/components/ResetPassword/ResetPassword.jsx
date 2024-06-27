@@ -1,16 +1,16 @@
-import css from './SignUpForm.module.css';
+import css from './ResetPassword.module.css';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { signup } from '../../redux/auth/operations';
+import { useEffect, useState } from 'react';
+import { resetPassword } from '../../redux/auth/operations';
 import icon from '../../assets/icons.svg';
 import { toast, Toaster } from 'react-hot-toast';
+import { jwtDecode } from 'jwt-decode';
 
 const schema = yup.object().shape({
-  email: yup.string().email('Invalid email').required('Email is required'),
   password: yup
     .string()
     .min(8, 'Password must be at least 8 characters')
@@ -21,12 +21,27 @@ const schema = yup.object().shape({
     .required('Repeat Password is required'),
 });
 
-const SignUpForm = () => {
+const ResetPassword = () => {
   const dispatch = useDispatch();
   const [inputTypePassword, setTypePassword] = useState('password');
   const [inputTypeRePassword, setTypeRePassword] = useState('password');
   const [iconPassword, setIconPassword] = useState('eye-off');
   const [iconRePassword, setIconRePassword] = useState('eye-off');
+  const [validToken, setValidToken] = useState(false);
+
+  const { token } = useParams();
+
+  useEffect(() => {
+    if(token){
+      const decoded = jwtDecode(token);
+      const current = new Date();
+      if (decoded.exp * 1000 < current.getTime()) {
+        setValidToken(false);
+      } else {
+        setValidToken(true);
+      }
+    }
+  }, [token]);
 
   const navigate = useNavigate();
   const {
@@ -40,12 +55,12 @@ const SignUpForm = () => {
 
   const onSubmit = async formData => {
     try {
-      await dispatch(signup(formData)).unwrap();
-      toast.success('Successfully registered!');
+      await dispatch(resetPassword(formData)).unwrap();
+      toast.success('Password has been successfully changed! Please sign in.');
       reset();
       navigate('/signin');
     } catch (error) {
-      toast.error(error || 'Failed to sign up');
+      toast.error(error || 'Failed to reset password. Please try again later.');
     }
   };
 
@@ -63,20 +78,21 @@ const SignUpForm = () => {
     setIconRePassword(prevIcon => (prevIcon === 'eye-off' ? 'eye' : 'eye-off'));
   };
 
-  return (
+  return (!validToken ?
+    <div className={css.signUpWrap}>
+      <div className={css.form}>
+        <h2 className={css.formTitle}>Change password</h2>
+        <p className={css.errorInfo}>Sorry your verification link has expired.</p>
+        <p className={css.errorInfo}>Go to the page <Link to='/forgot-password'>Forgot password</Link></p>
+      </div>
+    </div>
+   :
+    (
     <div className={css.signUpWrap}>
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-        <h2 className={css.formTitle}>Sign Up</h2>
-        <label className={css.label}>Email</label>
-        <input
-          className={`${css.input} ${errors.email ? css.inputError : ''}`}
-          {...register('email')}
-          placeholder="Enter your email"
-        />
-        {errors.email && (
-          <p className={css.errorMessage}>{errors.email.message}</p>
-        )}
+        <h2 className={css.formTitle}>Change password</h2>
+        <input type='hidden' name='resetToken' id='resetToken' value={token} {...register('resetToken')} />
 
         <label className={css.label}>Password</label>
         <div className={css.inputWrapper}>
@@ -85,6 +101,7 @@ const SignUpForm = () => {
             {...register('password')}
             type={inputTypePassword}
             placeholder="Enter your password"
+            autoComplete='off'
           />
           <button
             type="button"
@@ -135,28 +152,19 @@ const SignUpForm = () => {
         {errors.repeatPassword && (
           <p className={css.errorMessage}>{errors.repeatPassword.message}</p>
         )}
-      </form>
-      <button className={css.button} type="submit">
-        Sign Up
-      </button>
 
+        <button className={css.button} type="submit">
+          Reset password
+        </button>
+      </form>
       <p className={css.text}>
         Already have an account?{' '}
         <Link to="/signin">
           <span className={css.spanLink}>Sign In</span>
         </Link>
       </p>
-      <div className={css.line}></div>
-      <div className={css.loginWithGoogleBtnContainer}>
-        <a
-          className={css.loginWithGoogleBtn}
-          href="https://aquatrack-api-myzh.onrender.com/api/auth/google"
-        >
-          Sign up with Google
-        </a>
-      </div>
-    </div>
+    </div>)
   );
 };
 
-export default SignUpForm;
+export default ResetPassword;
