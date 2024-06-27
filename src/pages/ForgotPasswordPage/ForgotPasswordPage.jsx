@@ -4,7 +4,7 @@ import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
 import { Helmet } from 'react-helmet-async';
 import Page from '../../components/Page/Page';
 
-const SignInPage = () => {
+const ForgotPasswordPage = () => {
   return (
     <>
       <Helmet>
@@ -20,4 +20,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default ForgotPasswordPage;
