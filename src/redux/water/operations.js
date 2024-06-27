@@ -37,7 +37,6 @@ export const weekActivity = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const res = await requestMonthActivity(data);
-
       return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message || err.message);
