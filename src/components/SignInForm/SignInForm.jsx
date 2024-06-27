@@ -72,6 +72,7 @@ const SignInForm = () => {
         {errors.email && (
           <p className={css.errorMessage}>{errors.email.message}</p>
         )}
+
         <div style={{marginBottom: 25, display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
 
           <label className={css.label}>Password</label>
@@ -99,12 +100,14 @@ const SignInForm = () => {
           </button>
         </div>
 
-        <p className={css.text}><Link to="/forgot-password"><span className={css.spanLink} style={{fontSize:14}}>Forgot password?</span></Link></p>
-
-        </div>
         {errors.password && (
           <p className={css.errorMessage}>{errors.password.message}</p>
         )}
+
+        <p className={css.text}><Link to="/forgot-password"><span className={css.spanLink} style={{fontSize:14}}>Forgot password?</span></Link></p>
+
+
+        </div>
 
         <button className={css.button} type="submit">
           Sign In
