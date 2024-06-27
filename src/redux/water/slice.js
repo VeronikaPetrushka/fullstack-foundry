@@ -8,7 +8,6 @@ import {
 } from './operations.js';
 
 const initialState = {
-  waterRecords: [],
   waterDaily: [],
   waterMonthly: [],
   isLoading: false,
@@ -53,7 +52,15 @@ const waterSlice = createSlice({
     builder.addCase(addWater.pending, handlePending);
     builder.addCase(addWater.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.waterRecords.push(action.payload);
+      state.waterDaily.push(action.payload);
+      const totalAmount = state.waterDaily.reduce((total, record) => {total + record.amount; return total;}, 0);
+      const index = state.waterMonthly.find(
+        record => record.date === action.payload.createdAt.slice(0, 9)
+      );
+      if (index) {
+        state.waterMonthly[index].totalAmount = totalAmount;
+        state.waterMonthly[index].percentageOfNorma = (state.users.user.waterNorma / totalAmount * 100).toFixed(0);
+      }
     });
     builder.addCase(addWater.rejected, handleRejected);
 
@@ -61,11 +68,11 @@ const waterSlice = createSlice({
     builder.addCase(editWater.pending, handlePending);
     builder.addCase(editWater.fulfilled, (state, action) => {
       state.isLoading = false;
-      const index = state.waterRecords.findIndex(
+      const index = state.waterDaily.findIndex(
         record => record._id === action.payload._id
       );
       if (index !== -1) {
-        state.waterRecords[index] = action.payload;
+        state.waterDaily[index] = action.payload;
       }
     });
     builder.addCase(editWater.rejected, handleRejected);
@@ -74,7 +81,7 @@ const waterSlice = createSlice({
     builder.addCase(deleteWater.pending, handlePending);
     builder.addCase(deleteWater.fulfilled, (state, action) => {
       state.isLoading = false;
-      const index = state.waterRecords.findIndex(
+      const index = state.waterDaily.findIndex(
         record => record._id === action.payload._id
       );
       state.items.splice(index, 1);
