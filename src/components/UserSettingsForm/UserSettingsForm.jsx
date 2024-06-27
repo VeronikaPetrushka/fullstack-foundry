@@ -10,9 +10,6 @@ import css from './UserSettingsForm.module.css';
 import RadioBtn from './RadioInput/RadioInput';
 import AvatarInput from './AvatarInput/AvatarInput';
 
-//import icons from '../assets/logo.svg';
-//import { editUser } from '../../../redux/auth/operations';
-
 export default function UserSettingsForm({ closeModal, getSetting }) {
   const [selectedValueRadio, setSelectedValueRadio] = useState('');
   const [result, setResult] = useState(null);
