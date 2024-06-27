@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import css from './ForgotPassword.module.css';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,6 +17,7 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSignedIn = useSelector(selectIsSignedIn);
+  const [sendResult, setSendResult] = useState(null);
 
   const {
     register,
@@ -30,7 +31,7 @@ const ForgotPassword = () => {
   const onSubmit = async formData => {
     try {
       await dispatch(forgotPassword(formData)).unwrap();
-      toast.success('Check your email! We sent you a link to reset your password.');
+      setSendResult('Check your email! We sent you a link to reset your password.');
       reset();
     } catch (error) {
       toast.error(error || 'Failed to send email. Please try again later.');
@@ -43,7 +44,12 @@ const ForgotPassword = () => {
     }
   }, [isSignedIn, navigate]);
 
-  return (
+  return (sendResult ?
+    <div className={css.signUpWrap}>
+      <h2 className={css.formTitle}>Forgot your password?</h2>
+      <p className={css.errorInfo}>{sendResult}</p>
+    </div>
+     :
     <div className={css.signUpWrap}>
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>

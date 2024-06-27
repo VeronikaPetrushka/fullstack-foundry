@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { resetPassword } from '../../redux/auth/operations';
 import icon from '../../assets/icons.svg';
 import { toast, Toaster } from 'react-hot-toast';
@@ -27,16 +27,21 @@ const ResetPassword = () => {
   const [inputTypeRePassword, setTypeRePassword] = useState('password');
   const [iconPassword, setIconPassword] = useState('eye-off');
   const [iconRePassword, setIconRePassword] = useState('eye-off');
+  const [validToken, setValidToken] = useState(false);
 
   const { token } = useParams();
-  if(token){
-    const decoded = jwtDecode(token);
-    if (decoded.exp * 1000 < new Date().getTime()) {
-      console.log("Token expired.");
-    } else {
-      console.log("Valid token");
+
+  useEffect(() => {
+    if(token){
+      const decoded = jwtDecode(token);
+      const current = new Date();
+      if (decoded.exp * 1000 < current.getTime()) {
+        setValidToken(false);
+      } else {
+        setValidToken(true);
+      }
     }
-  }
+  }, [token]);
 
   const navigate = useNavigate();
   const {
@@ -73,12 +78,21 @@ const ResetPassword = () => {
     setIconRePassword(prevIcon => (prevIcon === 'eye-off' ? 'eye' : 'eye-off'));
   };
 
-  return (
+  return (!validToken ?
+    <div className={css.signUpWrap}>
+      <div className={css.form}>
+        <h2 className={css.formTitle}>Change password</h2>
+        <p className={css.errorInfo}>Sorry your verification link has expired.</p>
+        <p className={css.errorInfo}>Go to the page <Link to='/forgot-password'>Forgot password</Link></p>
+      </div>
+    </div>
+   :
+    (
     <div className={css.signUpWrap}>
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <h2 className={css.formTitle}>Change password</h2>
-        <input type='hidden' name='token' id='token' value={token} />
+        <input type='hidden' name='resetToken' id='resetToken' value={token} {...register('resetToken')} />
 
         <label className={css.label}>Password</label>
         <div className={css.inputWrapper}>
@@ -149,7 +163,7 @@ const ResetPassword = () => {
           <span className={css.spanLink}>Sign In</span>
         </Link>
       </p>
-    </div>
+    </div>)
   );
 };
 
