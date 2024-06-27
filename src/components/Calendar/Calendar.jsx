@@ -19,7 +19,7 @@ const Calendar = ({
   const handleAddWater = async () => {
     const data = {
       "amount": 150,
-      "date": "2024-06-27T11:30"
+      "date": "2024-06-20T11:30"
     }
     await dispatch(addWater(data));
 }

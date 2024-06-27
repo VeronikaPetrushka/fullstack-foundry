@@ -59,6 +59,7 @@ const waterSlice = createSlice({
       );
       if (index) {
         state.waterMonthly[index].totalAmount = totalAmount;
+        // console.log("user waterNorma", getDailyNorma());
         // TODO: зберігати waterNorma в слайсі води
         // state.waterMonthly[index].percentageOfNorma = (state.users.user.waterNorma / totalAmount * 100).toFixed(0);
       }
