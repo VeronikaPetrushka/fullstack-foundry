@@ -8,7 +8,7 @@ const ResetPasswordPage = () => {
   return (
     <>
       <Helmet>
-        <title>AQUATRACK: Forgot your password?</title>
+        <title>AQUATRACK: Reset your password</title>
       </Helmet>
       <Page>
         <ResetPassword />
