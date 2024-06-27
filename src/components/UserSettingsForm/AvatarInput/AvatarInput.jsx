@@ -1,9 +1,9 @@
 import { Controller } from 'react-hook-form';
 import css from './AvatarInput.module.css';
-import icons from '../../../../assets/icons.svg';
+import icons from '../../../asset/icons.svg';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-//import { selectAvatar } from '../../../../redux/auth/selectors';
+import { selectAvatar } from '../../../redux/user/selectors';
 
 export default function AvatarInput({ control, register, setMyAvatar }) {
   const [inputImg, setInputImage] = useState(false);

@@ -2,18 +2,19 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import css from './UserSettingsModal.module.css';
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
+import { selectUser } from '../../redux/auth/selectors';
 
 export default function UserSettingsModal({ closeModal, modIsOpen }) {
   const [get_setting, setGet_setting] = useState([]);
 
-  const selector = useSelector(selectUser);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     if (!modIsOpen) {
       return;
     }
-    setGet_setting(selector);
-  }, [modIsOpen]);
+    setGet_setting(user);
+  }, [modIsOpen, user]);
 
   return (
     <>
@@ -26,11 +27,3 @@ export default function UserSettingsModal({ closeModal, modIsOpen }) {
     </>
   );
 }
-=======
-const UserSettingsModal = () => {
-    return (
-        <div></div>
-    )
-}
-
-export default UserSettingsModal
