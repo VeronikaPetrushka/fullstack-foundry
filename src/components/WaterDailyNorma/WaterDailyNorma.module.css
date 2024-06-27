@@ -1,0 +1,41 @@
+.dailyNormaWrap {
+  padding: 12px;
+  background-color: var(--white);
+  position: absolute;
+  left: 16px;
+  top: 122px;
+  border-radius: 15px;
+}
+.quantity {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 6px;
+  color: var(--grey);
+}
+.desc {
+  font-size: 10px;
+  line-height: 1;
+  color: var(--lightGrey);
+}
+@media screen and (min-width: 768px) {
+  .dailyNormaWrap {
+    left: 32px;
+    top: 157px;
+    padding: 14px 18px;
+  }
+  .quantity {
+    font-size: 15px;
+    line-height: 1.49;
+    margin-bottom: 4px;
+  }
+  .desc {
+    font-size: 12px;
+    line-height: 1.86;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .dailyNormaWrap {
+    left: 64px;
+  }
+}
