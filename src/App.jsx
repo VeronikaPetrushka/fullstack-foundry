@@ -9,6 +9,7 @@ const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
 const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage/ForgotPasswordPage'));
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
     <SharedLayout>
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route
           path="/signup"
           element={
