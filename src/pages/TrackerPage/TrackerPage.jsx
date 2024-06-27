@@ -28,7 +28,6 @@ const TrackerPage = () => {
 
   useEffect(() => {
     if(selectedDate){
-     console.log(selectedDate.fullDate);
       dispatch(dailyActivity({"date": selectedDate.fullDate}));
     }
   }, [dispatch, selectedDate]);
