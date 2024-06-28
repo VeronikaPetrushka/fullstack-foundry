@@ -85,7 +85,7 @@ export const requestMonthActivity = async formData => {
 };
 
 export const addWaterRecord = async formData => {
-  const { data } = await instance.post('/water/add', formData);
+  const { data } = await instance.post('/water/', formData);
   return data;
 };
 
@@ -94,7 +94,7 @@ export const editWaterRecord = async (id, formData) => {
   return data;
 };
 
-export const deleteWaterRecord = async (id, formData) => {
-  const { data } = await instance.delete(`/water/${id}`, formData);
+export const deleteWaterRecord = async (id) => {
+  const { data } = await instance.delete(`/water/${id}`);
   return data;
 };

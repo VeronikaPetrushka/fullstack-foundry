@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   addWaterRecord,
   editWaterRecord,
+  deleteWaterRecord,
   requestDailyActivity,
   requestMonthActivity,
 } from '../services/aquatrackApi.js';
@@ -72,9 +73,9 @@ export const editWater = createAsyncThunk(
 
 export const deleteWater = createAsyncThunk(
   'water/delete',
-  async ({ id, formData }, thunkAPI) => {
+  async ({ id }, thunkAPI) => {
     try {
-      const res = await editWaterRecord(id, formData);
+      const res = await deleteWaterRecord(id);
 
       return res;
     } catch (err) {
