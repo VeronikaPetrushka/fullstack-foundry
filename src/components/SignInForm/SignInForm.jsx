@@ -120,11 +120,11 @@ const SignInForm = () => {
             </Link>
           </p>
         </div>
-      </form>
-      <button className={css.button} type="submit">
-        Sign In
-      </button>
 
+        <button className={css.signInButton} type="submit">
+          Sign In
+        </button>
+      </form>
       <p className={css.text}>
         Don’t have an account?{' '}
         <Link to="/signup">
