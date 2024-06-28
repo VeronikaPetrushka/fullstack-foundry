@@ -44,26 +44,21 @@ const CalendarStat = ({selectedDate, handleClick}) => {
 
   const handlePrevMonth = () => {
     setSelectedMonth(prevSelectedMonth => {
-      let newSelectedMonth;
       if (prevSelectedMonth.month === 1) {
-        newSelectedMonth = `${prevSelectedMonth.year - 1}-12-${prevSelectedMonth.day}`;
+        return getDateObject(`${prevSelectedMonth.year - 1}-12-${prevSelectedMonth.day}`);
       } else {
-        newSelectedMonth = `${prevSelectedMonth.year}-${prevSelectedMonth.month - 1}-${prevSelectedMonth.day}`;
+        return getDateObject(`${prevSelectedMonth.year}-${prevSelectedMonth.month - 1}-${prevSelectedMonth.day}`);
       }
-
-      return getDateObject(newSelectedMonth);
     });
   };
   const handleNextMonth = () => {
     setSelectedMonth(prevSelectedMonth => {
-      let newSelectedMonth;
-      if (selectedMonth.month === 12) {
-        newSelectedMonth = `${prevSelectedMonth.year + 1}-01-${prevSelectedMonth.day}`;
+      if (prevSelectedMonth.month === 12) {
+        return getDateObject(`${prevSelectedMonth.year + 1}-01-${prevSelectedMonth.day}`);
       }else{
-        newSelectedMonth = `${prevSelectedMonth.year}-${prevSelectedMonth.month + 1}-${prevSelectedMonth.day}`;
+        return getDateObject(`${prevSelectedMonth.year}-${prevSelectedMonth.month + 1}-${prevSelectedMonth.day}`);
       }
-      return getDateObject(newSelectedMonth);
-    })
+    });
   };
 
   useEffect(() => {
@@ -80,7 +75,7 @@ const CalendarStat = ({selectedDate, handleClick}) => {
 
   useEffect(() => {
     if (monthDate) {
-      dispatch(monthActivity(monthDate));
+      dispatch(monthActivity(monthDate)).unwrap();
     }
   }, [dispatch, monthDate]);
 
@@ -94,6 +89,7 @@ const CalendarStat = ({selectedDate, handleClick}) => {
       fullDate: `${selectedMonth.year}-${selectedMonth.month.toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`
     };
   }
+
   for (const day of dataForSelectedMonth) {
     let dayNumber = new Date(day.date).getDate();
     daysOfSelectedMonth[dayNumber] = {...daysOfSelectedMonth[dayNumber], ...day};

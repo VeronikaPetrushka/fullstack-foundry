@@ -33,7 +33,7 @@ export const addWater = createAsyncThunk(
     try {
       const res = await addWaterRecord(formData);
 
-      return res;
+      return {res, dailyNorma: thunkAPI.getState().users.user.dailyNorma};
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
@@ -46,7 +46,7 @@ export const editWater = createAsyncThunk(
     try {
       const res = await editWaterRecord(id, formData);
 
-      return res;
+      return {res, dailyNorma: thunkAPI.getState().users.user.dailyNorma};
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
@@ -59,7 +59,7 @@ export const deleteWater = createAsyncThunk(
     try {
       const res = await deleteWaterRecord(id);
 
-      return res;
+      return {res, dailyNorma: thunkAPI.getState().users.user.dailyNorma};
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
