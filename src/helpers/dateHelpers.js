@@ -1,34 +1,20 @@
-export const months_en = {
-  '1':'January',
-  '2':'February',
-  '3':'March',
-  '4':'April',
-  '5':'May',
-  '6':'June',
-  '7':'July',
-  '8':'August',
-  '9':'September',
-  '10':'October',
-  '11':'November',
-  '12':'December'
-};
-
 function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
 }
 
 export const getDateObject = (date = null) => {
   const currentDate = date ? new Date(date) : new Date();
+  const month = currentDate.getMonth() + 1;
+
   const today = {
     day: currentDate.getDate(),
-    month: currentDate.getMonth() + 1,
+    month: month,
     year: currentDate.getFullYear(),
-    dayInMonth: daysInMonth(
-      currentDate.getMonth() + 1,
-      currentDate.getFullYear()
-    ),
-    month_name: months_en[currentDate.getMonth() + 1],
-    fullDate: currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'),
+    dayInMonth: daysInMonth(month, currentDate.getFullYear()),
+    fullDate: currentDate.getFullYear() + '-' + month.toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'),
+    monthName: currentDate.toLocaleString('en', { month: 'long' }),
+    month_name: currentDate.toLocaleString('en', { month: 'long' }),
+    full: currentDate,
   };
   return today;
 };

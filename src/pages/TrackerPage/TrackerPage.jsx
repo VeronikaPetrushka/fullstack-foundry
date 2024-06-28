@@ -4,17 +4,19 @@ import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedI
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { userInfo } from '../../redux/user/operations';
+import { dailyActivity } from '../../redux/water/operations';
 import { getDateObject } from '../../helpers/dateHelpers';
-import Calendar from '../../components/Calendar/Calendar';
+import CalendarStat from '../../components/Calendar/CalendarStat';
 import { Helmet } from 'react-helmet-async';
 import css from './TrackerPage.module.css';
+import DailyInfo from '../../components/DailyInfo/DailyInfo';
 
 const TrackerPage = () => {
 
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
   const [selectedDate, setSelectedDate] = useState(getDateObject());
-  
-  const handleCalendarBtnClick = (btnDate) => {
+
+  const handleCalendarBtnClick = async (btnDate) => {
     setSelectedDate(getDateObject(btnDate));
   };
 
@@ -23,7 +25,12 @@ const TrackerPage = () => {
   useEffect(() => {
     dispatch(userInfo());
   }, [dispatch]);
-  // console.log(selectedDate);
+
+  useEffect(() => {
+    if(selectedDate){
+      dispatch(dailyActivity({"date": selectedDate.fullDate}));
+    }
+  }, [dispatch, selectedDate]);
 
   return (
     <>
@@ -34,7 +41,8 @@ const TrackerPage = () => {
         <WaterMainInfo selectedDate={selectedDate} />
         <section className={css.trackerSection}>
           <WaterDetailedInfo />
-          <Calendar handleClick={handleCalendarBtnClick} selectedDate={selectedDate} />
+          <DailyInfo selectedDate={selectedDate} />
+          <CalendarStat selectedDate={selectedDate} handleClick={handleCalendarBtnClick} />
         </section>
       </Page>
     </>

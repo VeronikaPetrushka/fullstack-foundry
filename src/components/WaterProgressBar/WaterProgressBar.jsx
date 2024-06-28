@@ -1,19 +1,28 @@
 import Icon from '../Icon/Icon.jsx';
+import { useSelector } from 'react-redux';
 import css from './WaterProgressBar.module.css';
 import { getDateObject } from '../../helpers/dateHelpers.js';
+import { selectWaterDaily } from '../../redux/water/selectors.js';
+import { selectUserInfo } from '../../redux/user/selectors.js';
 
 const WaterProgressBar = ({ selectedDate }) => {
-  const currentDay = selectedDate.fullDate;
+  const { day, month_name, fullDate } = selectedDate;
+  const dayWater = useSelector(selectWaterDaily);
+  const { dailyNorma } = useSelector(selectUserInfo);
+  const totalAmount = dayWater.reduce(
+    (total, record) => total + record.amount,
+    0
+  );
+  const percentage = Math.min((totalAmount / dailyNorma) * 100, 100).toFixed(0);
   const today = getDateObject();
 
-  const percentage = 35;
   return (
     <div className={css.progressBarContainer}>
       <div className={css.nameBar}>
-        {currentDay === today.fullDate ? (
+        {fullDate === today.fullDate ? (
           <div>Today</div>
         ) : (
-          <div>{`${selectedDate.day}, ${selectedDate.month_name}`}</div>
+          <div>{`${day}, ${month_name}`}</div>
         )}
       </div>
       <div className={css.percentDynamicContainer}>

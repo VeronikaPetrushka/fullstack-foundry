@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import Icon from '../Icon/Icon.jsx';
 import css from './CalendarPagination.module.css';
 
@@ -10,6 +9,7 @@ const CalendarPagination = ({
   handlePrevMonth,
   handleNextMonth,
 }) => {
+
   const showPrevMonth =
   selectedMonth.month === minDay.month && selectedMonth.year === minDay.year
       ? true
@@ -35,7 +35,7 @@ const CalendarPagination = ({
         />
       </button>
       <div className={css.calendarMonth}>
-        {today.month_name} {selectedMonth.year}
+        {selectedMonth.monthName} {selectedMonth.year}
       </div>
       <button
         type="button"

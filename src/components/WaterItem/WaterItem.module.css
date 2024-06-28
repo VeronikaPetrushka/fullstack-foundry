@@ -1,0 +1,111 @@
+.item {
+    background-color: var(--white);
+    width: 150px;
+    height: 74px;
+    display: flex;
+    padding: 18px 14px 18px 14px;
+    border-radius: 15px;
+    gap: 10px;
+}
+
+@media screen and (min-width: 768px) {
+   .item {
+        width: 192px;
+        height: 86px;
+        padding: 20px;
+        gap: 20px;
+    }
+    
+}
+
+.itemContent {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+
+}
+
+@media screen and (min-width: 768px) {
+   .itemContent {
+        gap: 0;
+    }
+    
+}
+
+.icon {
+    fill: var(--green);
+}
+
+@media screen and (min-width: 768px) {
+    .icon {
+        width: 44px;
+        height: 45px;
+    }
+}
+
+.btns {
+display: flex;
+flex-direction: column;
+gap: 5px;
+
+}
+
+@media screen and (min-width: 768px) {
+   .btns {
+        gap: 14px;
+    }
+    
+}
+
+.btnIcon {
+fill: none;
+stroke: var(--grey);
+}
+
+.itemAmount {
+    font-size: 14px;
+font-weight: 700;
+line-height: 14px;
+letter-spacing: 0;
+}
+
+@media screen and (min-width: 768px) {
+   .itemAmount {
+    font-size: 15px;
+       line-height: 22.4px;
+    }
+    
+}
+
+.itemDate {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    color: var(--lightGrey);
+}
+
+@media screen and (min-width: 768px) {
+    .itemDate {
+        font-size: 12px;
+        line-height: 22.4px;
+    }
+}
+
+.changeBtn {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.changeBtn:hover {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+   .changeBtn {
+       width: 16px;
+       height: 16px;
+    }
+    
+}

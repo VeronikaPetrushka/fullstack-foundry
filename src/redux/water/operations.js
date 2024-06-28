@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   addWaterRecord,
   editWaterRecord,
+  deleteWaterRecord,
   requestDailyActivity,
   requestMonthActivity,
 } from '../services/aquatrackApi.js';
@@ -12,7 +13,7 @@ export const dailyActivity = createAsyncThunk('water/day', async (data, thunkAPI
 
     return res;
   } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
+    return thunkAPI.rejectWithValue(err.response.data.message || err.message);
   }
 });
 
@@ -22,7 +23,7 @@ export const monthActivity = createAsyncThunk('water/month', async (data, thunkA
 
     return res;
   } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
+    return thunkAPI.rejectWithValue(err.response.data.message || err.message);
   }
 });
 
@@ -34,7 +35,7 @@ export const addWater = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
@@ -47,20 +48,20 @@ export const editWater = createAsyncThunk(
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );
 
 export const deleteWater = createAsyncThunk(
   'water/delete',
-  async ({ id, formData }, thunkAPI) => {
+  async ({ id }, thunkAPI) => {
     try {
-      const res = await editWaterRecord(id, formData);
+      const res = await deleteWaterRecord(id);
 
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message);
     }
   }
 );

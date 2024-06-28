@@ -1,5 +1,6 @@
 .trackerSection {
   width: 100%;
+  min-width: 288px;
   border-radius: 30px;
   background: var(--light);
   padding: 40px 20px;
