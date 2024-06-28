@@ -50,7 +50,7 @@ const CalendarStat = ({selectedDate, handleClick}) => {
   };
   const handleNextMonth = () => {
     setSelectedMonth(prevSelectedMonth => {
-      if (selectedMonth.month === 12) {
+      if (prevSelectedMonth.month === 12) {
         return getDateObject(`${prevSelectedMonth.year + 1}-01-${prevSelectedMonth.day}`);
       }else{
         return getDateObject(`${prevSelectedMonth.year}-${prevSelectedMonth.month + 1}-${prevSelectedMonth.day}`);
@@ -70,13 +70,9 @@ const CalendarStat = ({selectedDate, handleClick}) => {
     setMonthDate({ startDate: waterMonthStart, endDate: waterMonthEnd });
   }, [selectedMonth]);
 
-
   useEffect(() => {
-    const fetchMonthlyActivity = async () => {
-       await dispatch(monthActivity(monthDate));
-    }
     if (monthDate) {
-      fetchMonthlyActivity();
+      dispatch(monthActivity(monthDate)).unwrap();
     }
   }, [dispatch, monthDate]);
 
