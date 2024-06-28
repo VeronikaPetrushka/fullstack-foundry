@@ -4,6 +4,7 @@ import css from './WaterProgressBar.module.css';
 import { getDateObject } from '../../helpers/dateHelpers.js';
 import { selectWaterDaily } from '../../redux/water/selectors.js';
 import { selectUserInfo } from '../../redux/user/selectors.js';
+import { useTranslation } from 'react-i18next';
 
 const WaterProgressBar = ({ selectedDate }) => {
   const { day, month_name, fullDate } = selectedDate;
@@ -16,13 +17,15 @@ const WaterProgressBar = ({ selectedDate }) => {
   const percentage = Math.min((totalAmount / dailyNorma) * 100, 100).toFixed(0);
   const today = getDateObject();
 
+  const { t } = useTranslation();
+
   return (
     <div className={css.progressBarContainer}>
       <div className={css.nameBar}>
         {fullDate === today.fullDate ? (
-          <div>Today</div>
+          <div>{t('today')}</div>
         ) : (
-          <div>{`${day}, ${month_name}`}</div>
+          <div>{`${day}, ${t(month_name.toLowerCase())}`}</div>
         )}
       </div>
       <div className={css.percentDynamicContainer}>

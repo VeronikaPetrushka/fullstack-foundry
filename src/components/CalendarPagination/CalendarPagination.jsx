@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Icon from '../Icon/Icon.jsx';
 import css from './CalendarPagination.module.css';
+import { useTranslation } from 'react-i18next';
 
 const CalendarPagination = ({
   today,
@@ -9,6 +10,8 @@ const CalendarPagination = ({
   handlePrevMonth,
   handleNextMonth,
 }) => {
+
+  const { t } = useTranslation();
 
   const showPrevMonth =
   selectedMonth.month === minDay.month && selectedMonth.year === minDay.year
@@ -35,7 +38,7 @@ const CalendarPagination = ({
         />
       </button>
       <div className={css.calendarMonth}>
-        {selectedMonth.monthName} {selectedMonth.year}
+        {t(selectedMonth.monthName.toLowerCase())} {selectedMonth.year}
       </div>
       <button
         type="button"

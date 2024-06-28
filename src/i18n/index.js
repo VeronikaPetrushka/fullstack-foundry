@@ -31,6 +31,5 @@ export default i18n;
 
 
 export const chLang = (lang) => {
-  console.log(lang);
   i18next.changeLanguage(lang);
 }

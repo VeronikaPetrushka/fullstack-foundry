@@ -49,4 +49,27 @@ export const uk = {
   // tracker page
   errorOccured: 'Виникла помилка. Будь ласка, спробуйте пізніше.',
   month: 'Місяць',
+  addWaterBtn: 'Додати',
+  today: 'Сьогодні',
+  myDailyNorma: 'Моя денна норма',
+  hello: 'Привіт',
+  settings: 'Параметри',
+  logout: 'Вихід',
+  logoutText: 'Ви справді бажаєте вийти?',
+  cancelBtn: 'Скасувати',
+
+  // month
+  january: 'Січень',
+  february: 'Лютий',
+  march: 'Березень',
+  april: 'Квітень',
+  may: 'Травень',
+  june: 'Червень',
+  july: 'Липень',
+  august: 'Серпень',
+  september: 'Вересень',
+  october: 'Жовтень',
+  november: 'Листопад',
+  december: 'Грудень',
+
 };

@@ -49,4 +49,28 @@ export const en = {
   // tracker page
   errorOccured: 'An error occured. Please try again later.',
   month: 'Month',
+  addWaterBtn: 'Add water',
+  today: 'Today',
+  myDailyNorma: 'My daily norma',
+  hello: 'Hello',
+  settings: 'Settings',
+  logout: 'Log out',
+  logoutText: 'Do you really want to leave?',
+  cancelBtn: 'Cancel',
+
+  // month
+  january: 'January',
+  february: 'February',
+  march: 'March',
+  april: 'April',
+  may: 'May',
+  june: 'June',
+  july: 'July',
+  august: 'August',
+  september: 'September',
+  october: 'October',
+  november: 'November',
+  december: 'December',
+
+  // error messages
 };

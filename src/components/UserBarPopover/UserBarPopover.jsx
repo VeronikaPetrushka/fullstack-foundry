@@ -4,6 +4,8 @@ import Icon from '../Icon/Icon';
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal';
 import { LogOutModal } from '../LogOutModal/LogOutModal';
 import { BasicModal } from '../BasicModal/BasicModal';
+import { useTranslation } from 'react-i18next';
+
 
 const UserBarPopover = ({ isOpen }) => {
   const [activeModal, setActiveModal] = useState(null);
@@ -15,6 +17,8 @@ const UserBarPopover = ({ isOpen }) => {
   const closeModal = () => {
     setActiveModal(null);
   };
+
+  const { t } = useTranslation();
 
   return (
     <div className={`${css.popoverBtnWrapper} ${isOpen ? css.isOpen : ''}`}>
@@ -31,7 +35,7 @@ const UserBarPopover = ({ isOpen }) => {
           height="18"
           styles={css.popoverIcon}
         />
-        Settings
+        {t('settings')}
       </button>
       <button
         type="button"
@@ -46,7 +50,7 @@ const UserBarPopover = ({ isOpen }) => {
           height="18"
           styles={css.popoverIcon}
         />
-        Log out
+        {t('logout')}
       </button>
 
       {activeModal === 'settings' && (

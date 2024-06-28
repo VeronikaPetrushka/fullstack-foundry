@@ -3,6 +3,7 @@ import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
 import { BasicModal } from '../BasicModal/BasicModal';
 import WaterModal from '../WaterModal/WaterModal';
+import { useTranslation } from 'react-i18next';
 
 const AddWaterBtn = ({ isBig = true }) => {
   const [modIsOpen, setModIsOpen] = useState(false);
@@ -12,6 +13,8 @@ const AddWaterBtn = ({ isBig = true }) => {
   const closeWaterModal = () => {
     setModIsOpen(false);
   };
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -38,7 +41,7 @@ const AddWaterBtn = ({ isBig = true }) => {
               />
             </div>
           )}
-          <span className={isBig ? css.txtSmall : css.txtBig}>Add water</span>
+          <span className={isBig ? css.txtSmall : css.txtBig}>{t('addWaterBtn')}</span>
         </button>
       </div>
       <BasicModal isOpen={modIsOpen} onClose={closeWaterModal}>
