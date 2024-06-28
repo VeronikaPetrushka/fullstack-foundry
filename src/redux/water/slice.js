@@ -54,14 +54,15 @@ const waterSlice = createSlice({
       state.isLoading = false;
       state.waterDaily.push(action.payload);
       const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
-      const index = state.waterMonthly.findIndex(
+      const mIndex = state.waterMonthly.findIndex(
         record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
       );
-      if (index) {
-        state.waterMonthly[index].totalAmount = totalAmount;
-        // console.log("user waterNorma", getDailyNorma());
-        // TODO: зберігати waterNorma в слайсі води
-        // state.waterMonthly[index].percentageOfNorma = (state.users.user.waterNorma / totalAmount * 100).toFixed(0);
+      // TODO: рахувати процент використовуючи waterNorma в слайсі води
+      if (mIndex !== -1) {
+        state.waterMonthly[mIndex].totalAmount = totalAmount;
+      }
+      if(mIndex === -1) {
+        state.waterMonthly.push({ totalAmount, percentageOfNorma: 0, date: action.payload.createdAt,  });
       }
     });
     builder.addCase(addWater.rejected, handleRejected);
@@ -81,9 +82,9 @@ const waterSlice = createSlice({
       const mIndex = state.waterMonthly.findIndex(
         record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
       );
-      if (mIndex) {
-        state.waterMonthly[index].totalAmount = totalAmount;
-        // TODO: зберігати waterNorma в слайсі води
+        // TODO: рахувати процент використовуючи waterNorma в слайсі води
+        if (mIndex !== -1) {
+        state.waterMonthly[mIndex].totalAmount = totalAmount;
       }
     });
     builder.addCase(editWater.rejected, handleRejected);
@@ -100,9 +101,9 @@ const waterSlice = createSlice({
       const mIndex = state.waterMonthly.findIndex(
         record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
       );
-      if (mIndex) {
-        state.waterMonthly[index].totalAmount = totalAmount;
-        // TODO: зберігати waterNorma в слайсі води
+        // TODO: рахувати процент використовуючи waterNorma в слайсі води
+        if (mIndex !== -1) {
+        state.waterMonthly[mIndex].totalAmount = totalAmount;
       }
     });
     builder.addCase(deleteWater.rejected, handleRejected);

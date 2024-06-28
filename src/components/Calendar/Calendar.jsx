@@ -3,8 +3,8 @@ import CalendarItem from '../CalendarItem/CalendarItem';
 import css from './Calendar.module.css';
 
 
-// import { useDispatch } from 'react-redux';
-// import {addWater, deleteWater} from '../../redux/water/operations';
+import { useDispatch } from 'react-redux';
+import {addWater, deleteWater} from '../../redux/water/operations';
 
 const Calendar = ({
   daysOfSelectedMonth,
@@ -15,21 +15,21 @@ const Calendar = ({
 }) => {
 
 
-//   const dispatch = useDispatch();
-//   const handleAddWater = async () => {
-//     const data = {
-//       "amount": 150,
-//       "date": "2024-06-20T11:30"
-//     }
-//     await dispatch(addWater(data));
-// }
+  const dispatch = useDispatch();
+  const handleAddWater = async () => {
+    const data = {
+      "amount": 150,
+      "date": "2024-06-28T11:30"
+    }
+    await dispatch(addWater(data));
+}
 
-//   const handleDeleteWater = async () => {
-//     const data = {
-//       "id": "667d8cc5b09b9391fee4618f"
-//     }
-//     await dispatch(deleteWater(data));
-// }
+  const handleDeleteWater = async () => {
+    const data = {
+      "id": "667d8cc5b09b9391fee4618f"
+    }
+    await dispatch(deleteWater(data));
+}
 
 
   return (
@@ -48,8 +48,8 @@ const Calendar = ({
       ))}
 
 
-      {/* <button onClick={handleAddWater}>Add water</button>
-      <button onClick={handleDeleteWater}>Delete water</button> */}
+      <button onClick={handleAddWater}>Add water</button>
+      <button onClick={handleDeleteWater}>Delete water</button>
 
     </div>
   );
