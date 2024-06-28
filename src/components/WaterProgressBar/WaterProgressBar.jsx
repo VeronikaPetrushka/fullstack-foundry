@@ -7,13 +7,13 @@ import { selectUserInfo } from '../../redux/user/selectors.js';
 
 const WaterProgressBar = ({ selectedDate }) => {
   const { day, month_name, fullDate } = selectedDate;
-
   const dayWater = useSelector(selectWaterDaily);
   const { dailyNorma } = useSelector(selectUserInfo);
-
-  const totalAmount = dayWater.reduce((total, record) => total + record.amount, 0);
-  const percentage = totalAmount > dailyNorma ? 100 : (totalAmount / dailyNorma * 100).toFixed(0);
-
+  const totalAmount = dayWater.reduce(
+    (total, record) => total + record.amount,
+    0
+  );
+  const percentage = Math.min((totalAmount / dailyNorma) * 100, 100).toFixed(0);
   const today = getDateObject();
 
   return (

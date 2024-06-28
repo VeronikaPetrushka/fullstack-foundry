@@ -23,6 +23,7 @@
   position: absolute;
   font-size: 8px;
   color: var(--green);
+  transition: left 0.5s ease;
 }
 .progressBar {
   width: 100%;
@@ -37,11 +38,13 @@
   height: 100%;
   border-radius: 9px;
   background-color: var(--green);
+  transition: width 0.5s ease;
 }
 .circle {
   position: absolute;
   top: 52%;
   transform: translateX(-50%) translateY(-50%);
+  transition: left 0.5s ease;
 }
 
 .percentContainer {
