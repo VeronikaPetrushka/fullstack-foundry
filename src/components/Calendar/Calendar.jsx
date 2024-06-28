@@ -47,9 +47,10 @@ const Calendar = ({
         </div>
       ))}
 
-
+      <div style={{position: 'absolute', right: '0px', bottom: '-20px'}}>
       <button onClick={handleAddWater}>Add water</button>
       <button onClick={handleDeleteWater}>Delete water</button>
+      </div>
 
     </div>
   );

@@ -1,33 +1,19 @@
 import Icon from '../Icon/Icon.jsx';
-import { useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { monthActivity } from '../../redux/water/operations.js';
+import { useSelector } from 'react-redux';
 import css from './WaterProgressBar.module.css';
 import { getDateObject } from '../../helpers/dateHelpers.js';
-import { selectWaterMonthly } from '../../redux/water/selectors.js';
+import { selectWaterDaily } from '../../redux/water/selectors.js';
+import { selectUserInfo } from '../../redux/user/selectors.js';
 
 const WaterProgressBar = ({ selectedDate }) => {
   const { day, month_name, fullDate } = selectedDate;
 
-  const currentDate = useMemo(
-    () => ({
-      startDate: fullDate,
-      endDate: fullDate,
-    }),
-    [fullDate]
-  );
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (currentDate) {
-      dispatch(monthActivity(currentDate));
-    }
-  }, [dispatch, currentDate]);
+  const dayWater = useSelector(selectWaterDaily);
+  const { dailyNorma } = useSelector(selectUserInfo);
 
-  const dayWater = useSelector(selectWaterMonthly);
-  const percentage =
-    dayWater.length > 0
-      ? Math.min(dayWater[0].percentageOfNorma, 100).toFixed(0)
-      : 0;
+  const totalAmount = dayWater.reduce((total, record) => total + record.amount, 0);
+  const percentage = totalAmount > dailyNorma ? 100 : (totalAmount / dailyNorma * 100).toFixed(0);
+
   const today = getDateObject();
 
   return (
