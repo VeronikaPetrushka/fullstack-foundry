@@ -5,9 +5,6 @@ import { PrivateRoute } from './components/PrivateRoute';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { useRefreshUser } from './hooks/RefreshUser';
 
-import { useTranslation } from 'react-i18next';
-import './i18n/index.js/';
-
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
@@ -18,7 +15,6 @@ const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage/ResetPass
 const App = () => {
 
   useRefreshUser();
-  const { t } = useTranslation();
 
   return (
     <SharedLayout>

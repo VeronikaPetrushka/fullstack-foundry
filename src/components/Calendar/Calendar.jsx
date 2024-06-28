@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import CalendarItem from '../CalendarItem/CalendarItem';
 import css from './Calendar.module.css';
 
-
 // import { useDispatch } from 'react-redux';
 // import {addWater, deleteWater} from '../../redux/water/operations';
 
@@ -13,7 +12,6 @@ const Calendar = ({
   today,
   handleClick,
 }) => {
-
 
 //   const dispatch = useDispatch();
 //   const handleAddWater = async () => {

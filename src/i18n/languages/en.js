@@ -1,11 +1,37 @@
 export const en = {
-  homepage: {
-    'Record daily water intake and track':
-      'Record daily water intake and track',
-    'Water consumption tracker': 'Water consumption tracker',
-    'Try tracker': 'Try tracker',
-    'Sign In': 'Sign In',
-  },
-  signinpage: {},
-  tracker: {},
+  // titles - meta tags
+  homePage: 'AQUATRACK: Water consumption tracker',
+  signupPage: 'AQUATRACK: Create your account',
+  signinPage: 'AQUATRACK: Sign in to your account',
+  trackerPage: 'AQUATRACK: Record daily water intake and track',
+  forgotPage: 'AQUATRACK: Forgot your password?',
+  resetPage: 'AQUATRACK: Reset your password',
+
+  // home page
+  title: 'Water consumption tracker',
+  subtitle: 'Record daily water intake and track',
+  signup: 'Try tracker',
+  signin: 'Sign In',
+
+  // signin and signup page
+  signedin: 'Successfully signed in!',
+  failedSign: 'Failed to sign in. Please try again later.',
+  enterYourEmail: 'Enter your email',
+  password: 'Password',
+  email: 'Email',
+  signInTitle: 'Sign In',
+  enterYourPassword: 'Enter your password',
+  forgotPassword: 'Forgot password?',
+  signinBtn: 'Sign In',
+  dontHaveAccount: 'Don\'t have an account? ',
+  signUpLink: 'Sign Up',
+  loginWithGoogle: 'Login with Google',
+
+  signupTitle: 'Sign Up',
+  repeatPassword: 'Repeat Password',
+  repeatPasswordLabel: 'Repeat Password',
+  alreadyHaveAccount: 'Already have an account? ',
+  signupWithGoogleBtn: 'Sign Up with Google',
+  signupBtn: 'Sign Up',
+  // tracker page
 };

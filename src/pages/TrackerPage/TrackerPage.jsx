@@ -11,7 +11,12 @@ import { Helmet } from 'react-helmet-async';
 import css from './TrackerPage.module.css';
 import DailyInfo from '../../components/DailyInfo/DailyInfo';
 
+import LangSwitch from '../../components/LangSwitch/LangSwitch';
+import { useTranslation } from 'react-i18next';
+
 const TrackerPage = () => {
+
+  const { t } = useTranslation();
 
   // поточна або вибрана в календарі дата для якої треба виводити дані в усіх компонентах
   const [selectedDate, setSelectedDate] = useState(getDateObject());
@@ -35,9 +40,10 @@ const TrackerPage = () => {
   return (
     <>
       <Helmet>
-        <title>AQUATRACK: Record daily water intake and track</title>
+        <title>{t('trackerPage')}</title>
       </Helmet>
       <Page>
+        <LangSwitch />
         <WaterMainInfo selectedDate={selectedDate} />
         <section className={css.trackerSection}>
           <WaterDetailedInfo />

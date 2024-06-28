@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { signup } from '../../redux/auth/operations';
 import icon from '../../assets/icons.svg';
 import { toast, Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -27,6 +28,8 @@ const SignUpForm = () => {
   const [inputTypeRePassword, setTypeRePassword] = useState('password');
   const [iconPassword, setIconPassword] = useState('eye-off');
   const [iconRePassword, setIconRePassword] = useState('eye-off');
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const {
@@ -67,24 +70,24 @@ const SignUpForm = () => {
     <div className={css.signUpWrap}>
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-        <h2 className={css.formTitle}>Sign Up</h2>
-        <label className={css.label}>Email</label>
+        <h2 className={css.formTitle}>{t('signupTitle')}</h2>
+        <label className={css.label}>{t('email')}</label>
         <input
           className={`${css.input} ${errors.email ? css.inputError : ''}`}
           {...register('email')}
-          placeholder="Enter your email"
+          placeholder={t('enterYourEmail')}
         />
         {errors.email && (
           <p className={css.errorMessage}>{errors.email.message}</p>
         )}
 
-        <label className={css.label}>Password</label>
+        <label className={css.label}>{t('password')}</label>
         <div className={css.inputWrapper}>
           <input
             className={`${css.input} ${errors.password ? css.inputError : ''}`}
             {...register('password')}
             type={inputTypePassword}
-            placeholder="Enter your password"
+            placeholder={t('enterYourPassword')}
           />
           <button
             type="button"
@@ -106,7 +109,7 @@ const SignUpForm = () => {
           <p className={css.errorMessage}>{errors.password.message}</p>
         )}
 
-        <label className={css.label}>Repeat password</label>
+        <label className={css.label}>{t('repeatPassword')}</label>
         <div className={css.inputWrapper}>
           <input
             className={`${css.input} ${
@@ -114,7 +117,7 @@ const SignUpForm = () => {
             }`}
             {...register('repeatPassword')}
             type={inputTypeRePassword}
-            placeholder="Repeat password"
+            placeholder={t('repeatPasswordLabel')}
           />
           <button
             type="button"
@@ -137,13 +140,13 @@ const SignUpForm = () => {
         )}
 
         <button className={css.signUpButton} type="submit">
-          Sign Up
+          {t('signupBtn')}
         </button>
       </form>
       <p className={css.text}>
-        Already have an account?{' '}
+        {t('alreadyHaveAccount')}
         <Link to="/signin">
-          <span className={css.spanLink}>Sign In</span>
+          <span className={css.spanLink}>{t('signinBtn')}</span>
         </Link>
       </p>
       <div className={css.line}></div>
@@ -152,7 +155,7 @@ const SignUpForm = () => {
           className={css.loginWithGoogleBtn}
           href="https://aquatrack-api-myzh.onrender.com/api/auth/google"
         >
-          Sign up with Google
+          {t('signupWithGoogleBtn')}
         </a>
       </div>
     </div>

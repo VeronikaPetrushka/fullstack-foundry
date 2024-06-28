@@ -1,0 +1,30 @@
+.langSwitch{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  fill: #2f2f2f;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px
+}
+
+.langSwithBtn{
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background-color: var(--light);
+  color: var(--grey);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.langSwithBtn:disabled{
+  background-color: var(--grey);
+  color: var(--light);
+}

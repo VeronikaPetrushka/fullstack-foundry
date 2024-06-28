@@ -4,14 +4,20 @@ import SignInForm from '../../components/SignInForm/SignInForm';
 import { Helmet } from 'react-helmet-async';
 import Page from '../../components/Page/Page';
 
+import LangSwitch from '../../components/LangSwitch/LangSwitch';
+import { useTranslation } from 'react-i18next';
+
 const SignInPage = () => {
+
+  const { t } = useTranslation();
+
   return (
     <>
       <Helmet>
-        <title>AQUATRACK: Sign in to your account</title>
+        <title>{t('signinPage')}</title>
       </Helmet>
       <Page>
-        <title>Sign In Page</title>
+        <LangSwitch />
         <SignInForm />
         <div className={css.divDesktopOnly}>
           <AdvantagesSection />
