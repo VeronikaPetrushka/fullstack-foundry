@@ -55,7 +55,7 @@ const CalendarStat = ({selectedDate, handleClick}) => {
       }else{
         return getDateObject(`${prevSelectedMonth.year}-${prevSelectedMonth.month + 1}-${prevSelectedMonth.day}`);
       }
-    })
+    });
   };
 
   useEffect(() => {
