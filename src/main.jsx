@@ -12,7 +12,7 @@ import {
 } from './redux/store.js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         {/* <PersistGate loading={null} persistor={persistor}> */}
@@ -22,5 +22,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         {/* </PersistGate> */}
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
