@@ -44,7 +44,6 @@ const CalendarStat = ({ selectedDate, handleClick }) => {
 
   const handlePrevMonth = () => {
     setSelectedMonth(prevSelectedMonth => {
-      let newSelectedMonth;
       if (prevSelectedMonth.month === 1) {
         newSelectedMonth = `${prevSelectedMonth.year - 1}-12-${
           prevSelectedMonth.day
@@ -54,8 +53,6 @@ const CalendarStat = ({ selectedDate, handleClick }) => {
           prevSelectedMonth.month - 1
         }-${prevSelectedMonth.day}`;
       }
-
-      return getDateObject(newSelectedMonth);
     });
   };
   const handleNextMonth = () => {
@@ -88,7 +85,7 @@ const CalendarStat = ({ selectedDate, handleClick }) => {
 
   useEffect(() => {
     if (monthDate) {
-      dispatch(monthActivity(monthDate));
+      dispatch(monthActivity(monthDate)).unwrap();
     }
   }, [dispatch, monthDate]);
 
@@ -104,6 +101,7 @@ const CalendarStat = ({ selectedDate, handleClick }) => {
         .padStart(2, '0')}-${i.toString().padStart(2, '0')}`,
     };
   }
+
   for (const day of dataForSelectedMonth) {
     let dayNumber = new Date(day.date).getDate();
     daysOfSelectedMonth[dayNumber] = {
@@ -117,6 +115,7 @@ const CalendarStat = ({ selectedDate, handleClick }) => {
         day.percentageOfNorma.toFixed(0)
       );
   }
+
   toast.error(isErrorWaterMonth || 'Sorry, error occured! Try later...');
   return isErrorWaterMonth ? (
     <Toaster position="top-center" />

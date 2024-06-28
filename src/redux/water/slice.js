@@ -61,6 +61,7 @@ const waterSlice = createSlice({
     // Handling addWater
     builder.addCase(addWater.pending, handlePending);
     builder.addCase(addWater.fulfilled, (state, action) => {
+      const dailyNorma = Number(action.payload.dailyNorma);
       state.isLoading = false;
       state.waterDaily.push(action.payload);
       const totalAmount = state.waterDaily.reduce((total, record) => {
@@ -83,11 +84,12 @@ const waterSlice = createSlice({
     builder.addCase(editWater.pending, handlePending);
     builder.addCase(editWater.fulfilled, (state, action) => {
       state.isLoading = false;
+      const dailyNorma = Number(action.payload.dailyNorma);
       const index = state.waterDaily.findIndex(
-        record => record._id === action.payload._id
+        record => record._id === action.payload.res._id
       );
       if (index !== -1) {
-        state.waterDaily[index] = action.payload;
+        state.waterDaily[index] = action.payload.res;
       }
     });
     builder.addCase(editWater.rejected, handleRejected);
@@ -96,6 +98,7 @@ const waterSlice = createSlice({
     builder.addCase(deleteWater.pending, handlePending);
     builder.addCase(deleteWater.fulfilled, (state, action) => {
       state.isLoading = false;
+      const dailyNorma = Number(action.payload.dailyNorma);
       const index = state.waterDaily.findIndex(
         record => record._id === action.payload._id
       );

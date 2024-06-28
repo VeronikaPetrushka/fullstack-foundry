@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { applyMiddleware, configureStore } from '@reduxjs/toolkit';
 // import {
 //   persistStore,
 //   persistReducer,
@@ -28,9 +28,11 @@ import rootReducer from './rootReducer';
 //   error: null,
 // };
 
+
 export const store = configureStore({
   reducer: rootReducer,
 });
+
 // middleware: getDefaultMiddleware =>
 //   getDefaultMiddleware({
 //     serializableCheck: {
