@@ -3,7 +3,6 @@ import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
 import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { userInfo } from '../../redux/user/operations';
 import { dailyActivity } from '../../redux/water/operations';
 import { getDateObject } from '../../helpers/dateHelpers';
 import CalendarStat from '../../components/Calendar/CalendarStat';
@@ -22,9 +21,6 @@ const TrackerPage = () => {
 
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(userInfo());
-  }, [dispatch]);
 
   useEffect(() => {
     if(selectedDate){

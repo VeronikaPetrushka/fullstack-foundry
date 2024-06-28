@@ -5,11 +5,13 @@ import {
   deleteWater,
   dailyActivity,
   monthActivity,
+  weekActivity,
 } from './operations.js';
 
 const initialState = {
   waterDaily: [],
   waterMonthly: [],
+  waterWeekly: [],
   isLoading: false,
   isError: null,
 };
@@ -48,14 +50,26 @@ const waterSlice = createSlice({
     });
     builder.addCase(monthActivity.rejected, handleRejected);
 
+    // Handling weekActivity
+    builder.addCase(weekActivity.pending, handlePending);
+    builder.addCase(weekActivity.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.waterWeekly = action.payload;
+    });
+    builder.addCase(weekActivity.rejected, handleRejected);
+
     // Handling addWater
     builder.addCase(addWater.pending, handlePending);
     builder.addCase(addWater.fulfilled, (state, action) => {
+      const dailyNorma = Number(action.payload.dailyNorma);
       state.isLoading = false;
       state.waterDaily.push(action.payload);
-      const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
-      const index = state.waterMonthly.findIndex(
-        record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
+      const totalAmount = state.waterDaily.reduce((total, record) => {
+        total + record.amount;
+        return total;
+      }, 0);
+      const index = state.waterMonthly.find(
+        record => record.date === action.payload.createdAt.slice(0, 9)
       );
       if (index) {
         state.waterMonthly[index].totalAmount = totalAmount;
@@ -70,20 +84,12 @@ const waterSlice = createSlice({
     builder.addCase(editWater.pending, handlePending);
     builder.addCase(editWater.fulfilled, (state, action) => {
       state.isLoading = false;
+      const dailyNorma = Number(action.payload.dailyNorma);
       const index = state.waterDaily.findIndex(
-        record => record._id === action.payload._id
+        record => record._id === action.payload.res._id
       );
       if (index !== -1) {
-        state.waterDaily[index] = action.payload;
-      }
-
-      const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
-      const mIndex = state.waterMonthly.findIndex(
-        record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
-      );
-      if (mIndex) {
-        state.waterMonthly[index].totalAmount = totalAmount;
-        // TODO: зберігати waterNorma в слайсі води
+        state.waterDaily[index] = action.payload.res;
       }
     });
     builder.addCase(editWater.rejected, handleRejected);
@@ -92,18 +98,11 @@ const waterSlice = createSlice({
     builder.addCase(deleteWater.pending, handlePending);
     builder.addCase(deleteWater.fulfilled, (state, action) => {
       state.isLoading = false;
+      const dailyNorma = Number(action.payload.dailyNorma);
       const index = state.waterDaily.findIndex(
-        record => record._id === action.meta.arg.id
+        record => record._id === action.payload._id
       );
-      state.waterDaily.splice(index, 1);
-      const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
-      const mIndex = state.waterMonthly.findIndex(
-        record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
-      );
-      if (mIndex) {
-        state.waterMonthly[index].totalAmount = totalAmount;
-        // TODO: зберігати waterNorma в слайсі води
-      }
+      state.items.splice(index, 1);
     });
     builder.addCase(deleteWater.rejected, handleRejected);
   },

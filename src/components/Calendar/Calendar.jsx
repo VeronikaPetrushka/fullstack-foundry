@@ -14,19 +14,27 @@ const Calendar = ({
   handleClick,
 }) => {
 
-
-//   const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 //   const handleAddWater = async () => {
 //     const data = {
-//       "amount": 150,
-//       "date": "2024-06-20T11:30"
+//       "amount": 230,
+//       "date": selectedDate.fullDate+"T10:30"
 //     }
 //     await dispatch(addWater(data));
 // }
 
+// const handleEditWater = async () => {
+//   const id = "667e738ddd629e109a93647f";
+//   const data = {
+//     "amount": 370,
+//     "date": selectedDate.fullDate+"T13:30"
+//   }
+//   await dispatch(addWater(id, data));
+// }
+
 //   const handleDeleteWater = async () => {
 //     const data = {
-//       "id": "667d8cc5b09b9391fee4618f"
+//       "id": "667e7354dd629e109a93646e"
 //     }
 //     await dispatch(deleteWater(data));
 // }
@@ -47,9 +55,11 @@ const Calendar = ({
         </div>
       ))}
 
-
-      {/* <button onClick={handleAddWater}>Add water</button>
-      <button onClick={handleDeleteWater}>Delete water</button> */}
+      {/* <div style={{position: 'absolute', right: '0px', bottom: '-20px'}}>
+      <button onClick={handleAddWater}>Add water</button>
+      <button onClick={handleEditWater}>Edit water</button>
+      <button onClick={handleDeleteWater}>Delete water</button>
+      </div> */}
 
     </div>
   );

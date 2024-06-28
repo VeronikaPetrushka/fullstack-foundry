@@ -4,6 +4,9 @@ import SharedLayout from './components/SharedLayout';
 import { PrivateRoute } from './components/PrivateRoute';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { useRefreshUser } from './hooks/RefreshUser';
+import { useSelector } from 'react-redux';
+import { selectIsLoading } from './redux/auth/selectors'
+import Loader  from './components/Loader/Loader';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
@@ -13,10 +16,11 @@ const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage/ForgotP
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage/ResetPasswordPage'));
 
 const App = () => {
-
+  const isRefreshing = useSelector(selectIsLoading);
   useRefreshUser();
 
   return (
+    isRefreshing ? <Loader addClass='page-loader' /> :
     <SharedLayout>
     <Routes>
       <Route path="/" element={<HomePage />} />

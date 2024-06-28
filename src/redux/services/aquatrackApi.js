@@ -1,6 +1,5 @@
 import { instance, publicInstance } from './instance';
 
-
 //AUTH
 export const requestRegister = async formData => {
   const { data } = await publicInstance.post('/auth/register', formData);
@@ -13,7 +12,9 @@ export const requestLogin = async formData => {
 };
 
 export const requestGoogleLogin = async formData => {
-  const { data } = await publicInstance.get('/auth/google', { params: formData });
+  const { data } = await publicInstance.get('/auth/google', {
+    params: formData,
+  });
   return data;
 };
 
@@ -28,7 +29,10 @@ export const requestLogout = async () => {
 };
 
 export const requestSendVerify = async (verificationToken, formData) => {
-  const { data } = await publicInstance.post(`/auth/verify/${verificationToken}`,formData);
+  const { data } = await publicInstance.post(
+    `/auth/verify/${verificationToken}`,
+    formData
+  );
   return data;
 };
 
@@ -51,7 +55,7 @@ export const requestResetPassword = async formData => {
 export const requestTotalUsers = async () => {
   const { data } = await publicInstance.get('users/count-users');
   return data;
-}
+};
 
 export const requestUserInfo = async () => {
   const { data } = await instance.get('/users/current');
@@ -70,18 +74,18 @@ export const uploadUserAvatar = async formData => {
 
 // WATER
 
-export const requestDailyActivity = async (formData) => {
+export const requestDailyActivity = async formData => {
   const { data } = await instance.post('/water/day', formData);
   return data;
 };
 
-export const requestMonthActivity = async (formData) => {
+export const requestMonthActivity = async formData => {
   const { data } = await instance.post('/water/month', formData);
   return data;
 };
 
 export const addWaterRecord = async formData => {
-  const { data } = await instance.post('/water/', formData);
+  const { data } = await instance.post('/water', formData);
   return data;
 };
 
