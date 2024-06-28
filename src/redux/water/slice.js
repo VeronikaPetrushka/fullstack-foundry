@@ -51,18 +51,20 @@ const waterSlice = createSlice({
     // Handling addWater
     builder.addCase(addWater.pending, handlePending);
     builder.addCase(addWater.fulfilled, (state, action) => {
+      const dailyNorma = Number(action.payload.dailyNorma);
       state.isLoading = false;
-      state.waterDaily.push(action.payload);
+      state.waterDaily.push(action.payload.res);
       const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
       const mIndex = state.waterMonthly.findIndex(
-        record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
+        record => record.date.slice(0, 10) === action.payload.res.date.slice(0, 10)
       );
-      // TODO: рахувати процент використовуючи waterNorma в слайсі води
+      const percentageOfNorma = totalAmount > dailyNorma ? 100 : Number((totalAmount / dailyNorma * 100).toFixed(0));
       if (mIndex !== -1) {
         state.waterMonthly[mIndex].totalAmount = totalAmount;
+        state.waterMonthly[mIndex].percentageOfNorma = percentageOfNorma;
       }
       if(mIndex === -1) {
-        state.waterMonthly.push({ totalAmount, percentageOfNorma: 0, date: action.payload.createdAt,  });
+        state.waterMonthly.push({ totalAmount, percentageOfNorma, date: action.payload.res.date,  });
       }
     });
     builder.addCase(addWater.rejected, handleRejected);
@@ -71,20 +73,22 @@ const waterSlice = createSlice({
     builder.addCase(editWater.pending, handlePending);
     builder.addCase(editWater.fulfilled, (state, action) => {
       state.isLoading = false;
+      const dailyNorma = Number(action.payload.dailyNorma);
       const index = state.waterDaily.findIndex(
-        record => record._id === action.payload._id
+        record => record._id === action.payload.res._id
       );
       if (index !== -1) {
-        state.waterDaily[index] = action.payload;
+        state.waterDaily[index] = action.payload.res;
       }
 
       const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
       const mIndex = state.waterMonthly.findIndex(
-        record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
+        record => record.date.slice(0, 10) === action.payload.res.date.slice(0, 10)
       );
-        // TODO: рахувати процент використовуючи waterNorma в слайсі води
-        if (mIndex !== -1) {
+      const percentageOfNorma = totalAmount > dailyNorma ? 100 : Number((totalAmount / dailyNorma * 100).toFixed(0));
+      if (mIndex !== -1) {
         state.waterMonthly[mIndex].totalAmount = totalAmount;
+        state.waterMonthly[mIndex].percentageOfNorma = percentageOfNorma;
       }
     });
     builder.addCase(editWater.rejected, handleRejected);
@@ -93,17 +97,25 @@ const waterSlice = createSlice({
     builder.addCase(deleteWater.pending, handlePending);
     builder.addCase(deleteWater.fulfilled, (state, action) => {
       state.isLoading = false;
+      const dailyNorma = Number(action.payload.dailyNorma);
       const index = state.waterDaily.findIndex(
         record => record._id === action.meta.arg.id
       );
+      const deletedData = state.waterDaily[index];
       state.waterDaily.splice(index, 1);
+
       const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
       const mIndex = state.waterMonthly.findIndex(
-        record => record.date.slice(0, 10) === action.payload.createdAt.slice(0, 10)
+        record => record.date.slice(0, 10) === deletedData.date.slice(0, 10)
       );
-        // TODO: рахувати процент використовуючи waterNorma в слайсі води
-        if (mIndex !== -1) {
-        state.waterMonthly[mIndex].totalAmount = totalAmount;
+      const percentageOfNorma = totalAmount > dailyNorma ? 100 : Number((totalAmount / dailyNorma * 100).toFixed(0));
+      if (mIndex !== -1) {
+        if(totalAmount === 0) {
+          state.waterMonthly.splice(mIndex, 1);
+        }else{
+          state.waterMonthly[mIndex].totalAmount = totalAmount;
+          state.waterMonthly[mIndex].percentageOfNorma = percentageOfNorma;
+        }
       }
     });
     builder.addCase(deleteWater.rejected, handleRejected);

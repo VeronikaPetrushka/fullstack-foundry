@@ -14,19 +14,18 @@ const Calendar = ({
   handleClick,
 }) => {
 
-
   const dispatch = useDispatch();
   const handleAddWater = async () => {
     const data = {
       "amount": 230,
-      "date": "2024-06-26T11:30"
+      "date": selectedDate.fullDate+"T10:30"
     }
     await dispatch(addWater(data));
 }
 
   const handleDeleteWater = async () => {
     const data = {
-      "id": "667d8cc5b09b9391fee4618f"
+      "id": "667e7354dd629e109a93646e"
     }
     await dispatch(deleteWater(data));
 }

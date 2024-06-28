@@ -81,7 +81,7 @@ export const requestMonthActivity = async (formData) => {
 };
 
 export const addWaterRecord = async formData => {
-  const { data } = await instance.post('/water/', formData);
+  const { data } = await instance.post('/water', formData);
   return data;
 };
 
