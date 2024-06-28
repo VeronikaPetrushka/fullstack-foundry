@@ -5,7 +5,6 @@ import {
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
@@ -47,9 +46,18 @@ const Chart = ({ selectedDate }) => {
             </linearGradient>
           </defs>
 
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
-          <YAxis />
+          <XAxis
+            dataKey="day"
+            padding={{ left: 10, right: 10 }}
+            tickLine={false}
+            axisLine={false}
+          />
+          <YAxis
+            tickFormatter={value => `${value / 1000} L`}
+            padding={{ top: 10, bottom: 10 }}
+            tickLine={false}
+            axisLine={false}
+          />
           <Tooltip
             contentStyle={{
               backgroundColor: '#FFFFFF',
