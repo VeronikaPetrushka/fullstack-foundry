@@ -33,5 +33,20 @@ export const uk = {
   alreadyHaveAccount: 'Вже маєте аккаунт? ',
   signupWithGoogleBtn: 'Зареєструватися з Google',
   signupBtn: 'Зареєструватися',
+
+  // forgot and reset  password page
+  forgotYourPassword: 'Забули пароль?',
+  signInLink: 'Вхід',
+
+  passwordChanged: 'Пароль успішно змінено! Ввійдіть в аккаунт.',
+  failedReset: 'Помилка при зміні паролю. Спробуйте пізніше.',
+  changePassword: 'Змінити пароль',
+  linkExpired: 'Вибачте, але посилання для зміни паролю застаріло.',
+  goToThePage: 'Перейти на сторінку',
+  forgotPassLink: 'Забули пароль',
+  resetPassBtn: 'Змінити пароль',
+
   // tracker page
+  errorOccured: 'Виникла помилка. Будь ласка, спробуйте пізніше.',
+  month: 'Місяць',
 };

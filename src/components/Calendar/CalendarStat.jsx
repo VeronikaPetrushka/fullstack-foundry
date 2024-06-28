@@ -9,6 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import CalendarPagination from '../CalendarPagination/CalendarPagination';
 import Calendar from './Calendar';
 import Chart  from './Chart';
+import { useTranslation } from 'react-i18next';
 import Loader from '../Loader/Loader'
 
 import Icon from '../Icon/Icon.jsx';
@@ -21,7 +22,7 @@ const CalendarStat = ({selectedDate, handleClick}) => {
   const isLoadingWaterMonth = useSelector(selectIsLoading);
   const isErrorWaterMonth = useSelector(selectIsError);
 
-
+  const { t } = useTranslation();
 
   const [selectedMonth, setSelectedMonth] = useState(today);
 
@@ -99,12 +100,12 @@ const CalendarStat = ({selectedDate, handleClick}) => {
     if(day.percentageOfNorma > 100) daysOfSelectedMonth[dayNumber].percentageOfNorma = 100;
     else daysOfSelectedMonth[dayNumber].percentageOfNorma = Number(day.percentageOfNorma.toFixed(0));
   }
-  toast.error(isErrorWaterMonth || 'Sorry, error occured! Try later...');
+  toast.error(isErrorWaterMonth || t('errorOccured'));
   return isErrorWaterMonth ? (<Toaster position="top-center" />) :
   (
     <div className={css.calendar}>
       <div className={css.calendarHead}>
-        <div className={css.calendarTitle}>Month</div>
+        <div className={css.calendarTitle}>{t('month')}</div>
         <div className={css.calendarSwitcher}>
           <CalendarPagination
             today={today}

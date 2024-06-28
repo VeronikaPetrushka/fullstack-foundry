@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { forgotPassword } from '../../redux/auth/operations';
 import { selectIsSignedIn } from '../../redux/auth/selectors';
 import { toast, Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -18,6 +19,8 @@ const ForgotPassword = () => {
   const dispatch = useDispatch();
   const isSignedIn = useSelector(selectIsSignedIn);
   const [sendResult, setSendResult] = useState(null);
+
+  const { t } = useTranslation();
 
   const {
     register,
@@ -46,19 +49,19 @@ const ForgotPassword = () => {
 
   return (sendResult ?
     <div className={css.signUpWrap}>
-      <h2 className={css.formTitle}>Forgot your password?</h2>
+      <h2 className={css.formTitle}>{t('forgotYourPassword')}</h2>
       <p className={css.errorInfo}>{sendResult}</p>
     </div>
      :
     <div className={css.signUpWrap}>
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-        <h2 className={css.formTitle}>Forgot your password?</h2>
-        <label className={css.label}>Email</label>
+        <h2 className={css.formTitle}>{t('forgotYourPassword')}</h2>
+        <label className={css.label}>{t('email')}</label>
         <input
           className={`${css.input} ${errors.email ? css.inputError : ''}`}
           {...register('email')}
-          placeholder="Enter your email"
+          placeholder={t('enterYourEmail')}
         />
         {errors.email && (
           <p className={css.errorMessage}>{errors.email.message}</p>
@@ -69,15 +72,15 @@ const ForgotPassword = () => {
         </button>
       </form>
       <p className={css.text}>
-        Don’t have an account?{' '}
+        {t('dontHaveAccount')}
         <Link to="/signup">
-          <span className={css.spanLink}>Sign Up</span>
+          <span className={css.spanLink}>{t('signUpLink')}</span>
         </Link>
       </p>
       <p className={css.text}>
-        Already registered?{' '}
+        {t('alreadyHaveAccount')}
         <Link to="/signin">
-          <span className={css.spanLink}>Sign In</span>
+          <span className={css.spanLink}>{t('signInLink')}</span>
         </Link>
       </p>
     </div>

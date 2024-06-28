@@ -9,6 +9,7 @@ import { resetPassword } from '../../redux/auth/operations';
 import icon from '../../assets/icons.svg';
 import { toast, Toaster } from 'react-hot-toast';
 import { jwtDecode } from 'jwt-decode';
+import { useTranslation } from 'react-i18next';
 
 const schema = yup.object().shape({
   password: yup
@@ -28,6 +29,8 @@ const ResetPassword = () => {
   const [iconPassword, setIconPassword] = useState('eye-off');
   const [iconRePassword, setIconRePassword] = useState('eye-off');
   const [validToken, setValidToken] = useState(false);
+
+  const { t } = useTranslation();
 
   const { token } = useParams();
 
@@ -56,11 +59,11 @@ const ResetPassword = () => {
   const onSubmit = async formData => {
     try {
       await dispatch(resetPassword(formData)).unwrap();
-      toast.success('Password has been successfully changed! Please sign in.');
+      toast.success(t('passwordChanged'));
       reset();
       navigate('/signin');
     } catch (error) {
-      toast.error(error || 'Failed to reset password. Please try again later.');
+      toast.error(error || t('failedReset'));
     }
   };
 
@@ -81,9 +84,9 @@ const ResetPassword = () => {
   return (!validToken ?
     <div className={css.signUpWrap}>
       <div className={css.form}>
-        <h2 className={css.formTitle}>Change password</h2>
-        <p className={css.errorInfo}>Sorry your verification link has expired.</p>
-        <p className={css.errorInfo}>Go to the page <Link to='/forgot-password'>Forgot password</Link></p>
+        <h2 className={css.formTitle}>{t('changePassword')}</h2>
+        <p className={css.errorInfo}>{t('linkExpired')}</p>
+        <p className={css.errorInfo}>{t('goToThePage')} <Link to='/forgot-password'>{t('forgotPassLink')}</Link></p>
       </div>
     </div>
    :
@@ -91,16 +94,16 @@ const ResetPassword = () => {
     <div className={css.signUpWrap}>
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-        <h2 className={css.formTitle}>Change password</h2>
+        <h2 className={css.formTitle}>{t('changePassword')}</h2>
         <input type='hidden' name='resetToken' id='resetToken' value={token} {...register('resetToken')} />
 
-        <label className={css.label}>Password</label>
+        <label className={css.label}>{t('password')}</label>
         <div className={css.inputWrapper}>
           <input
             className={`${css.input} ${errors.password ? css.inputError : ''}`}
             {...register('password')}
             type={inputTypePassword}
-            placeholder="Enter your password"
+            placeholder={t('enterYourPassword')}
             autoComplete='off'
           />
           <button
@@ -123,7 +126,7 @@ const ResetPassword = () => {
           <p className={css.errorMessage}>{errors.password.message}</p>
         )}
 
-        <label className={css.label}>Repeat password</label>
+        <label className={css.label}>{t('repeatPasswordLabel')}</label>
         <div className={css.inputWrapper}>
           <input
             className={`${css.input} ${
@@ -131,7 +134,7 @@ const ResetPassword = () => {
             }`}
             {...register('repeatPassword')}
             type={inputTypeRePassword}
-            placeholder="Repeat password"
+            placeholder={t('repeatPassword')}
           />
           <button
             type="button"
@@ -154,13 +157,13 @@ const ResetPassword = () => {
         )}
 
         <button className={css.button} type="submit">
-          Reset password
+          {t('resetPassBtn')}
         </button>
       </form>
       <p className={css.text}>
-        Already have an account?{' '}
+        {t('alreadyHaveAccount')}
         <Link to="/signin">
-          <span className={css.spanLink}>Sign In</span>
+          <span className={css.spanLink}>{t('signInLink')}</span>
         </Link>
       </p>
     </div>)

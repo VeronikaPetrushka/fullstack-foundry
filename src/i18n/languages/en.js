@@ -33,5 +33,20 @@ export const en = {
   alreadyHaveAccount: 'Already have an account? ',
   signupWithGoogleBtn: 'Sign Up with Google',
   signupBtn: 'Sign Up',
+
+  // forgot and reset  password page
+  forgotYourPassword: 'Forgot your password?',
+  signInLink: 'Sign In',
+
+  passwordChanged: 'Password has been successfully changed! Please sign in.',
+  failedReset: 'Failed to reset password. Please try again later.',
+  changePassword: 'Change Password',
+  linkExpired: 'Sorry your verification link has expired.',
+  goToThePage: 'Go to the page',
+  forgotPassLink: 'Forgot password',
+  resetPassBtn: 'Reset password',
+
   // tracker page
+  errorOccured: 'An error occured. Please try again later.',
+  month: 'Month',
 };
