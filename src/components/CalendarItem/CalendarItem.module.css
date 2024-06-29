@@ -37,6 +37,9 @@
   color: #9be1a0;
   background-color: #323f47;
 }
+.selected{
+  border: 1px solid #323f47;
+}
 .full {
   color: #323f47;
   background-color: #fff;
