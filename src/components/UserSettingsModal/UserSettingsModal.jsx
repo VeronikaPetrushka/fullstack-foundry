@@ -9,8 +9,11 @@ export default function UserSettingsModal({ closeModal, isOpen }) {
   const [get_setting, setGet_setting] = useState([]);
 
   const user = useSelector(selectUser);
+  const navigate = useNavigate();
 
   useNavigate(() => {
+    navigate('/');
+
     if (!isOpen) {
       return;
     }
