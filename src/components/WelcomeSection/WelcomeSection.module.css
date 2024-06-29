@@ -3,6 +3,7 @@
   background: var(--light);
   padding: 100px 16px 54px 16px;
   margin-bottom: 16px;
+  min-width: 288px;
 }
 
 .text {
@@ -11,7 +12,6 @@
   line-height: 1.28;
   letter-spacing: 0.84px;
   margin-bottom: 16px;
-
 }
 
 .title {
@@ -38,8 +38,8 @@
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  background: var(--color-lightgreen);
-  color: var(--color-darkblue);
+  background: var(--green);
+  color: var(--grey);
   text-align: center;
   font-size: 14px;
   font-weight: 700;
@@ -51,7 +51,7 @@
 .linkSignUP:hover,
 .linkSignUP:active,
 .linkSignUP:focus {
-  background-color: var(--green);
+  background-color: var(--lightGreenHover);
 }
 
 .linkSignIn {
@@ -77,8 +77,8 @@
 .linkSignIn:hover,
 .linkSignIn:focus,
 .linkSignIn:active {
-  border: 1px solid var(--green);
-  color: var(--green);
+  border: 1px solid var(--lightGreenHover);
+  color: var(--lightGreenHover);
 }
 
 

@@ -1,11 +1,10 @@
 .advantagesSection {
-  width: 343px;
+  min-width: 288px;
   height: 363px;
   border-radius: 30px;
   background-color: var(--light);
 
-
-  background-image: url(../../img/homePage.jpg);
+  background-image: url(../../assets/img/HomePageGirl-min.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -13,8 +12,8 @@
 }
 
 @media only screen and (min-resolution: 192dpi) {
-  .advantages_main {
-    background-image: url(../../assets/img/baner@2x.jpg);
+  .advantagesSection {
+    background-image: url(../../assets/img/HomePageGirl2x-min.png);
   }
 }
 
@@ -82,13 +81,75 @@
   letter-spacing: -0.08px;
 }
 
+.customersBox {
+  display: inline-flex;
+  position: absolute;
+
+  width: 154px;
+  padding: 10px 14px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  background: var(--white);
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
+
+  bottom: 96px;
+  left: 16px;
+}
 
 
+.customersList {
+display: flex;
+}
 
+.customersItem {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  overflow: hidden;
+}
+
+.customersItem:nth-child(1) {
+  z-index: 3;
+  position: relative;
+}
+.customersItem:nth-child(2) {
+  z-index: 2;
+  left: -10px;
+  position: relative;
+}
+.customersItem:nth-child(3) {
+  z-index: 1;
+  left: -20px;
+  position: relative;
+}
+
+
+.customersImg {
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.customersText {
+  color: var(--grey);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.16;
+  margin-left: -20px;
+}
+
+.span {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14px;
+}
 
 
 @media (min-width: 768px) {
-
   .group {
     position: absolute;
     right: 32px;
@@ -133,42 +194,41 @@
   }
 
 
+  .customersBox {
+ 
+    left: 32px;
+    width: 233px;
+    padding: 10px 10px;
+  }
 
+  .customersItem {
+    height: 47px;
+    width: 47px;
+  }
+  .customersItem:nth-child(2) {
+    left: -18px;
+  }
+  .customersItem:nth-child(3) {
+    left: -36px;
+  }
+  .customersText {
+    font-size: 15px;
+    line-height: 1.49;
+    margin-left: -34px;
+    width: 90px;
+  }
+
+  .span {
+    font-size: 15px;
+    line-height: 1.49;
+  }
 }
 
 @media (min-width: 1440px) {
-
   .group {
     bottom: 64px;
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media screen and (min-width: 768px) {
   .advantagesSection {
@@ -182,4 +242,10 @@
     width: 672px;
     height: 736px;
   }
+
+  .customersBox {
+ 
+    bottom: 140px;
+  }
+
 }

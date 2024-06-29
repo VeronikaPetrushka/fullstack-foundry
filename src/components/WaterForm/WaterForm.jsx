@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 import styles from './WaterForm.module.css';
+import { useEffect } from 'react';
 
 const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
   const schema = Yup.object().shape({
@@ -18,15 +19,24 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     }
   });
 
+  useEffect(() => {
+    if (initialData) {
+      setValue('amount', initialData.amount);
+      setValue('time', initialData.time);
+    }
+  }, [initialData, setValue]);
+
   const incrementAmount = () => {
     const currentAmount = getValues('amount');
     setValue('amount', currentAmount + 50);
+    console.log('Increment amount:', currentAmount + 50);
   };
 
   const decrementAmount = () => {
     const currentAmount = getValues('amount');
     if (currentAmount > 50) {
       setValue('amount', currentAmount - 50);
+      console.log('Decrement amount:', currentAmount - 50);
     }
   };
 
@@ -90,6 +100,10 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                 {...field}
                 className={styles.input}
                 min="1"
+                onChange={(e) => {
+                  field.onChange(e);
+                  console.log('Input amount:', e.target.value);
+                }}
               />
             )}
           />

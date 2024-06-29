@@ -1,0 +1,49 @@
+.waterMainInfoWrapper {
+  width: 100%;
+  min-width: 288px;
+  padding: 32px;
+  height: 415px;
+  background-color: var(--green);
+  background-image: url(../../assets/img/bottle/bottle_mob.png);
+  background-position: 50% 70%;
+  background-repeat: no-repeat;
+  background-size: 262px 335px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  border-radius: 30px;
+}
+
+@media screen and (min-resolution: 192dpi) {
+  .waterMainInfoWrapper {
+    background-image: url(../../assets/img/bottle/bottle_mob_2x.png);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .waterMainInfoWrapper {
+    height: 578px;
+    background-image: url(../../assets/img/bottle/bottle_tab.png);
+    background-size: 374px 477px;
+  }
+
+  @media screen and (min-resolution: 192dpi) {
+    .waterMainInfoWrapper {
+      background-image: url(../../assets/img/bottle/bottle_tab_2x.png);
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .waterMainInfoWrapper {
+    min-height: 736px;
+    background-image: url(../../assets/img/bottle/bottle_desc.png);
+    background-size: 472px 604px;
+  }
+
+  @media screen and (min-resolution: 192dpi) {
+    .waterMainInfoWrapper {
+      background-image: url(../../assets/img/bottle/bottle_desk_2x.png);
+    }
+  }
+}
