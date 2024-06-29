@@ -14,7 +14,7 @@ const DailyInfo = ({selectedDate}) => {
   </div>
   <div className={css.dailyContent}>
 
-<WaterList/>
+<WaterList />
 
   </div>  
 </div>
