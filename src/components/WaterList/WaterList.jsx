@@ -1,42 +1,26 @@
+
+import { useSelector } from 'react-redux';
 import WaterItem from '../WaterItem/WaterItem';
 import css from './WaterList.module.css';
+import {selectWaterDaily} from '../../redux/water/selectors';
+
 
 const WaterList = () => {
-    return (
-        <div className={css.container}>
-            <ul className={css.waterList}>
-                <li>
-                <WaterItem />
-                </li>
-                <li>
-                <WaterItem />
-                </li>
-                <li>
-                <WaterItem />
-                </li>
-                <li>
-                <WaterItem />
-                </li>
-                <li>
-                <WaterItem />
-                </li>
-                <li>
-                <WaterItem />
-                </li>
-                <li>
-                <WaterItem />
-                </li>
-               
-{/* items.map(item => (
-    <li className={css.waterItem} key={item.id}>
-        <WaterItem item={item} />
-        </li>
-)) */}
-            </ul>
-        </div>
-    )
-                
+    
+    const dayWater = useSelector(selectWaterDaily);
+       
 
+        return (
+            <div className={css.container}>
+                <ul className={css.waterList}>
+                    {dayWater.map((day) => (
+                        <li key={day._id} >
+                            <WaterItem day={day} id={day._id} />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )                    
 }
 
 export default WaterList;

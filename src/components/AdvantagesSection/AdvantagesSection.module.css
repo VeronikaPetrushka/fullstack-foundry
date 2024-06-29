@@ -11,6 +11,18 @@
   position: relative;
 }
 
+.totalUsers{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: -0.08px
+}
+
 @media only screen and (min-resolution: 192dpi) {
   .advantagesSection {
     background-image: url(../../assets/img/HomePageGirl2x-min.png);
@@ -195,7 +207,7 @@ display: flex;
 
 
   .customersBox {
- 
+
     left: 32px;
     width: 233px;
     padding: 10px 10px;
@@ -222,6 +234,10 @@ display: flex;
     font-size: 15px;
     line-height: 1.49;
   }
+
+  .totalUsers{
+    font-size: 24px;
+  }
 }
 
 @media (min-width: 1440px) {
@@ -244,7 +260,7 @@ display: flex;
   }
 
   .customersBox {
- 
+
     bottom: 140px;
   }
 
