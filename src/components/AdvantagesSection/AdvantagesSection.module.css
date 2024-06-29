@@ -197,10 +197,10 @@ display: flex;
   .customersBox {
  
     left: 32px;
-    width: 244px;
+    width: 250px;
     padding: 10px;
     padding-left: 20px;
-    padding-right: 14px;
+    padding-right: 20px;
   }
 
   .customersItem {
