@@ -22,7 +22,7 @@ export const AdvantagesSection = () => {
       <div className={css.customersBox}>
         <ul className={css.customersList}>
           <li className={css.customersItem}>
-            {totalUsers ? <span className={css.totalUsers}>{totalUsers}</span> : '<img className={css.customersImg} src={user1} alt="user1" />'}
+           <img className={css.customersImg} src={user1} alt="user1" />
           </li>
 
           <li className={css.customersItem}>
@@ -35,7 +35,7 @@ export const AdvantagesSection = () => {
         </ul>
 
         <p className={css.customersText}>
-          Our <span className={css.span}>happy</span> customers
+          Our <span className={css.span}>{totalUsers}</span> happy customers
         </p>
       </div>
 
