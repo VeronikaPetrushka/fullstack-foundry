@@ -13,7 +13,7 @@ export const uk = {
   signup: 'Спробувати',
   signin: 'Увійти',
 
-  ourHappy: "<s className={{classStyle}}>Щасливі</s> користувачі",
+  ourHappy: "<s className={{classStyle}}>{{count}}</s> щасливих користувачів",
   habitDrive: 'Habit drive',
   viewStat: 'Статистика',
   personalRate: 'Персональні налаштування',

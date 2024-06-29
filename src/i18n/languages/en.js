@@ -13,7 +13,7 @@ export const en = {
   signup: 'Try tracker',
   signin: 'Sign In',
 
-  ourHappy: "Our <s className={{classStyle}}>happy</s> customers",
+  ourHappy: "Our <s className={{classStyle}}>{{count}}</s> happy customers",
   habitDrive: 'Habit drive',
   viewStat: 'View statistics',
   personalRate: 'Personal rate setting',

@@ -17,7 +17,7 @@ export const AdvantagesSection = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTotalUsers()).unwrap();
-  }, [dispatch])
+  }, [dispatch]);
 
   const totalUsers = useSelector(selectUserCount);
 
@@ -26,7 +26,7 @@ export const AdvantagesSection = () => {
       <div className={css.customersBox}>
         <ul className={css.customersList}>
           <li className={css.customersItem}>
-            {totalUsers ? <span className={css.totalUsers}>{totalUsers}</span> : '<img className={css.customersImg} src={user1} alt="user1" />'}
+            <img className={css.customersImg} src={user1} alt="user1" />
           </li>
 
           <li className={css.customersItem}>
@@ -43,6 +43,7 @@ export const AdvantagesSection = () => {
             i18nKey="ourHappy"
             values={{
               classStyle: css.span,
+              count: totalUsers,
             }}
             components={{s: <span />}}
           />
