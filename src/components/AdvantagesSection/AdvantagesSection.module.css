@@ -97,8 +97,8 @@
   display: inline-flex;
   position: absolute;
 
-  width: 154px;
-  padding: 10px 14px;
+  width: 168px;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   border-radius: 30px;
@@ -209,8 +209,10 @@ display: flex;
   .customersBox {
 
     left: 32px;
-    width: 233px;
-    padding: 10px 10px;
+    width: 252px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .customersItem {
@@ -227,7 +229,7 @@ display: flex;
     font-size: 15px;
     line-height: 1.49;
     margin-left: -34px;
-    width: 90px;
+    /* width: 90px; */
   }
 
   .span {
