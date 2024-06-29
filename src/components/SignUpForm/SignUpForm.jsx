@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { signup } from '../../redux/auth/operations';
 import icon from '../../assets/icons.svg';
 import { toast, Toaster } from 'react-hot-toast';
+import LangSwitch from '../../components/LangSwitch/LangSwitch';
 import { useTranslation } from 'react-i18next';
 
 const schema = yup.object().shape({
@@ -68,6 +69,7 @@ const SignUpForm = () => {
 
   return (
     <div className={css.signUpWrap}>
+      <LangSwitch />
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <h2 className={css.formTitle}>{t('signupTitle')}</h2>

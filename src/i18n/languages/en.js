@@ -13,6 +13,11 @@ export const en = {
   signup: 'Try tracker',
   signin: 'Sign In',
 
+  ourHappy: "Our <s className={{classStyle}}>happy</s> customers",
+  habitDrive: 'Habit drive',
+  viewStat: 'View statistics',
+  personalRate: 'Personal rate setting',
+
   // signin and signup page
   signedin: 'Successfully signed in!',
   failedSign: 'Failed to sign in. Please try again later.',

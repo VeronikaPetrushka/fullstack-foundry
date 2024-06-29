@@ -7,10 +7,10 @@ import { uk } from './languages/uk';
 import { en } from './languages/en';
 
 const resources = {
-  [LOCALES.EN]: {
+  [LOCALES.EN.code]: {
     translation: en,
   },
-  [LOCALES.UA]: {
+  [LOCALES.UA.code]: {
     translation: uk,
   },
 };
@@ -20,7 +20,7 @@ i18n
   .use(LanguageDetector)
   .init({
     resources,
-    fallbackLng: [LOCALES.EN],
+    fallbackLng: [LOCALES.EN.code],
 
     interpolation: {
       escapeValue: false,

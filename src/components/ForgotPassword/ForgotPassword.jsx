@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { forgotPassword } from '../../redux/auth/operations';
 import { selectIsSignedIn } from '../../redux/auth/selectors';
 import { toast, Toaster } from 'react-hot-toast';
+import LangSwitch from '../../components/LangSwitch/LangSwitch';
 import { useTranslation } from 'react-i18next';
 
 const schema = yup.object().shape({
@@ -54,6 +55,7 @@ const ForgotPassword = () => {
     </div>
      :
     <div className={css.signUpWrap}>
+      <LangSwitch />
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <h2 className={css.formTitle}>{t('forgotYourPassword')}</h2>

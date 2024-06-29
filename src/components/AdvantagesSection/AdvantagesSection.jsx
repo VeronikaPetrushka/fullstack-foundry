@@ -4,7 +4,12 @@ import user1 from '../../assets/img/user1.png';
 import user2 from '../../assets/img/user2.png';
 import user3 from '../../assets/img/user3.png';
 
+import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
+
 export const AdvantagesSection = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={css.advantagesSection}>
       <div className={css.customersBox}>
@@ -23,7 +28,13 @@ export const AdvantagesSection = () => {
         </ul>
 
         <p className={css.customersText}>
-          Our <span className={css.span}>happy</span> customers
+          <Trans
+            i18nKey="ourHappy"
+            values={{
+              classStyle: css.span,
+            }}
+            components={{s: <span />}}
+          />
         </p>
       </div>
 
@@ -31,13 +42,13 @@ export const AdvantagesSection = () => {
         <ul className={css.advantagesGroup}>
           <li className={css.textAdvantage}>
             <div className={css.circle}></div>
-            <p className={css.text}>Habit drive</p>
+            <p className={css.text}>{t('habitDrive')}</p>
           </li>
           <li className={css.textAdvantage}>
-            <p className={css.textBlack}>View statistics</p>
+            <p className={css.textBlack}>{t('viewStat')}</p>
           </li>
           <li className={css.textAdvantage}>
-            <p className={css.textBlack}>Personal rate setting</p>
+            <p className={css.textBlack}>{t('personalRate')}</p>
           </li>
         </ul>
       </div>

@@ -4,7 +4,6 @@ import SignInForm from '../../components/SignInForm/SignInForm';
 import { Helmet } from 'react-helmet-async';
 import Page from '../../components/Page/Page';
 
-import LangSwitch from '../../components/LangSwitch/LangSwitch';
 import { useTranslation } from 'react-i18next';
 
 const SignInPage = () => {
@@ -17,7 +16,6 @@ const SignInPage = () => {
         <title>{t('signinPage')}</title>
       </Helmet>
       <Page>
-        <LangSwitch />
         <SignInForm />
         <div className={css.divDesktopOnly}>
           <AdvantagesSection />

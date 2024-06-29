@@ -4,7 +4,6 @@ import Page from '../../components/Page/Page';
 import { Helmet } from 'react-helmet-async';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 
-import LangSwitch from '../../components/LangSwitch/LangSwitch';
 import { useTranslation } from 'react-i18next';
 
 const SignUpPage = () => {
@@ -17,7 +16,6 @@ const SignUpPage = () => {
         <title>{t('signupPage')}</title>
       </Helmet>
       <Page>
-        <LangSwitch />
         <SignUpForm />
         <div className={css.divDesktopOnly}>
           <AdvantagesSection />

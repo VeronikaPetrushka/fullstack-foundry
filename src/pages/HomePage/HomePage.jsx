@@ -3,7 +3,6 @@ import { AdvantagesSection } from '../../components/AdvantagesSection/Advantages
 import { Helmet } from 'react-helmet-async';
 import Page from '../../components/Page/Page';
 
-import LangSwitch from '../../components/LangSwitch/LangSwitch';
 import { useTranslation } from 'react-i18next';
 
 // import WaterForm from '../../components/WaterForm/WaterForm';
@@ -19,7 +18,6 @@ const Homepage = () => {
       </Helmet>
 
       <Page>
-        <LangSwitch />
         <WelcomeSection />
         <AdvantagesSection />
         {/* <WaterForm isOpen={true}/> */}

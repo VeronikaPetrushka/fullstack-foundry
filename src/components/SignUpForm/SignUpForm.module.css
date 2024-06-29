@@ -4,6 +4,7 @@
   padding: 170px 16px 0 16px;
   height: 780px;
   min-width: 288px;
+  position: relative;
 }
 
 .form {

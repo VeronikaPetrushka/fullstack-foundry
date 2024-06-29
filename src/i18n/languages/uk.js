@@ -13,6 +13,12 @@ export const uk = {
   signup: 'Спробувати',
   signin: 'Увійти',
 
+  ourHappy: "<s className={{classStyle}}>Щасливі</s> користувачі",
+  habitDrive: 'Habit drive',
+  viewStat: 'Статистика',
+  personalRate: 'Персональні налаштування',
+
+
   // signin and signup page
   signedin: 'Успішний вхід в аккаунт!',
   failedSign: 'Помилка входу. Спробуйте пізніше.',
