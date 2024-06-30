@@ -12,17 +12,6 @@ import { jwtDecode } from 'jwt-decode';
 import LangSwitch from '../../components/LangSwitch/LangSwitch';
 import { useTranslation } from 'react-i18next';
 
-const schema = yup.object().shape({
-  password: yup
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .required('Password is required'),
-  repeatPassword: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
-    .required('Repeat Password is required'),
-});
-
 const ResetPassword = () => {
   const dispatch = useDispatch();
   const [inputTypePassword, setTypePassword] = useState('password');
@@ -34,6 +23,17 @@ const ResetPassword = () => {
   const { t } = useTranslation();
 
   const { token } = useParams();
+
+  const schema = yup.object().shape({
+    password: yup
+      .string()
+      .min(8, t('notValidPassword'))
+      .required(t('passwordRequired')),
+    repeatPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), null], t('passwordNotMatch'))
+      .required(t('repeatPasswordRequired')),
+  });
 
   useEffect(() => {
     if(token){

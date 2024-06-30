@@ -39,6 +39,9 @@ export const en = {
   signupWithGoogleBtn: 'Sign Up with Google',
   signupBtn: 'Sign Up',
 
+  invalidEmail: 'Invalid email',
+  emailIsRequired: 'Email is required',
+
   // forgot and reset  password page
   forgotYourPassword: 'Forgot your password?',
   signInLink: 'Sign In',
@@ -50,6 +53,12 @@ export const en = {
   goToThePage: 'Go to the page',
   forgotPassLink: 'Forgot password',
   resetPassBtn: 'Reset password',
+  checkYourEmail: 'Check your email! We sent you a link to reset your password.',
+  userNotExist: 'User with this email does not exist.',
+  notValidPassword: 'Password must be at least 8 characters',
+  passwordRequired: 'Password is required',
+  passwordNotMatch: 'Passwords must match',
+  repeatPasswordRequired: 'Repeat Password is required',
 
   // tracker page
   errorOccured: 'An error occured. Please try again later.',
@@ -62,6 +71,13 @@ export const en = {
   logout: 'Log out',
   logoutText: 'Do you really want to leave?',
   cancelBtn: 'Cancel',
+
+  //DeleteWaterModal
+  waterDeleted: 'The amount of water has been successfully deleted',
+  deleteWaterError: 'Something went wrong. Please try again',
+  deleteEntry: 'Delete entry',
+  youWantDelete: 'Are you sure you want to delete the entry?',
+  deleteBtn: 'Delete',
 
   // month
   january: 'January',

@@ -35,10 +35,10 @@ const ForgotPassword = () => {
   const onSubmit = async formData => {
     try {
       await dispatch(forgotPassword(formData)).unwrap();
-      setSendResult('Check your email! We sent you a link to reset your password.');
+      setSendResult(t('checkYourEmail'));
       reset();
     } catch (error) {
-      toast.error(error || 'User with this email does not exist!');
+      toast.error(error || t('userNotExist'));
     }
   };
 

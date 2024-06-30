@@ -11,17 +11,6 @@ import { toast, Toaster } from 'react-hot-toast';
 import LangSwitch from '../../components/LangSwitch/LangSwitch';
 import { useTranslation } from 'react-i18next';
 
-const schema = yup.object().shape({
-  email: yup.string().email('Invalid email').required('Email is required'),
-  password: yup
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .required('Password is required'),
-  repeatPassword: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
-    .required('Repeat Password is required'),
-});
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -31,6 +20,17 @@ const SignUpForm = () => {
   const [iconRePassword, setIconRePassword] = useState('eye-off');
 
   const { t } = useTranslation();
+  const schema = yup.object().shape({
+    email: yup.string().email(t('invalidEmail')).required(t('emailIsRequired')),
+    password: yup
+      .string()
+      .min(8, t('notValidPassword'))
+      .required(t('passwordRequired')),
+    repeatPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), null], t('passwordNotMatch'))
+      .required(t('repeatPasswordRequired')),
+  });
 
   const navigate = useNavigate();
   const {

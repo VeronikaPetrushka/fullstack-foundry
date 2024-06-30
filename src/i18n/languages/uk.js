@@ -40,6 +40,9 @@ export const uk = {
   signupWithGoogleBtn: 'Зареєструватися з Google',
   signupBtn: 'Зареєструватися',
 
+  invalidEmail: 'Невірний email',
+  emailIsRequired: 'Email обов’язковий',
+
   // forgot and reset  password page
   forgotYourPassword: 'Забули пароль?',
   signInLink: 'Вхід',
@@ -51,6 +54,12 @@ export const uk = {
   goToThePage: 'Перейти на сторінку',
   forgotPassLink: 'Забули пароль',
   resetPassBtn: 'Змінити пароль',
+  checkYourEmail: 'Перевірте вашу пошту! Вам надіслано посилання для зміни паролю.',
+  userNotExist: 'Користувач з цим email не існує.',
+  notValidPassword: 'Довжина паролюмає бути мінімум 8 символів',
+  passwordRequired: 'Пароль обов’язковий',
+  passwordNotMatch: 'Паролі не співпадають',
+  repeatPasswordRequired: 'Повторіть пароль',
 
   // tracker page
   errorOccured: 'Виникла помилка. Будь ласка, спробуйте пізніше.',
@@ -63,6 +72,13 @@ export const uk = {
   logout: 'Вихід',
   logoutText: 'Ви справді бажаєте вийти?',
   cancelBtn: 'Скасувати',
+
+  //DeleteWaterModal
+  waterDeleted: 'Вибрану порцію води успішно видалено',
+  deleteWaterError: 'Щось пішло не так. Спробуйте пізніше',
+  deleteEntry: 'Видалити запис',
+  youWantDelete: 'Ви справді бажаєте видалити запис?',
+  deleteBtn: 'Видалити',
 
   // month
   january: 'Січень',
