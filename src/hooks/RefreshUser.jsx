@@ -40,7 +40,8 @@ export const useRefreshUser = () => {
     }
   }, [dispatch]);
   isSignedIn = useSelector(selectIsSignedIn);
-  useSelector(selectUserInfo);
+  const user = useSelector(selectUserInfo);
+  console.log(user)
 
   return [isSignedIn];
 

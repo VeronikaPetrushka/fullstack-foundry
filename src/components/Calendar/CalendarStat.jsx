@@ -15,6 +15,8 @@ import Loader from '../Loader/Loader'
 import Icon from '../Icon/Icon.jsx';
 import css from './Calendar.module.css';
 
+import UserProfileForm from './UserProfileForm';
+
 const CalendarStat = ({selectedDate, handleClick}) => {
 
   const today = getDateObject();
@@ -129,6 +131,7 @@ const CalendarStat = ({selectedDate, handleClick}) => {
           <Calendar daysOfSelectedMonth={daysOfSelectedMonth} selectedDate={selectedDate} minDay={minDay} today={today} handleClick={handleClick} />
         </>)
       }
+      <UserProfileForm />
     </div>
     );
 };
