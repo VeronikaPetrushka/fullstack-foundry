@@ -6,11 +6,11 @@ export const settingsSchema = Yup.object({
     .email('Please enter a valid email address (must contain @)')
     .required('Email is required'),
   lastKilo: Yup.number()
-    .min(1, 'The  value must be at least 0')
+    .min(1, 'The value must be at least 0')
     .max(9999, 'The value must be no more than 4 numbers')
     .required('The field is required'),
   lastVolume: Yup.number()
-    .min(1, 'The  value must be at least 0')
+    .min(1, 'The value must be at least 0')
     .max(9999, 'The value must be no more than 4 numbers')
-    .required('The  field is required'),
+    .required('The field is required'),
 });

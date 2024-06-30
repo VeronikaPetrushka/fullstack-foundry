@@ -1,6 +1,5 @@
 import Modal from 'react-modal';
 import css from './BasicModal.module.css';
-import Icon from '../Icon/Icon';
 import PropTypes from 'prop-types';
 
 
@@ -15,9 +14,6 @@ export const BasicModal = ({ isOpen, onClose, children }) => {
       onRequestClose={() => onClose()}
       overlayClassName={css.overlay}
     >
-      <button type="button" className={css.close} onClick={() => onClose()}>
-        <Icon width="28" height="28" iconName="close" styles="icon-close" />
-      </button>
 
       {children}
     </Modal>

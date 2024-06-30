@@ -1,10 +1,21 @@
+import { getTotalUsers } from '../../redux/user/operations';
+import { selectUserCount } from '../../redux/user/selectors';
+import { useSelector, useDispatch } from 'react-redux';
 import css from './AdvantagesSection.module.css';
 
 import user1 from '../../assets/img/user1.png';
 import user2 from '../../assets/img/user2.png';
 import user3 from '../../assets/img/user3.png';
+import { useEffect } from 'react';
 
 export const AdvantagesSection = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTotalUsers()).unwrap();
+  }, [dispatch]);
+
+  const totalUsers = useSelector(selectUserCount);
+
   return (
     <div className={css.advantagesSection}>
       <div className={css.customersBox}>
@@ -23,7 +34,7 @@ export const AdvantagesSection = () => {
         </ul>
 
         <p className={css.customersText}>
-          Our <span className={css.span}>happy</span> customers
+          Our <span className={css.span}>{totalUsers}</span> happy customers
         </p>
       </div>
 
