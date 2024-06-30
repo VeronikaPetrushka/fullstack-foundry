@@ -5,15 +5,26 @@
   letter-spacing: -0.01em;
   color: var(--main);
 }
+
 @media (min-width: 1440px) {
   .title {
     font-size: 28px;
     margin-bottom: 20px;
   }
 }
+
 /* ================= */
 .settingBox {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  background-color: var(--white);
+  position: absolute;
+  left: -370px;
+  top: -300px;
+  /* test */
+  border-radius: 30px;
+  width: 900px;
+  height: 900px;
+  padding: 30px;
 }

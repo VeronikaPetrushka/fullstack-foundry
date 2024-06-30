@@ -1,33 +1,17 @@
-import { useState } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import css from './UserSettingsModal.module.css';
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
-import { selectUser } from '../../redux/auth/selectors';
+import { selectUserInfo } from '../../redux/user/selectors';
 
 export default function UserSettingsModal({ closeModal, isOpen }) {
-  const [get_setting, setGet_setting] = useState([]);
-
-  const user = useSelector(selectUser);
-  const navigate = useNavigate();
-
-  useNavigate(() => {
-    navigate('/');
-
-    if (!isOpen) {
-      return;
-    }
-    setGet_setting(user);
-  }, [isOpen, user]);
+  const user = useSelector(selectUserInfo);
 
   return (
-    <>
-      <h2 className={css.title}> Setting</h2>
+    <div className={`${css.modal} ${isOpen ? css.open : ''}`}>
+      <h2 className={css.title}>Settings</h2>
       <div className={css.settingBox}>
-        {get_setting.length !== 0 && (
-          <UserSettingsForm closeModal={closeModal} getSetting={get_setting} />
-        )}
+        <UserSettingsForm closeModal={closeModal} getSetting={user} />
       </div>
-    </>
+    </div>
   );
 }

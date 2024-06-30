@@ -61,7 +61,7 @@ export default function AvatarInput({ control, register, setMyAvatar }) {
       />
       <label htmlFor="file-input">
         <div className={css.upLoad}>
-          <Icon width={'16'} height={'16'}  iconName={'upload'} styles={css.svgAvatarBtn} style />
+          <Icon width={'16'} height={'16'} iconName={'upload'} styles={css.svgAvatarBtn} />
           <p>Upload a photo</p>
         </div>
       </label>

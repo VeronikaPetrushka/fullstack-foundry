@@ -4,19 +4,19 @@ import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
 import TimeField from 'react-simple-timefield';
-
 import { settingsSchema } from './settingsSchema';
 import css from './UserSettingsForm.module.css';
 import RadioBtn from './RadioInput/RadioInput';
 import AvatarInput from './AvatarInput/AvatarInput';
+import { updateUserSettings } from '../../redux/user/operations';
 
 export default function UserSettingsForm({ closeModal, getSetting }) {
   const [selectedValueRadio, setSelectedValueRadio] = useState('');
   const [result, setResult] = useState(null);
-  const [volume, setSelectedVolume] = useState('');
+  const setSelectedVolume = useState('')
   const [M, setM] = useState(null);
   const [T, setT] = useState('7:00');
-  const [myAvatar, setMyAvatar] = useState(false);
+
   const {
     avatarURL,
     dailyActivityTime,
@@ -39,7 +39,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
 
   const convertToMinutes = time => {
     const [hours, minutes] = time.split(':');
-    const totalMinutes = parseInt(hours) + parseInt(minutes) / 60;
+    const totalMinutes = parseInt(hours) * 60 + parseInt(minutes);
     return totalMinutes;
   };
 
@@ -73,9 +73,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     closeModal();
 
     const formData = new FormData();
-
-    formData.append('avatar', myAvatar);
-
+    formData.append('avatar', avatarURL);
     formData.append('gender', gender);
     formData.append('name', lastName);
     formData.append('email', lastEmail);
@@ -83,13 +81,10 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     formData.append('dailyActivityTime', lastTime);
     formData.append('dailyWaterNorm', lastVolume);
 
-    // const obj = Object.fromEntries(formData.entries());
-    // console.log('formData', obj);
-
-    dispatch(editUser(formData))
+    dispatch(updateUserSettings(formData))
       .unwrap()
       .then(() => {
-        toast.success('Successfully created!');
+        toast.success('Successfully updated!');
       })
       .catch(() => {
         toast.error('This is an error!');
@@ -103,7 +98,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
         <AvatarInput
           control={control}
           register={register}
-          setMyAvatar={setMyAvatar}
+          setMyAvatar={avatarURL}
         />
         <div>
           <h3 className={css.titleHender}>Your gender identity</h3>
@@ -122,7 +117,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                 <p className={css.error}>{errors.lastName.message}</p>
               )}
             </div>
-
             <div className={css.box}>
               <label className={css.labelName}>Email</label>
               <input
@@ -132,7 +126,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                 <p className={css.error}>{errors.lastEmail.message} </p>
               )}
             </div>
-
             <h2 className={css.titleNormaFormula}>My daily norma</h2>
             <ul className={css.listFormula}>
               <li>
@@ -160,7 +153,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
               </li>
             </ul>
           </section>
-          {/* =========================================== */}
           <section>
             <div className={css.formKilo}>
               <label>Your weight in kilograms:</label>
@@ -172,25 +164,19 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                 <p className={css.error}>{errors.lastKilo.message} </p>
               )}
             </div>
-
             <div className={css.formKilo}>
               <label>The time of active participation in sports:</label>
-
               <TimeField
                 value={dailyActivityTime}
-                onChange={(event, value) => {
-                  handleChange(setT, event);
-                }}
+                onChange={event => handleChange(setT, event)}
                 input={<input {...register('lastTime', { required: true })} />}
                 colon=":"
               />
             </div>
-
             <p className={css.amountWater}>
               The required amount of water in liters per day:
               <span className={css.amount}>{result} L</span>
             </p>
-
             <div className={css.youWater}>
               <label>Write down how much water you will drink:</label>
               <input
@@ -198,7 +184,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                 onChange={event => handleChange(setSelectedVolume, event)}
               />
               {errors.lastVolume && (
-                <p className={css.error}>{errors.lastValume.message} </p>
+                <p className={css.error}>{errors.lastVolume.message} </p>
               )}
             </div>
           </section>
