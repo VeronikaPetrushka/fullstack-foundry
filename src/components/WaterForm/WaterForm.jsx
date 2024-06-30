@@ -98,7 +98,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
           </div>
         </div>
         <div className={styles.enter}>
-          <div className={styles.labelText}>Enter the value of the water used:</div>
+          <div className={styles.dataText}>Enter the value of the water used:</div> 
           <Controller
             name="amount"
             control={control}
@@ -110,7 +110,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                 min="1"
                 onChange={(e) => {
                   field.onChange(e);
-                  
                 }}
               />
             )}
@@ -127,6 +126,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
         </svg>
       </button>
     </form>
+
   );
 };
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
@@ -13,11 +13,12 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
       const fetchData = async () => {
         try {
           const token = localStorage.getItem('token');
-          await axios.post('https://aquatrack-api-myzh.onrender.com/api/water/day', { date: new Date().toISOString().split('T')[0] }, {
+          const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water/day', { date: new Date().toISOString().split('T')[0] }, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
+          console.log('Data on server before opening modal:', response.data);
         } catch (error) {
           console.error('Error fetching water items:', error);
         }
@@ -39,8 +40,9 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
 
   const handleSubmit = async (data) => {
     try {
+      console.log('Submitting data to server:', data);
       const token = localStorage.getItem('token');
-      await axios.post('https://aquatrack-api-myzh.onrender.com/api/water', {
+      const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water', {
         amount: data.amount,
         date: new Date().toISOString().split('T')[0] 
       }, {
@@ -48,6 +50,7 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
           Authorization: `Bearer ${token}`
         }
       });
+      console.log('Server response:', response.data);
       closeWaterModal();
     } catch (error) {
       console.error('Error submitting data:', error.response ? error.response.data : error.message);
@@ -93,6 +96,5 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
     </>
   );
 };
-
 
 export default AddWaterBtn;
