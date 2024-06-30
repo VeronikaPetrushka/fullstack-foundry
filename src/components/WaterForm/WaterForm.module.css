@@ -46,6 +46,10 @@
   align-items: flex-start;
 }
 
+.enter {
+  margin-top: 24px;
+}
+
 .dataText {
   font-size: 16px;
   padding-bottom: 20px;
@@ -266,9 +270,7 @@
   cursor: pointer;
 }
 
-/* Медіа-запити для планшета */
 @media (min-width: 768px) {
-
   .headerText {
     font-size: 28px;
     line-height: 32px;
@@ -317,9 +319,7 @@
   }
 }
 
-/* Медіа-запити для десктопа */
 @media (min-width: 1440px) {
-
   .headerText {
     font-size: 28px;
     line-height: 32px;

@@ -5,11 +5,13 @@ import {
   deleteWater,
   dailyActivity,
   monthActivity,
+  weekActivity,
 } from './operations.js';
 
 const initialState = {
   waterDaily: [],
   waterMonthly: [],
+  waterWeekly: [],
   isLoading: false,
   isError: null,
 };
@@ -47,6 +49,14 @@ const waterSlice = createSlice({
       state.waterMonthly = action.payload;
     });
     builder.addCase(monthActivity.rejected, handleRejected);
+
+    // Handling weekActivity
+    builder.addCase(weekActivity.pending, handlePending);
+    builder.addCase(weekActivity.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.waterWeekly = action.payload;
+    });
+    builder.addCase(weekActivity.rejected, handleRejected);
 
     // Handling addWater
     builder.addCase(addWater.pending, handlePending);

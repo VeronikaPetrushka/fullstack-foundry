@@ -1,26 +1,61 @@
-import { useState } from 'react';
+import  { useState, useEffect } from 'react';
+import axios from 'axios';
 import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
 import WaterModal from '../WaterModal/WaterModal';
-import { BasicModal } from '../BasicModal/BasicModal';
 
-const AddWaterBtn = ({ isBig = true }) => {
+const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
   const [modIsOpen, setModIsOpen] = useState(false);
-  const [basicModIsOpen, setBasicModIsOpen] = useState(false);
+  const [initialData, setInitialData] = useState({ amount: 50, time: '' });
 
-  const openAddModal = () => {
-    setModIsOpen(true);
-    setBasicModIsOpen(true);
-  };
+  useEffect(() => {
+    if (modIsOpen) {
+      const fetchData = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water/day', { date: new Date().toISOString().split('T')[0] }, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          console.log('Data on server before opening modal:', response.data);
+        } catch (error) {
+          console.error('Error fetching water items:', error);
+        }
+      };
+      fetchData();
 
-  const closeWaterModal = () => {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const currentTime = `${hours}:${minutes}`;
+      setInitialData({ amount: 50, time: currentTime });
+    }
+  }, [modIsOpen]);
+
+  const closeWaterModal = async () => {
     setModIsOpen(false);
-    setBasicModIsOpen(false);
+    await fetchDailyActivity(); 
   };
 
-  // Видалення використання змінної data, оскільки вона не використовується.
-  const handleSubmit = async () => {
-    // Логіка для відправки даних
+  const handleSubmit = async (data) => {
+    try {
+      console.log('Submitting data to server:', data);
+      const token = localStorage.getItem('token');
+      const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water', {
+        amount: data.amount,
+        date: new Date().toISOString().split('T')[0] 
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      console.log('Server response:', response.data);
+      closeWaterModal();
+    } catch (error) {
+      console.error('Error submitting data:', error.response ? error.response.data : error.message);
+      console.log('Error details:', error.response);
+    }
   };
 
   return (
@@ -29,7 +64,7 @@ const AddWaterBtn = ({ isBig = true }) => {
         <button
           className={isBig ? css.btnBig : css.btnSmall}
           type="button"
-          onClick={openAddModal}
+          onClick={() => setModIsOpen(true)}
         >
           {isBig ? (
             <Icon
@@ -51,21 +86,13 @@ const AddWaterBtn = ({ isBig = true }) => {
           <span className={isBig ? css.txtSmall : css.txtBig}>Add water</span>
         </button>
       </div>
-      <BasicModal isOpen={basicModIsOpen} onClose={closeWaterModal}>
-        <WaterModal
-          isOpen={modIsOpen}
-          onClose={closeWaterModal}
-          onSubmit={handleSubmit}
-          type="add"
-          initialData={{
-            amount: 50,
-            time: new Date().toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-            }),
-          }}
-        />
-      </BasicModal>
+      <WaterModal
+        isOpen={modIsOpen}
+        onClose={closeWaterModal}
+        onSubmit={handleSubmit}
+        type="add"
+        initialData={initialData}
+      />
     </>
   );
 };

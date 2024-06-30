@@ -14,29 +14,37 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
   const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      amount: initialData ? initialData.amount : 50,
-      time: initialData ? initialData.time : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      amount: initialData?.amount || 50,
+      time: initialData?.time || '',
     }
   });
 
   useEffect(() => {
     if (initialData) {
-      setValue('amount', initialData.amount);
-      setValue('time', initialData.time);
+      setValue('time', initialData.time || getCurrentTime());
+      setValue('amount', initialData.amount || 50);
+      
     }
   }, [initialData, setValue]);
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
 
   const incrementAmount = () => {
     const currentAmount = getValues('amount');
     setValue('amount', currentAmount + 50);
-    console.log('Increment amount:', currentAmount + 50);
+    
   };
 
   const decrementAmount = () => {
     const currentAmount = getValues('amount');
     if (currentAmount > 50) {
       setValue('amount', currentAmount - 50);
-      console.log('Decrement amount:', currentAmount - 50);
+      
     }
   };
 
@@ -90,7 +98,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
           </div>
         </div>
         <div className={styles.enter}>
-          <div className={styles.labelText}>Enter the value of the water used:</div>
+          <div className={styles.dataText}>Enter the value of the water used:</div> 
           <Controller
             name="amount"
             control={control}
@@ -102,7 +110,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                 min="1"
                 onChange={(e) => {
                   field.onChange(e);
-                  console.log('Input amount:', e.target.value);
                 }}
               />
             )}
@@ -119,6 +126,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
         </svg>
       </button>
     </form>
+
   );
 };
 

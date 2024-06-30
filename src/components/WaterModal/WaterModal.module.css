@@ -3,8 +3,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 288px;
-  height: 490px;
+  min-width: 345px;
+
   padding: 40px 20px;
   background-color: white;
   box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.1);
@@ -14,21 +14,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: 24px;
-  z-index: 999;
-}
-
-@media (min-width: 375px) {
-  .waterModal {
-    width: 345px;
-  }
-}
-
-@media (min-width: 768px) {
-  .waterModal {
-    width: 520px;
-    height: 560px;
-    padding: 40px;
-  }
+  z-index: 1001;
 }
 
 .errorModal {
@@ -45,48 +31,57 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 1002;
 }
 
 .errorModalContent {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 288px;
-  height: 490px;
-  padding: 40px 20px;
-  box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
 }
 
 .errorText {
   margin-top: 24px;
-  /* Відступ від кнопки закриття */
   margin-bottom: 48px;
   font-size: 14px;
   font-weight: 600;
   color: red;
   text-align: center;
   padding-top: 24px;
-  /* Додатковий відступ зверху */
 }
 
-/* Використання існуючих стилів для кнопки закриття */
 .closeBtn {
   width: 24px;
   height: 24px;
   position: absolute;
   top: 24px;
-  /* Відступ зверху */
   right: 24px;
-  /* Відступ з правого боку */
   cursor: pointer;
   background: none;
   border: none;
   padding: 0;
 }
 
+.noOverlay {
+  background: none !important;
+}
+
 .overlay {
-  background-color: rgba(255, 255, 255, 0.75);
+  z-index: 1000 !important;
+}
+
+.modalContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .waterModal {
+    width: 520px;
+
+    padding: 40px;
+  }
 }
