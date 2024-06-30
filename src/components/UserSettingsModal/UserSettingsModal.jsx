@@ -1,20 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import css from './UserSettingsModal.module.css';
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
 import { selectUser } from '../../redux/auth/selectors';
 
-export default function UserSettingsModal({ closeModal, modIsOpen }) {
+export default function UserSettingsModal({ closeModal, isOpen }) {
   const [get_setting, setGet_setting] = useState([]);
 
   const user = useSelector(selectUser);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!modIsOpen) {
+  useNavigate(() => {
+    navigate('/');
+
+    if (!isOpen) {
       return;
     }
     setGet_setting(user);
-  }, [modIsOpen, user]);
+  }, [isOpen, user]);
 
   return (
     <>
