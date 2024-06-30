@@ -8,9 +8,9 @@ export default function RadioBtn({ register, onChangeRadio, selectedValue }) {
           <input
             {...register('gender')}
             type="radio"
-            value="woman"
+            value="female"
             id="field-woman"
-            defaultChecked={selectedValue === 'woman'}
+            defaultChecked={selectedValue === 'female'}
             onChange={onChangeRadio}
           />
           <label htmlFor="field-woman" className={css.radioLabel}>
@@ -22,9 +22,9 @@ export default function RadioBtn({ register, onChangeRadio, selectedValue }) {
           <input
             {...register('gender')}
             type="radio"
-            value="man"
+            value="male"
             id="field-man"
-            defaultChecked={selectedValue === 'man'}
+            defaultChecked={selectedValue === 'male'}
             onChange={onChangeRadio}
           />
           <label htmlFor="field-man" className={css.radioLabel}>

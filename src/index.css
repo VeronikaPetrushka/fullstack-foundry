@@ -3,8 +3,8 @@
 :root {
   --dark-grey: #2f2f2f;
   --grey: #323f47;
-  --green: #9be1a0;
-  --lightGreenHover: #87d28d;
+  --lightGreenHover: #9be1a0;
+  --green: #87d28d;
   --light: #f0eff4;
   --white: #ffffff;
   --lightGrey: #2f2f2f99;
@@ -137,7 +137,7 @@ button {
   cursor: pointer;
 }
 
-.page-loader{
+.page-loader {
   position: absolute;
   top: 50%;
   left: 50%;

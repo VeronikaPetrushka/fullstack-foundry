@@ -1,9 +1,29 @@
+// import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import WaterItem from '../WaterItem/WaterItem';
 import css from './WaterList.module.css';
+// import {selectWaterDaily} from '../../redux/water/selectors';
+
 
 const WaterList = () => {
+    
+//     const dayWater = useSelector(selectWaterDaily);
+       
+
+//         return (
+//             <div className={css.container}>
+//                 <ul className={css.waterList}>
+//                     {dayWater.map((day) => (
+//                         <li key={day._id} >
+//                             <WaterItem day={day} id={day._id} />
+//                         </li>
+//                     ))}
+//                 </ul>
+//             </div>
+//         )                    
+}
+
   const [waterItems, setWaterItems] = useState([]);
 
   useEffect(() => {

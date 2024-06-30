@@ -11,6 +11,18 @@
   position: relative;
 }
 
+.totalUsers{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: -0.08px
+}
+
 @media only screen and (min-resolution: 192dpi) {
   .advantagesSection {
     background-image: url(../../assets/img/HomePageGirl2x-min.png);
@@ -85,8 +97,8 @@
   display: inline-flex;
   position: absolute;
 
-  width: 154px;
-  padding: 10px 14px;
+  width: 168px;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   border-radius: 30px;
@@ -195,10 +207,12 @@ display: flex;
 
 
   .customersBox {
- 
+
     left: 32px;
-    width: 233px;
-    padding: 10px 10px;
+    width: 252px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .customersItem {
@@ -215,12 +229,16 @@ display: flex;
     font-size: 15px;
     line-height: 1.49;
     margin-left: -34px;
-    width: 90px;
+    /* width: 90px; */
   }
 
   .span {
     font-size: 15px;
     line-height: 1.49;
+  }
+
+  .totalUsers{
+    font-size: 24px;
   }
 }
 
@@ -244,7 +262,7 @@ display: flex;
   }
 
   .customersBox {
- 
+
     bottom: 140px;
   }
 

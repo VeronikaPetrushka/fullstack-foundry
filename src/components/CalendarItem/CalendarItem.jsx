@@ -12,7 +12,10 @@ const CalendarItem = ({ selectedDate, dayOfMonth, minDay, today, handleClick }) 
     dayClass = css.full;
   }
 
-  if (dateIsEqual(dayOfMonth.fullDate, today.fullDate) || dateIsEqual(dayOfMonth.fullDate, selectedDate.fullDate)) {
+  if (dateIsEqual(dayOfMonth.fullDate, selectedDate.fullDate)) {
+    dayClass = css.selected;
+  }
+  if (dateIsEqual(dayOfMonth.fullDate, today.fullDate)) {
     dayClass = css.current;
   }
 

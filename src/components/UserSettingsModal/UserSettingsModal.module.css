@@ -5,15 +5,64 @@
   letter-spacing: -0.01em;
   color: var(--main);
 }
+
 @media (min-width: 1440px) {
   .title {
     font-size: 28px;
     margin-bottom: 20px;
   }
 }
+
 /* ================= */
 .settingBox {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.modalBox {
+  background-color: var(--white);
+  border-radius: 15px;
+  width: 288px;
+  height: 1302px;
+  padding: 20px;
+  position: absolute;
+  top: -250px;
+  right: -148px;
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 15px;
+  z-index: 1000;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  fill: #2f2f2f;
+}
+
+@media (min-width: 375px) {
+  .modalBox {
+    width: 344px;
+    right: -176px;
+  }
+}
+
+@media (min-width: 768px) {
+  .modalBox {
+    width: 648px;
+    height: 1336px;
+    top: -260px;
+    right: -328px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .modalBox {
+    width: 920px;
+    height: 996px;
+    top: -305px;
+    right: -465px;
+  }
 }

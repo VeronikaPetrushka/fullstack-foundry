@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectUserInfo } from '../../../redux/user/selectors';
 import Icon from '../../Icon/Icon'
 
-export default function AvatarInput({ control, register, setMyAvatar }) {
+export default function AvatarInput({ control, register, setAvatarURL }) {
   const [inputImg, setInputImage] = useState(false);
   const user = useSelector(selectUserInfo);
 
@@ -32,7 +32,7 @@ export default function AvatarInput({ control, register, setMyAvatar }) {
   const onChange = event => {
     const file = event.target.files[0];
     if (file) {
-      setMyAvatar(file);
+      setAvatarURL(file);
       setInputImage(URL.createObjectURL(file));
     } else {
       setInputImage(false);
@@ -61,7 +61,7 @@ export default function AvatarInput({ control, register, setMyAvatar }) {
       />
       <label htmlFor="file-input">
         <div className={css.upLoad}>
-          <Icon width={'16'} height={'16'}  iconName={'upload'} styles={css.svgAvatarBtn} style />
+          <Icon width={'16'} height={'16'} iconName={'upload'} styles={css.svgAvatarBtn} />
           <p>Upload a photo</p>
         </div>
       </label>
