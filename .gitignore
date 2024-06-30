@@ -54,3 +54,4 @@ dist-ssr
 *.sw?
 
 pull.txt
+project_copies/

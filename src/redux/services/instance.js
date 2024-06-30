@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as AxiosLogger from 'axios-logger';
 
 const API_URI = 'https://aquatrack-api-myzh.onrender.com/api';
 // const API_URI = 'http://localhost:8080/api';
@@ -13,6 +14,10 @@ const headerConfig = {
 
 export const publicInstance = axios.create({ ...headerConfig, baseURL: API_URI });
 export const instance = axios.create({ ...headerConfig, baseURL: API_URI });
+
+// Додаємо логування запитів і відповідей
+instance.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
+instance.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
 
 instance.interceptors.request.use(
   config => {
@@ -29,22 +34,13 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   response => response,
-
   async error => {
-
     const originalRequest = error.config;
-
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-
       try {
-        const { data } = await axios.get(
-          `${API_URI}/auth/refresh`,
-          headerConfig
-        );
-
+        const { data } = await axios.get(`${API_URI}/auth/refresh`, headerConfig);
         localStorage.setItem('token', data.token);
-
         originalRequest.headers.Authorization = `Bearer ${data.token}`;
         return instance(originalRequest);
       } catch (refreshError) {
@@ -53,7 +49,6 @@ instance.interceptors.response.use(
         window.location.href = '/signin';
       }
     }
-
     return Promise.reject(error);
   }
 );

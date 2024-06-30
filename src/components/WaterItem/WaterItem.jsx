@@ -1,4 +1,3 @@
-
 import css from './WaterItem.module.css';
 import Icon from '../../components/Icon/Icon';
 import {BasicModal} from '../BasicModal/BasicModal';

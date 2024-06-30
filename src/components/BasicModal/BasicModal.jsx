@@ -29,3 +29,5 @@ BasicModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node,
 };
+
+export default BasicModal;

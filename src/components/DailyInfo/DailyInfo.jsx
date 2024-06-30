@@ -1,7 +1,8 @@
-import WaterList from '../WaterList/WaterList';
 import css from './DailyInfo.module.css';
+import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma';
+import WaterProgressBar from '../WaterProgressBar/WaterProgressBar';
 import AddWaterBtn from '../AddWaterBtn/AddWaterBtn';
-import ChooseDate from '../ChooseDate/ChooseDate';
+import DailyInfo from '../DailyInfo/DailyInfo';
 
 
 const DailyInfo = ({selectedDate}) => {

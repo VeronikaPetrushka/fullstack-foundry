@@ -1,6 +1,7 @@
 
 import { useSelector } from 'react-redux';
 import WaterItem from '../WaterItem/WaterItem';
+import WaterModal from '../WaterModal/WaterModal';
 import css from './WaterList.module.css';
 import {selectWaterDaily} from '../../redux/water/selectors';
 
