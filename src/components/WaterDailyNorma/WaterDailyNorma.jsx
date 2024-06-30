@@ -8,7 +8,7 @@ const WaterDailyNorma = () => {
   return (
     <div className={css.dailyNormaWrap}>
       <p className={css.quantity}>
-        {user.dailyNorma ? `${user.dailyNorma / 1000} ` : '2 '}L
+        {user.dailyNorma ? `${user.dailyNorma} ` : '2 '}L
       </p>
       <p className={css.desc}>My daily norma</p>
     </div>

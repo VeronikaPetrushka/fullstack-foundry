@@ -13,7 +13,8 @@ import { updateUserSettings } from '../../redux/user/operations';
 export default function UserSettingsForm({ closeModal, getSetting }) {
   const [selectedValueRadio, setSelectedValueRadio] = useState('');
   const [result, setResult] = useState(null);
-  const setSelectedVolume = useState('')
+  // eslint-disable-next-line no-unused-vars
+  const [selectedVolume, setSelectedVolume] = useState('');
   const [M, setM] = useState(null);
   const [T, setT] = useState('7:00');
 
@@ -45,11 +46,11 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
 
   useEffect(() => {
     const time = convertToMinutes(T);
-    if (selectedValueRadio === 'woman') {
-      const V = M * 0.03 + time * 0.4;
+    if (selectedValueRadio === 'female') {
+      const V = (M * 0.03 + time * 0.4) / 100;
       setResult(V.toFixed(2));
     } else {
-      const V = (M * 0.04 + time * 0.6).toFixed(2);
+      const V = ((M * 0.04 + time * 0.6) / 100).toFixed(2);
       setResult(V);
     }
   }, [selectedValueRadio, M, T]);
@@ -73,23 +74,21 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     closeModal();
 
     const formData = new FormData();
-    formData.append('avatar', avatarURL);
     formData.append('gender', gender);
     formData.append('name', lastName);
     formData.append('email', lastEmail);
     formData.append('weight', lastKilo);
-    formData.append('dailyActivityTime', lastTime);
-    formData.append('dailyWaterNorm', lastVolume);
+    formData.append('timeActivity', lastTime);
+    formData.append('dailyNorma', lastVolume);
 
     dispatch(updateUserSettings(formData))
       .unwrap()
       .then(() => {
-        toast.success('Successfully updated!');
+        toast.success('Your settings have been successfully updated and saved!');
       })
       .catch(() => {
-        toast.error('This is an error!');
+        toast.error('Oops... Something went wrong. Please try again later!');
       });
-    closeModal();
   };
 
   return (
@@ -101,7 +100,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
           setMyAvatar={avatarURL}
         />
         <div>
-          <h3 className={css.titleHender}>Your gender identity</h3>
+          <h3 className={css.titleHeader}>Your gender identity</h3>
         </div>
         <RadioBtn
           onChangeRadio={handleRadioChange}
@@ -130,18 +129,18 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
             <ul className={css.listFormula}>
               <li>
                 <p>For woman:</p>
-                <span>V=(M*0,03) + (T*0,4)</span>
+                <span style={{ color: '#9be1a0' }}>V=(M*0.03) + (T*0.4)</span>
               </li>
               <li>
                 <p>For man:</p>
-                <span>V=(M*0,04) + (T*0,6)</span>
+                <span style={{ color: '#9be1a0' }}>V=(M*0.04) + (T*0.6)</span>
               </li>
               <li>
                 <div className={css.textBox}>
                   <p>
                     <span>*</span> V is the volume of the water norm in liters
-                    per day, M is your body weight,T is the time of active
-                    sports,or another type of activity commensurate in terms of
+                    per day, M is your body weight, T is the time of active
+                    sports, or another type of activity commensurate in terms of
                     loads (in the absence of these, you must set 0)
                   </p>
                 </div>

@@ -1,6 +1,5 @@
 .modal {
   position: relative;
-  padding: 30px;
 }
 
 .overlay {
@@ -16,15 +15,4 @@
   overflow-y: auto;
   z-index: 999;
   background-color: rgba(47, 47, 47, 0.6);
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 999;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  fill: #2f2f2f;
 }

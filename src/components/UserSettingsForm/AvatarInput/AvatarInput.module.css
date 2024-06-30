@@ -5,12 +5,14 @@
   flex-direction: column;
   margin-bottom: 24px;
 }
+
 @media screen and (min-width: 768px) and (max-width: 1439px) {
   .avatarBox {
     margin-top: 20px;
     margin-bottom: 10px;
   }
 }
+
 .avatarBox {
   width: 75px;
   height: 75px;
@@ -21,28 +23,36 @@
   align-items: center;
   margin-bottom: 8px;
 }
+
 @media screen and (min-width: 768px) {
   .avatarBox {
     width: 100px;
     height: 100px;
   }
 }
+
 .svgAvatar {
   width: 102px;
   height: 102px;
 }
+
 .svgAvatarBtn {
   width: 18px;
   height: 18px;
+  stroke: black;
+  fill: none;
 }
+
 .photo {
   border-radius: 100px;
 }
+
 .upLoad {
   display: flex;
   justify-content: center;
   gap: 10px;
 }
+
 .upLoad p {
   font-weight: 400;
   font-size: 14px;
@@ -50,11 +60,13 @@
   letter-spacing: -0.01em;
   color: var(--main-text);
 }
+
 @media screen and (min-width: 768px) {
   .svgAvatarBtn {
-    width: 21px;
-    height: 21px;
+    width: 20px;
+    height: 20px;
   }
+
   .upLoad {
     font-size: 16px;
   }

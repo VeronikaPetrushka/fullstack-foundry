@@ -7,8 +7,8 @@ const UserPanel = () => {
     return (
         <div className={css.hiUserWrapper}>
             <h1 className={css.hiUser}>Hello,
-                {user.userName ? (
-                    <span className={css.userName}> {user.userName}</span>
+                {user.name ? (
+                    <span className={css.userName}> {user.name}</span>
                 ) : (
                     <span className={css.userName}> You</span>
                 )}
