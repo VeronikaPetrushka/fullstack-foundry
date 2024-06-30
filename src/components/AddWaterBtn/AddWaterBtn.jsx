@@ -94,4 +94,5 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
   );
 };
 
+
 export default AddWaterBtn;

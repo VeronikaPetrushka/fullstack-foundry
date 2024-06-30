@@ -13,7 +13,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: 24px;
-  z-index: 2001; 
+  z-index: 2001;
 }
 
 .errorModal {
@@ -30,7 +30,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1002; 
+  z-index: 1002;
 }
 
 .errorModalContent {

@@ -16,7 +16,7 @@ const UserBar = () => {
   return (
     <div className={css.userBarWrapper}>
       <div className={css.userBarMainWrapper}>
-        <p className={css.userName}>{user.userName || 'You'}</p>
+        <p className={css.userName}>{user.name || 'You'}</p>
         <div className={css.avatarBox}>
           <img
             src={user.avatar || 'src/assets/img/avatar-default.jpg'}
