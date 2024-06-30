@@ -22,7 +22,6 @@ const WaterList = () => {
 //                 </ul>
 //             </div>
 //         )                    
-}
 
   const [waterItems, setWaterItems] = useState([]);
 
