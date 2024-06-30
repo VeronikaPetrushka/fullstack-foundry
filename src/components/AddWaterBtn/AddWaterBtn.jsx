@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
-import { BasicModal } from '../BasicModal/BasicModal';
 import WaterModal from '../WaterModal/WaterModal';
 
 const AddWaterBtn = ({ isBig = true }) => {
   const [modIsOpen, setModIsOpen] = useState(false);
-  const openWaterModal = () => {
+
+  const openAddModal = () => {
     setModIsOpen(true);
   };
+
   const closeWaterModal = () => {
     setModIsOpen(false);
+  };
+
+  // Видалення використання змінної data, оскільки вона не використовується.
+  const handleSubmit = async () => {
+    // Логіка для відправки даних
   };
 
   return (
@@ -19,7 +25,7 @@ const AddWaterBtn = ({ isBig = true }) => {
         <button
           className={isBig ? css.btnBig : css.btnSmall}
           type="button"
-          onClick={openWaterModal}
+          onClick={openAddModal}
         >
           {isBig ? (
             <Icon
@@ -41,10 +47,15 @@ const AddWaterBtn = ({ isBig = true }) => {
           <span className={isBig ? css.txtSmall : css.txtBig}>Add water</span>
         </button>
       </div>
-      <BasicModal isOpen={modIsOpen} onClose={closeWaterModal}>
-        <WaterModal onClose={closeWaterModal} />
-      </BasicModal>
+      <WaterModal
+        isOpen={modIsOpen}
+        onClose={closeWaterModal}
+        onSubmit={handleSubmit}
+        type="add"
+        initialData={{ amount: 50, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+      />
     </>
   );
 };
+
 export default AddWaterBtn;
