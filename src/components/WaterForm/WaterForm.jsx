@@ -7,8 +7,13 @@ import { useEffect } from 'react';
 
 const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
   const schema = Yup.object().shape({
-    amount: Yup.number().required('Amount is required').min(1, 'Amount must be at least 1'),
-    time: Yup.string().required('Time is required').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Time must be in HH:mm format'),
+    amount: Yup.number()
+      .required('Amount is required')
+      .min(1, 'Amount must be at least 1')
+      .max(1000, 'Amount must be at most 1000'),  // Added max limit
+    time: Yup.string()
+      .required('Time is required')
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Time must be in HH:mm format'),
   });
 
   const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm({
@@ -23,7 +28,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (initialData) {
       setValue('time', initialData.time || getCurrentTime());
       setValue('amount', initialData.amount || 50);
-      
     }
   }, [initialData, setValue]);
 
@@ -36,15 +40,15 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
 
   const incrementAmount = () => {
     const currentAmount = getValues('amount');
-    setValue('amount', currentAmount + 50);
-    
+    if (currentAmount < 1000) {  // Check to not exceed 1000 ml
+      setValue('amount', currentAmount + 50);
+    }
   };
 
   const decrementAmount = () => {
     const currentAmount = getValues('amount');
     if (currentAmount > 50) {
       setValue('amount', currentAmount - 50);
-      
     }
   };
 
@@ -108,6 +112,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                 {...field}
                 className={styles.input}
                 min="1"
+                max="1000"  // Added max attribute
                 onChange={(e) => {
                   field.onChange(e);
                 }}
@@ -126,7 +131,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
         </svg>
       </button>
     </form>
-
   );
 };
 
