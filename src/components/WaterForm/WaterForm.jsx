@@ -40,7 +40,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
 
   const incrementAmount = () => {
     const currentAmount = getValues('amount');
-    if (currentAmount < 1000) {  // Check to not exceed 1000 ml
+    if (currentAmount < 1000) {
       setValue('amount', currentAmount + 50);
     }
   };
@@ -112,7 +112,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                 {...field}
                 className={styles.input}
                 min="1"
-                max="1000"  // Added max attribute
+                max="1000"
                 onChange={(e) => {
                   field.onChange(e);
                 }}
