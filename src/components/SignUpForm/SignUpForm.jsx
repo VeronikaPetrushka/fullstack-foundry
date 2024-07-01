@@ -39,8 +39,12 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async formData => {
+    const reqData = {
+      email: formData.email,
+      password: formData.password,
+    }
     try {
-      await dispatch(signup(formData)).unwrap();
+      await dispatch(signup(reqData)).unwrap();
       toast.success('Successfully registered!');
       reset();
       navigate('/signin');

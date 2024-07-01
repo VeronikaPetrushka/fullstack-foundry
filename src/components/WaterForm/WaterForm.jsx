@@ -25,7 +25,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
       setValue('amount', initialData.amount || 50);
       
       console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Початкові дані`, initialData);
-
     }
   }, [initialData, setValue]);
 
@@ -41,7 +40,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (currentAmount < 1000) {
       const newAmount = currentAmount + 50 > 1000 ? 1000 : currentAmount + 50;
       setValue('amount', newAmount);
-      console.log(`[WaterForm] ${newAmount}: Збільшення кількості`, newAmount);
+      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Збільшення кількості`, newAmount);
     }
   };
 
@@ -55,14 +54,17 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
   };
 
   const handleFormSubmit = (data) => {
-    if (data.amount > 1000) {
-      data.amount = 1000;
-    }
-    if (data.amount < 50) {
-      data.amount = 50;
-    }
-    console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Клік на кнопку Submit`, data);
-    onSubmit(data);
+    const date = new Date();
+    const [hours, minutes] = data.time ? data.time.split(':') : [date.getHours(), date.getMinutes()];
+    date.setHours(hours);
+    date.setMinutes(minutes);
+
+    const formattedDate = date.toISOString();
+    const newData = { ...data, date: formattedDate }; // Використання правильного формату ISO 8601 для параметра date
+    delete newData.time; // Видалення параметра time
+
+    console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Клік на кнопку Submit`, newData);
+    onSubmit(newData);
   };
 
   const handleFormClose = () => {
@@ -163,7 +165,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
 WaterForm.propTypes = {
   initialData: PropTypes.shape({
     amount: PropTypes.number,
-    time: PropTypes.string,
+    time: PropTypes.string, // Використовуємо time для отримання часу
   }),
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,

@@ -5,7 +5,6 @@ import Icon from '../../components/Icon/Icon';
 const WaterItem = ({ item, onEdit, onDelete }) => {
   const { amount, date } = item;
 
-  
   if (!date) {
     console.error('Помилка: item.createdAt не визначено', item);
     return null;
@@ -66,7 +65,7 @@ const WaterItem = ({ item, onEdit, onDelete }) => {
 WaterItem.propTypes = {
   item: PropTypes.shape({
     amount: PropTypes.number.isRequired,
-    createdAt: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
   }).isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
