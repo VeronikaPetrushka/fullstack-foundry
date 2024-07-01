@@ -3,9 +3,10 @@ import css from './WaterItem.module.css';
 import Icon from '../../components/Icon/Icon';
 
 const WaterItem = ({ item, onEdit, onDelete }) => {
-  const { amount, createdAt } = item;
+  const { amount, date } = item;
 
-  if (!createdAt) {
+  
+  if (!date) {
     console.error('Помилка: item.createdAt не визначено', item);
     return null;
   }
@@ -20,8 +21,8 @@ const WaterItem = ({ item, onEdit, onDelete }) => {
     onDelete();
   };
 
-  const displayTime = new Date(createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-
+  const displayTime = new Date(date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+  
   console.log(`[WaterItem] ${new Date().toLocaleTimeString()}: Відображення елемента води`, item);
 
   return (
