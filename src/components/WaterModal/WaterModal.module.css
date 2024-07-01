@@ -1,2 +1,86 @@
-.WaterModalWrap {
+.waterModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 345px;
+  background-color: white;
+  box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.1);
+  padding: 40px 20px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+  z-index: 1001;
+}
+
+.errorModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  padding: 10px 5px;
+  background-color: white;
+  box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+}
+
+.errorModalContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errorText {
+  margin-top: 24px;
+  margin-bottom: 48px;
+  font-size: 14px;
+  font-weight: 600;
+  color: red;
+  text-align: center;
+  padding-top: 24px;
+}
+
+.closeBtn {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.noOverlay {
+  background: none !important;
+}
+
+.overlay {
+  z-index: 1000 !important;
+}
+
+.modalContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .waterModal {
+    width: 520px;
+
+    padding: 40px;
+  }
 }

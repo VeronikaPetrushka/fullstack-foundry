@@ -15,9 +15,11 @@
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
+    "axios-logger": "^2.8.1",
     "fullstack-foundry": "file:..",
     "i18next": "^23.11.5",
     "jwt-decode": "^4.0.0",
+    "morgan": "^1.10.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -48,5 +50,8 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "vite": "^5.3.1"
+  },
+  "bin": {
+    "generate-structure": "./index.js"
   }
 }
