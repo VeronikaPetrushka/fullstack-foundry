@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as AxiosLogger from 'axios-logger';
+// import * as AxiosLogger from 'axios-logger';
 
 const API_URI = 'https://aquatrack-api-myzh.onrender.com/api';
 // const API_URI = 'http://localhost:8080/api';
@@ -16,8 +16,8 @@ export const publicInstance = axios.create({ ...headerConfig, baseURL: API_URI }
 export const instance = axios.create({ ...headerConfig, baseURL: API_URI });
 
 // Додаємо логування запитів і відповідей
-instance.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
-instance.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
+// instance.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
+// instance.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
 
 instance.interceptors.request.use(
   config => {
