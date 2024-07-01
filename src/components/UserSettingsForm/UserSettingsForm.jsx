@@ -79,7 +79,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
       setSuccess(true);
       closeModal();
       toast.success('Successfully updated!', {
-        duration: 6000, position: 'top-center',});
+        duration: 5000, position: 'top-center',});
     } catch (error) {
       toast.error(error || 'Failed to update data!');
     }
@@ -104,8 +104,9 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   }, [watch]);
 
   return (
+    isError ? (<Toaster position="top-center" />) :
     <>
-      {(success || isError) && <Toaster position="top-center" />}
+    {success && <Toaster position="top-center" />}
 
       {isLoading && (
         <div className={css.loaderBg}>

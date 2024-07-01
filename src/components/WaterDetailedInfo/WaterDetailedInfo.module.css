@@ -7,3 +7,10 @@
   flex-wrap: wrap;
   gap: 15px;
 }
+
+@media screen and (min-width: 768px) {
+  .waterDetailedInfoWrapper {
+    /* flex-wrap: nowrap; */
+  }
+
+}

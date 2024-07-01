@@ -2,8 +2,14 @@
     display: flex;
     color: var(--dark-grey);
     font-size: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .userName {
     font-weight: 700;
-}
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+ }
