@@ -43,8 +43,9 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
     try {
       const token = localStorage.getItem('token');
       const date = new Date();
-      const [hours, minutes] = data.time.split(':');
-      date.setHours(hours, minutes);
+      const [hours, minutes] = data.time ? data.time.split(':') : [date.getHours(), date.getMinutes()];
+      date.setHours(hours);
+      date.setMinutes(minutes);
 
       console.log('Submitting data to server:', data);
       const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water', {
@@ -93,12 +94,12 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
       </div>
       <BasicModal isOpen={modIsOpen} onClose={closeWaterModal}>
         <WaterModal
-        isOpen={modIsOpen}
-        onClose={closeWaterModal}
-        onSubmit={handleSubmit}
-        type="add"
-        initialData={initialData}
-      />
+          isOpen={modIsOpen}
+          onClose={closeWaterModal}
+          onSubmit={handleSubmit}
+          type="add"
+          initialData={initialData}
+        />
       </BasicModal>
     </>
   );

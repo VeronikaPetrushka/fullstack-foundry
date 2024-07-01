@@ -8,7 +8,6 @@ const WaterModal = ({ isOpen, onClose, initialData, onSubmit, type }) => {
   const [backendError, setBackendError] = useState('');
 
   const handleSubmit = async (data) => {
-    
     try {
       await onSubmit(data);
       setBackendError('');
@@ -27,7 +26,6 @@ const WaterModal = ({ isOpen, onClose, initialData, onSubmit, type }) => {
       console.log('Modal opened with initial data:', initialData);
     } else {
       setBackendError('');
-    
     }
   }, [isOpen, initialData]);
 
@@ -73,7 +71,7 @@ WaterModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   initialData: PropTypes.shape({
     amount: PropTypes.number,
-    time: PropTypes.string,
+    date: PropTypes.string, // Використовуємо date для отримання часу
   }),
   onSubmit: PropTypes.func.isRequired,
   type: PropTypes.oneOf(['add', 'edit']).isRequired,
