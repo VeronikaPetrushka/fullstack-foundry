@@ -9,15 +9,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
   const schema = Yup.object().shape({
     amount: Yup.number().required('Amount is required').min(1, 'Amount must be at least 1').max(1000, 'Amount must be no more than 1000'),
     time: Yup.string().required('Time is required').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Time must be in HH:mm format'),
-// =======
-//     amount: Yup.number()
-//       .required('Amount is required')
-//       .min(1, 'Amount must be at least 1')
-//       .max(1000, 'Amount must be at most 1000'),  // Added max limit
-//     time: Yup.string()
-//       .required('Time is required')
-//       .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Time must be in HH:mm format'),
-// >>>>>>> frontend
   });
 
   const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm({
@@ -51,9 +42,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
       const newAmount = currentAmount + 50 > 1000 ? 1000 : currentAmount + 50;
       setValue('amount', newAmount);
       console.log(`[WaterForm] ${newAmount}: Збільшення кількості`, newAmount);
-// =======
-//       setValue('amount', currentAmount + 50);
-// >>>>>>> frontend
     }
   };
 
@@ -63,9 +51,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
       const newAmount = currentAmount - 50 < 50 ? 50 : currentAmount - 50;
       setValue('amount', newAmount);
       console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зменшення кількості`, newAmount);
-// =======
-//       setValue('amount', currentAmount - 50);
-// >>>>>>> frontend
     }
   };
 
@@ -149,9 +134,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                 {...field}
                 className={styles.input}
                 min="50"
-// =======
-//                 min="1"
-// >>>>>>> frontend
                 max="1000"
                 onChange={(e) => {
                   let value = parseInt(e.target.value);
