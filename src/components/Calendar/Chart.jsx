@@ -72,6 +72,7 @@ const Chart = ({ selectedDate }) => {
             labelFormatter={() => ``}
           />
           <Area
+            name="Water"
             type="monotone"
             dataKey="totalAmount"
             stroke="#87D28D"
