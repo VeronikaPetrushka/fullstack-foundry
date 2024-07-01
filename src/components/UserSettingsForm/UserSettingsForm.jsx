@@ -1,130 +1,172 @@
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { toast, Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import TimeField from 'react-simple-timefield';
-import { settingsSchema } from './settingsSchema';
-import css from './UserSettingsForm.module.css';
-import RadioBtn from './RadioInput/RadioInput';
-import AvatarInput from './AvatarInput/AvatarInput';
 import { updateUserSettings } from '../../redux/user/operations';
+import { selectIsError, selectIsLoading } from '../../redux/user/selectors';
+import Loader from '../Loader/Loader';
+
+import css from './UserSettingsForm.module.css';
+import AvatarInput from './AvatarInput/AvatarInput';
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Enter a valid email address (must contain @)')
+    .required('This field is required'),
+  name: yup.string(),
+  gender: yup.string().oneOf(['male', 'female'], 'Select your gender'),
+  weight: yup
+    .number()
+    .min(1, 'The value must be at least 0')
+    .max(300, 'The value must be no more than 3 numbers')
+    .required('The field is required'),
+  timeActivity: yup
+    .string()
+    .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Enter time in HH:MM format'),
+  dailyNorma: yup
+    .number()
+    .min(1, 'The value must be at least 0')
+    .max(9999, 'The value must be no more than 4 numbers')
+    .required('The field is required'),
+});
 
 export default function UserSettingsForm({ closeModal, getSetting }) {
-  const [selectedValueRadio, setSelectedValueRadio] = useState('');
-  const [result, setResult] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [selectedVolume, setSelectedVolume] = useState('');
-  const [M, setM] = useState(null);
-  const [T, setT] = useState('7:00');
-
-  const {
-    avatarURL,
-    dailyActivityTime,
-    dailyWaterNorm,
-    email,
-    gender,
-    name,
-    weight,
-  } = getSetting;
+  const userSettings = getSetting;
 
   const dispatch = useDispatch();
 
-  const handleRadioChange = event => {
-    setSelectedValueRadio(event.target.value);
-  };
+  const isLoading = useSelector(selectIsLoading);
+  const isError = useSelector(selectIsError);
 
-  const handleChange = (setSelected, event) => {
-    setSelected(event.target.value);
-  };
+  const [success, setSuccess] = useState(false);
 
-  const convertToMinutes = time => {
-    const [hours, minutes] = time.split(':');
-    const totalMinutes = parseInt(hours) * 60 + parseInt(minutes);
-    return totalMinutes;
+  const convertToHours = time => {
+    const [hours, minutes] = time.toString().split(':');
+    const totalHours = parseInt(hours) + parseInt(minutes) / 60;
+    return totalHours;
   };
-
-  useEffect(() => {
-    const time = convertToMinutes(T);
-    if (selectedValueRadio === 'female') {
-      const V = (M * 0.03 + time * 0.4) / 100;
-      setResult(V.toFixed(2));
-    } else {
-      const V = ((M * 0.04 + time * 0.6) / 100).toFixed(2);
-      setResult(V);
-    }
-  }, [selectedValueRadio, M, T]);
 
   const {
-    control,
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
+    watch,
   } = useForm({
-    resolver: yupResolver(settingsSchema),
-    defaultValues: {
-      lastEmail: email,
-    },
+    resolver: yupResolver(schema),
   });
 
- const onSubmit = async (data) => {
-  try {
-    const { gender, lastEmail, lastKilo, lastName, lastTime, lastVolume } = data;
+  const [v, setV] = useState(null);
 
-    const formData = new FormData();
-    formData.append('gender', gender);
-    formData.append('name', lastName);
-    formData.append('email', lastEmail);
-    formData.append('weight', lastKilo);
-    formData.append('timeActivity', lastTime);
-    formData.append('dailyNorma', lastVolume * 1000);
+  useEffect(() => {
+    setValue('name', userSettings.name);
+    setValue('email', userSettings.email);
+    setValue('weight', userSettings.weight);
+    setValue('dailyNorma', userSettings.dailyNorma);
+    setValue('timeActivity', userSettings.timeActivity);
+    setValue('gender', userSettings.gender);
+    calculateV();
+  }, [userSettings, setValue]);
 
-    await dispatch(updateUserSettings(formData)).unwrap();
-
-    closeModal();
-
-    toast.success('Your settings have been successfully updated and saved!');
-  } catch (error) {
-    if (error) {
-      toast.error('Oops... Something went wrong. Please try again later!');
-      console.error(error);
+  const onSubmit = async data => {
+    try {
+      await dispatch(updateUserSettings(data)).unwrap();
+      setSuccess(true);
+      toast.success('Successfully updated!');
+      closeModal();
+    } catch (error) {
+      toast.error(error || 'Failed to update data!');
     }
-  }
-};
+  };
 
-  return (
+  const calculateV = useCallback(() => {
+    const { gender, weight, timeActivity } = watch();
+    if (
+      typeof weight === 'undefined' ||
+      typeof timeActivity === 'undefined' ||
+      typeof gender === 'undefined'
+    ) {
+      return;
+    }
+    if (gender === 'male') {
+      const vMale = weight * 0.04 + convertToHours(timeActivity) * 0.6;
+      setV(vMale.toFixed(1));
+    } else if (gender === 'female') {
+      const vFemale = weight * 0.03 + convertToHours(timeActivity) * 0.4;
+      setV(vFemale.toFixed(1));
+    }
+  }, [watch]);
+
+  return isError ? (
+    <Toaster position="top-center" />
+  ) : (
     <>
-      <Toaster position="top-right" />
+      {isLoading && (
+        <div className={css.loaderBg}>
+          <Loader addClass={css.monthDataLoader} />
+        </div>
+      )}
+
+      <AvatarInput />
+
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <AvatarInput
-          control={control}
-          register={register}
-          setMyAvatar={avatarURL}
-        />
         <div>
           <h3 className={css.titleHeader}>Your gender identity</h3>
         </div>
-        <RadioBtn
-          onChangeRadio={handleRadioChange}
-          selectedValue={gender}
-          register={register}
-        />
+        <div>
+          <div className={css.container}>
+            <div className={css.radio}>
+              <input
+                type="radio"
+                {...register('gender')}
+                value="male"
+                id="field-male"
+                onChange={() => {
+                  setValue('gender', 'male');
+                  calculateV();
+                }}
+              />{' '}
+              <label htmlFor="field-male" className={css.radioLabel}>
+                Male
+              </label>
+            </div>
+            <div className={css.radio}>
+              <input
+                type="radio"
+                {...register('gender')}
+                value="female"
+                id="field-female"
+                onChange={() => {
+                  setValue('gender', 'female');
+                  calculateV();
+                }}
+              />{' '}
+              <label htmlFor="field-female" className={css.radioLabel}>
+                Female
+              </label>
+            </div>
+            {errors.gender && <p>{errors.gender.message}</p>}
+          </div>
+        </div>
+
         <div className={css.sectionBox}>
           <section>
             <div className={css.box}>
               <label className={css.labelName}>Your name</label>
-              <input {...register('lastName', { value: name })} />
-              {errors.lastName && (
-                <p className={css.error}>{errors.lastName.message}</p>
+              <input {...register('name')} />
+              {errors.name && (
+                <p className={css.error}>{errors.name.message}</p>
               )}
             </div>
             <div className={css.box}>
               <label className={css.labelName}>Email</label>
-              <input
-                {...register('lastEmail', { value: email }, { required: true })}
-              />
-              {errors.lastEmail && (
-                <p className={css.error}>{errors.lastEmail.message} </p>
+              <input {...register('email', { required: true })} />
+              {errors.email && (
+                <p className={css.error}>{errors.email.message} </p>
               )}
             </div>
             <h2 className={css.titleNormaFormula}>My daily norma</h2>
@@ -152,7 +194,8 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                   <span className={css.vector}>!</span>Active time in hours
                 </p>
                 <p>
-                  <span className={css.vector}>!</span>Daily water norma in litres
+                  <span className={css.vector}>!</span>Daily water norma in
+                  litres
                 </p>
               </li>
             </ul>
@@ -161,33 +204,37 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
             <div className={css.formKilo}>
               <label>Your weight in kilograms:</label>
               <input
-                {...register('lastKilo', { value: weight })}
-                onChange={event => handleChange(setM, event)}
+                {...register('weight')}
+                onChange={event => {
+                  setValue('weight', event.target.value);
+                  calculateV();
+                }}
               />
-              {errors.lastKilo && (
-                <p className={css.error}>{errors.lastKilo.message} </p>
+              {errors.weight && (
+                <p className={css.error}>{errors.weight.message} </p>
               )}
             </div>
             <div className={css.formKilo}>
               <label>The time of active participation in sports:</label>
               <TimeField
-                value={dailyActivityTime}
-                onChange={event => handleChange(setT, event)}
-                input={<input {...register('lastTime', { required: true })} />}
+                value={watch('timeActivity')}
+                onChange={(event, value) => {
+                  setValue('timeActivity', value);
+                  calculateV();
+                }}
+                input={<input type="text" {...register('timeActivity')} />}
               />
+              {errors.timeActivity && <p>{errors.timeActivity.message}</p>}
             </div>
             <p className={css.amountWater}>
               The required amount of water in liters per day:
-              <span className={css.amount}>{result} L</span>
+              <span className={css.amount}>{v} L</span>
             </p>
             <div className={css.youWater}>
               <label>Write down how much water you will drink:</label>
-              <input
-                {...register('lastVolume', { value: dailyWaterNorm })}
-                onChange={event => handleChange(setSelectedVolume, event)}
-              />
-              {errors.lastVolume && (
-                <p className={css.error}>{errors.lastVolume.message} </p>
+              <input {...register('dailyNorma')} />
+              {errors.dailyNorma && (
+                <p className={css.error}>{errors.dailyNorma.message} </p>
               )}
             </div>
           </section>
@@ -198,8 +245,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
           </button>
         </div>
       </form>
+      {success && <Toaster position="top-center"></Toaster>}
     </>
   );
 }
-
-

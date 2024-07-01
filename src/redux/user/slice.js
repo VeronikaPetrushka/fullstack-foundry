@@ -6,6 +6,7 @@ const initialState = {
   totalUsers: null,
   isLoading: false,
   isError: null,
+  isLoadingAvatar: false,
 };
 
 const handlePending = state => {
@@ -43,9 +44,11 @@ const usersSlice = createSlice({
     builder.addCase(updateUserSettings.rejected, handleRejected);
 
     // Handling uploadAvatar
-    builder.addCase(uploadAvatar.pending, handlePending);
+    builder.addCase(uploadAvatar.pending, (state) => {
+      state.isLoadingAvatar = true;
+    });
     builder.addCase(uploadAvatar.fulfilled, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingAvatar = false;
       state.user.avatar = action.payload.avatar;
     });
     builder.addCase(uploadAvatar.rejected, handleRejected);

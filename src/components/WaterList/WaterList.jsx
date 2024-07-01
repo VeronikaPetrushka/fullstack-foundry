@@ -5,6 +5,7 @@ import WaterModal from '../WaterModal/WaterModal';
 import { DeleteWaterModal } from '../DeleteWaterModal/DeleteWaterModal';
 import { addWater, editWater } from '../../redux/water/operations';
 import css from './WaterList.module.css';
+import BasicModal from '../BasicModal/BasicModal';
 
 const WaterList = ({ fetchDailyActivity, waterItems }) => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -83,12 +84,14 @@ const WaterList = ({ fetchDailyActivity, waterItems }) => {
         onSubmit={handleSubmit}
         type={selectedItem ? 'edit' : 'add'}
       />
-      {isDeleteModalOpen && (
+      <BasicModal isOpen={isDeleteModalOpen} onClose={handleDeleteModalClose}>
+        {isDeleteModalOpen && (
         <DeleteWaterModal
           onClose={handleDeleteModalClose}
           id={selectedItem?._id}
         />
       )}
+      </BasicModal>
     </div>
   );
 };
