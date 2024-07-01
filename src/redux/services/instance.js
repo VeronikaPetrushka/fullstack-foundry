@@ -16,8 +16,8 @@ export const publicInstance = axios.create({ ...headerConfig, baseURL: API_URI }
 export const instance = axios.create({ ...headerConfig, baseURL: API_URI });
 
 // Додаємо логування запитів і відповідей
-instance.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
-instance.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
+// instance.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
+// instance.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
 
 instance.interceptors.request.use(
   config => {
