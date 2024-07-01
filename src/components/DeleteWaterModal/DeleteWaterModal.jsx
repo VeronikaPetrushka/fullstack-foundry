@@ -9,7 +9,7 @@ export const DeleteWaterModal = ({ onClose, id }) => {
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteWater(id))
+      await dispatch(deleteWater(id));
       toast.success("The amount of water has been successfully deleted");
     } catch (error) {
       toast.error("Something went wrong. Please try again");
