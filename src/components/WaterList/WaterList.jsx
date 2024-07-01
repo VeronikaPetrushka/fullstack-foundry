@@ -87,7 +87,6 @@ const WaterList = ({ fetchDailyActivity, waterItems }) => {
         <DeleteWaterModal
           onClose={handleDeleteModalClose}
           id={selectedItem?._id}
-          fetchDailyActivity={fetchDailyActivity} // Передаємо функцію для оновлення списку
         />
       )}
     </div>
