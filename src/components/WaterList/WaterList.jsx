@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import WaterItem from '../WaterItem/WaterItem';
 import WaterModal from '../WaterModal/WaterModal';
 import { DeleteWaterModal } from '../DeleteWaterModal/DeleteWaterModal';
+import { addWater, editWater } from '../../redux/water/operations';
 import css from './WaterList.module.css';
 
 const WaterList = ({ fetchDailyActivity, waterItems }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлення списку водних елементів`, waterItems);
@@ -41,33 +44,26 @@ const WaterList = ({ fetchDailyActivity, waterItems }) => {
 
   const handleSubmit = async (data) => {
     try {
-      const token = localStorage.getItem('token');
       if (selectedItem) {
-        await axios.put(`https://aquatrack-api-myzh.onrender.com/api/water/${selectedItem._id}`, {
-          amount: data.amount,
-          date: data.date,
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        await dispatch(editWater({
+          id: selectedItem._id,
+          formData: {
+            amount: data.amount,
+            date: data.date,
+          },
+        })).unwrap();
         console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлено елемент води`, data);
       } else {
-        await axios.post('https://aquatrack-api-myzh.onrender.com/api/water', {
+        await dispatch(addWater({
           amount: data.amount,
           date: data.date,
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        })).unwrap();
         console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Додано новий елемент води`, data);
       }
       fetchDailyActivity();
       handleModalClose();
     } catch (error) {
-      console.error('Помилка при надсиланні даних:', error.response ? error.response.data : error.message);
-      console.log('Деталі помилки:', error.response);
+      console.error('Помилка при надсиланні даних:', error);
     }
   };
 
