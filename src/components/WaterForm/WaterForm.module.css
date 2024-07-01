@@ -133,14 +133,14 @@
   border-radius: 50px;
   border: 1.5px #323f47 solid;
   cursor: pointer;
-  background-color: white;
+  background-color: inherit;
 }
 
 .minus .vector {
   width: 14px;
   height: 0px;
-  left: 12px;
-  top: 18px;
+  left: 13px;
+  top: 19px;
   position: absolute;
   border: 1.8px #323f47 solid;
 }
@@ -152,14 +152,14 @@
   border-radius: 50px;
   border: 1.5px #323f47 solid;
   cursor: pointer;
-  background-color: white;
+  background-color: inherit;
 }
 
 .plus .vector:first-child {
   width: 0px;
   height: 14px;
-  left: 18px;
-  top: 12px;
+  left: 19px;
+  top: 13px;
   position: absolute;
   border: 1.8px #323f47 solid;
 }
@@ -167,8 +167,8 @@
 .plus .vector:last-child {
   width: 14px;
   height: 0px;
-  left: 12px;
-  top: 18px;
+  left: 13px;
+  top: 19px;
   position: absolute;
   border: 1.8px #323f47 solid;
 }
