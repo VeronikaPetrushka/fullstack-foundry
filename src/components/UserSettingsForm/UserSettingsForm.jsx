@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import toast from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 import TimeField from 'react-simple-timefield';
 import { settingsSchema } from './settingsSchema';
 import css from './UserSettingsForm.module.css';
@@ -67,11 +67,9 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     },
   });
 
-  const onSubmit = data => {
-    const { gender, lastEmail, lastKilo, lastName, lastTime, lastVolume } =
-      data;
-
-    closeModal();
+ const onSubmit = async (data) => {
+  try {
+    const { gender, lastEmail, lastKilo, lastName, lastTime, lastVolume } = data;
 
     const formData = new FormData();
     formData.append('gender', gender);
@@ -79,20 +77,24 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     formData.append('email', lastEmail);
     formData.append('weight', lastKilo);
     formData.append('timeActivity', lastTime);
-    formData.append('dailyNorma', lastVolume);
+    formData.append('dailyNorma', lastVolume * 1000);
 
-    dispatch(updateUserSettings(formData))
-      .unwrap()
-      .then(() => {
-        toast.success('Your settings have been successfully updated and saved!');
-      })
-      .catch(() => {
-        toast.error('Oops... Something went wrong. Please try again later!');
-      });
-  };
+    await dispatch(updateUserSettings(formData)).unwrap();
+
+    closeModal();
+
+    toast.success('Your settings have been successfully updated and saved!');
+  } catch (error) {
+    if (error) {
+      toast.error('Oops... Something went wrong. Please try again later!');
+      console.error(error);
+    }
+  }
+};
 
   return (
     <>
+      <Toaster position="top-right" />
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <AvatarInput
           control={control}
@@ -149,6 +151,9 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                 <p>
                   <span className={css.vector}>!</span>Active time in hours
                 </p>
+                <p>
+                  <span className={css.vector}>!</span>Daily water norma in litres
+                </p>
               </li>
             </ul>
           </section>
@@ -169,7 +174,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                 value={dailyActivityTime}
                 onChange={event => handleChange(setT, event)}
                 input={<input {...register('lastTime', { required: true })} />}
-                colon=":"
               />
             </div>
             <p className={css.amountWater}>
@@ -197,3 +201,5 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     </>
   );
 }
+
+

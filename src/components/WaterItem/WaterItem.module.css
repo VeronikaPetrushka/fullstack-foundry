@@ -9,13 +9,13 @@
 }
 
 @media screen and (min-width: 768px) {
-   .item {
+    .item {
         width: 192px;
         height: 86px;
         padding: 20px;
         gap: 20px;
     }
-    
+
 }
 
 .itemContent {
@@ -26,11 +26,15 @@
 
 }
 
+.itemAmount p {
+    text-wrap: nowrap;
+}
+
 @media screen and (min-width: 768px) {
-   .itemContent {
+    .itemContent {
         gap: 0;
     }
-    
+
 }
 
 .icon {
@@ -45,37 +49,37 @@
 }
 
 .btns {
-display: flex;
-flex-direction: column;
-gap: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
 }
 
 @media screen and (min-width: 768px) {
-   .btns {
+    .btns {
         gap: 14px;
     }
-    
+
 }
 
 .btnIcon {
-fill: none;
-stroke: var(--grey);
+    fill: none;
+    stroke: var(--grey);
 }
 
 .itemAmount {
     font-size: 14px;
-font-weight: 700;
-line-height: 14px;
-letter-spacing: 0;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0;
 }
 
 @media screen and (min-width: 768px) {
-   .itemAmount {
-    font-size: 15px;
-       line-height: 22.4px;
+    .itemAmount {
+        font-size: 15px;
+        line-height: 22.4px;
     }
-    
+
 }
 
 .itemDate {
@@ -103,9 +107,9 @@ letter-spacing: 0;
 }
 
 @media screen and (min-width: 768px) {
-   .changeBtn {
-       width: 16px;
-       height: 16px;
+    .changeBtn {
+        width: 16px;
+        height: 16px;
     }
-    
+
 }
