@@ -1,13 +1,13 @@
+import PropTypes from 'prop-types';
+import styles from './WaterForm.module.css';
 import { useForm, Controller } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import PropTypes from 'prop-types';
-import styles from './WaterForm.module.css';
 import { useEffect } from 'react';
 
 const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
   const schema = Yup.object().shape({
-    amount: Yup.number().required('Amount is required').min(1, 'Amount must be at least 1'),
+    amount: Yup.number().required('Amount is required').min(1, 'Amount must be at least 1').max(1000, 'Amount must be no more than 1000'),
     time: Yup.string().required('Time is required').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Time must be in HH:mm format'),
   });
 
@@ -23,7 +23,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (initialData) {
       setValue('time', initialData.time || getCurrentTime());
       setValue('amount', initialData.amount || 50);
-      
+      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Початкові дані`, initialData);
     }
   }, [initialData, setValue]);
 
@@ -36,20 +36,40 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
 
   const incrementAmount = () => {
     const currentAmount = getValues('amount');
-    setValue('amount', currentAmount + 50);
-    
+    if (currentAmount < 1000) {
+      const newAmount = currentAmount + 50 > 1000 ? 1000 : currentAmount + 50;
+      setValue('amount', newAmount);
+      console.log(`[WaterForm] ${newAmount}: Збільшення кількості`, newAmount);
+    }
   };
 
   const decrementAmount = () => {
     const currentAmount = getValues('amount');
     if (currentAmount > 50) {
-      setValue('amount', currentAmount - 50);
-      
+      const newAmount = currentAmount - 50 < 50 ? 50 : currentAmount - 50;
+      setValue('amount', newAmount);
+      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зменшення кількості`, newAmount);
     }
   };
 
+  const handleFormSubmit = (data) => {
+    if (data.amount > 1000) {
+      data.amount = 1000;
+    }
+    if (data.amount < 50) {
+      data.amount = 50;
+    }
+    console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Клік на кнопку Submit`, data);
+    onSubmit(data);
+  };
+
+  const handleFormClose = () => {
+    console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Закриття форми`);
+    onClose();
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.popUp}>
+    <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.popUp}>
       <div className={styles.header}>
         <div className={styles.headerText}>{type === 'add' ? 'Add water' : 'Edit the entered amount of water'}</div>
         <div className={styles.data}>
@@ -90,6 +110,10 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                     placeholder="HH:MM"
                     pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
                     title="Time format HH:MM"
+                    onChange={(e) => {
+                      field.onChange(e);
+                      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зміна часу`, e.target.value);
+                    }}
                   />
                 )}
               />
@@ -98,7 +122,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
           </div>
         </div>
         <div className={styles.enter}>
-          <div className={styles.dataText}>Enter the value of the water used:</div> 
+          <div className={styles.dataText}>Enter the value of the water used:</div>
           <Controller
             name="amount"
             control={control}
@@ -107,9 +131,14 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                 type="number"
                 {...field}
                 className={styles.input}
-                min="1"
+                min="50"
+                max="1000"
                 onChange={(e) => {
-                  field.onChange(e);
+                  let value = parseInt(e.target.value);
+                  if (value > 1000) value = 1000;
+                  if (value < 50) value = 50;
+                  field.onChange(value);
+                  console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зміна кількості`, value);
                 }}
               />
             )}
@@ -119,7 +148,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
           <div className={styles.btnSave}>Save</div>
         </button>
       </div>
-      <button type="button" className={styles.closeBtn} onClick={onClose}>
+      <button type="button" className={styles.closeBtn} onClick={handleFormClose}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M18 6L6 18" stroke="#2F2F2F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           <path d="M6 6L18 18" stroke="#2F2F2F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

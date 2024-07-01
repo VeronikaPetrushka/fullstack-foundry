@@ -4,10 +4,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 345px;
-
-  padding: 40px 20px;
   background-color: white;
   box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.1);
+  padding: 40px 20px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;

@@ -28,7 +28,6 @@
   font-family: Poppins, sans-serif;
   font-weight: 700;
   line-height: 24px;
-  padding-bottom: 24px;
 }
 
 .section,
@@ -52,7 +51,8 @@
 
 .dataText {
   font-size: 16px;
-  padding-bottom: 20px;
+  padding-bottom: 8px;
+  padding-top: 24px;
 }
 
 .labelText {
@@ -133,6 +133,7 @@
   border-radius: 50px;
   border: 1.5px #323f47 solid;
   cursor: pointer;
+  background-color: white;
 }
 
 .minus .vector {
@@ -151,6 +152,7 @@
   border-radius: 50px;
   border: 1.5px #323f47 solid;
   cursor: pointer;
+  background-color: white;
 }
 
 .plus .vector:first-child {
@@ -365,5 +367,6 @@
     width: 141px;
     font-size: 16px;
     line-height: 24px;
+    padding: 18px 50px;
   }
 }

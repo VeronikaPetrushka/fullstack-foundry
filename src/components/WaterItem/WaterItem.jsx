@@ -3,12 +3,26 @@ import css from './WaterItem.module.css';
 import Icon from '../../components/Icon/Icon';
 
 const WaterItem = ({ item, onEdit, onDelete }) => {
-  const { amount, date } = item;
+  const { amount, createdAt } = item;
 
-  if (!date) {
-    console.error('Error: item.date is undefined', item);
-    return null; 
+  if (!createdAt) {
+    console.error('Помилка: item.createdAt не визначено', item);
+    return null;
   }
+
+  const handleEdit = () => {
+    console.log(`[WaterItem] ${new Date().toLocaleTimeString()}: Редагування елемента води`, item);
+    onEdit();
+  };
+
+  const handleDelete = () => {
+    console.log(`[WaterItem] ${new Date().toLocaleTimeString()}: Видалення елемента води`, item._id);
+    onDelete();
+  };
+
+  const displayTime = new Date(createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+
+  console.log(`[WaterItem] ${new Date().toLocaleTimeString()}: Відображення елемента води`, item);
 
   return (
     <div className={css.item}>
@@ -23,11 +37,11 @@ const WaterItem = ({ item, onEdit, onDelete }) => {
           <p>{amount} ml</p>
         </div>
         <div className={css.itemDate}>
-          <p>{new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+          <p>{displayTime}</p>
         </div>
       </div>
       <div className={css.btns}>
-        <button type="button" className={css.changeBtn} onClick={onEdit}>
+        <button type="button" className={css.changeBtn} onClick={handleEdit}>
           <Icon
             width={'14'}
             height={'14'}
@@ -35,7 +49,7 @@ const WaterItem = ({ item, onEdit, onDelete }) => {
             styles={css.btnIcon}
           />
         </button>
-        <button type="button" className={css.changeBtn} onClick={onDelete}>
+        <button type="button" className={css.changeBtn} onClick={handleDelete}>
           <Icon
             width={'14'}
             height={'14'}
@@ -51,7 +65,7 @@ const WaterItem = ({ item, onEdit, onDelete }) => {
 WaterItem.propTypes = {
   item: PropTypes.shape({
     amount: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
   }).isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
