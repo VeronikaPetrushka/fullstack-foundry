@@ -17,10 +17,10 @@ const WaterMainInfo = ({ selectedDate }) => {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log(`[WaterMainInfo] ${new Date().toLocaleTimeString()}: Отримано щоденну активність`, response.data);
+      // console.log(`[WaterMainInfo] ${new Date().toLocaleTimeString()}: Отримано щоденну активність`, response.data);
       setWaterItems(response.data);
     } catch (error) {
-      console.error('Помилка при отриманні водних елементів:', error);
+      // console.error('Помилка при отриманні водних елементів:', error);
     }
   };
 
