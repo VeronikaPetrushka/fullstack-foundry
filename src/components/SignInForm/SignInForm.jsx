@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth/operations';
+import { userInfo } from '../../redux/user/operations';
 import { selectIsSignedIn } from '../../redux/auth/selectors';
 import icon from '../../assets/icons.svg';
 import { toast, Toaster } from 'react-hot-toast';
@@ -37,6 +38,7 @@ const SignInForm = () => {
   const onSubmit = async formData => {
     try {
       await dispatch(login(formData)).unwrap();
+      dispatch(userInfo()).unwrap();
       toast.success('Successfully signed in!');
       reset();
       navigate('/tracker');
