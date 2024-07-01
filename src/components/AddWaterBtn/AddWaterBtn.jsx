@@ -3,6 +3,7 @@ import axios from 'axios';
 import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
 import WaterModal from '../WaterModal/WaterModal';
+import BasicModal from '../BasicModal/BasicModal';
 
 const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
   const [modIsOpen, setModIsOpen] = useState(false);
@@ -90,13 +91,15 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
           <span className={isBig ? css.txtSmall : css.txtBig}>Add water</span>
         </button>
       </div>
-      <WaterModal
+      <BasicModal isOpen={modIsOpen} onClose={closeWaterModal}>
+        <WaterModal
         isOpen={modIsOpen}
         onClose={closeWaterModal}
         onSubmit={handleSubmit}
         type="add"
         initialData={initialData}
       />
+      </BasicModal>
     </>
   );
 };
