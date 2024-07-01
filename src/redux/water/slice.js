@@ -101,7 +101,6 @@ const waterSlice = createSlice({
       if (index !== -1) {
         state.waterDaily[index] = action.payload.res;
       }
-
       const totalAmount = state.waterDaily.reduce(
         (total, record) => total + record.amount,
         0
@@ -127,7 +126,7 @@ const waterSlice = createSlice({
       state.isLoading = false;
       const dailyNorma = Number(action.payload.dailyNorma);
       const index = state.waterDaily.findIndex(
-        record => record._id === action.meta.arg.id
+        record => record._id === action.payload._id
       );
       const deletedData = state.waterDaily[index];
       state.waterDaily.splice(index, 1);
