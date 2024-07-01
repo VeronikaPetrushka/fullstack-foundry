@@ -1,70 +1,69 @@
-import { Controller } from 'react-hook-form';
 import css from './AvatarInput.module.css';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectUserInfo } from '../../../redux/user/selectors';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUserInfo, selectIsLoadingAvatar, selectIsError } from '../../../redux/user/selectors';
+import { useForm } from "react-hook-form";
+import { uploadAvatar } from '../../../redux/user/operations';
 import Icon from '../../Icon/Icon'
+import Loader from '../../Loader/Loader';
+import { toast, Toaster } from 'react-hot-toast';
 
-export default function AvatarInput({ control, register, setAvatarURL }) {
-  const [inputImg, setInputImage] = useState(false);
+export default function AvatarInput() {
+  const { register } = useForm();
+  const [avatarURL, setAvatarURL] = useState('src/assets/img/avatar-default.jpg');
+
+  const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
+  const isLoadingAvatar = useSelector(selectIsLoadingAvatar);
+  const isErrorAvatar = useSelector(selectIsError);
 
-  const avatarUser = (
-    <img
-      className={css.photo}
-      src={inputImg ? inputImg : user.avatarURL}
-      width="100%"
-      height="100%"
-      alt="Avatar"
-    />
-  );
+  useEffect(() => {
+    if (user.avatar) {
+      setAvatarURL(user.avatar);
+    }
+  }, [user.avatar]);
 
-  const avatarDefault = (
-    <img
-      className={css.photo}
-      src="src\assets\img\avatar-default.jpg"
-      width="100%"
-      height="100%"
-      alt="Avatar"
-    />
-  );
-
+  const handleUpload = async(file) => {
+    const formData = new FormData();
+    formData.append("avatar", file);
+    const res = await dispatch(uploadAvatar(formData)).unwrap();
+    return res;
+  }
   const onChange = event => {
     const file = event.target.files[0];
     if (file) {
-      setAvatarURL(file);
-      setInputImage(URL.createObjectURL(file));
-    } else {
-      setInputImage(false);
+      const avatar = handleUpload(file);
+      if(avatar && !isErrorAvatar && !isLoadingAvatar){
+        setAvatarURL(avatar);
+      }
     }
   };
 
+  toast.error(isErrorAvatar || 'Sorry, error occured! Try later...');
+
   return (
+    isErrorAvatar ? (<Toaster position="top-center" />) :
     <div className={css.avatarInput}>
       <div className={css.avatarBox}>
-        {user.avatarURL || inputImg ? avatarUser : avatarDefault}
+        {isLoadingAvatar ? <Loader /> :
+        <img className={css.photo} src={avatarURL} width="100%" height="100%" alt="Avatar" />
+        }
       </div>
-
-      <Controller
-        name="file"
-        control={control}
-        render={({ field }) => (
+      <form>
           <input
-            {...field}
             {...register('avatar')}
             type="file"
             id="file-input"
             style={{ display: 'none' }}
             onChange={onChange}
           />
-        )}
-      />
       <label htmlFor="file-input">
         <div className={css.upLoad}>
-          <Icon width={'16'} height={'16'} iconName={'upload'} styles={css.svgAvatarBtn} />
+          <Icon width={'16'} height={'16'}  iconName={'upload'} styles= {css.svgAvatarBtn}/>
           <p>Upload a photo</p>
         </div>
       </label>
+      </form>
     </div>
   );
 }
