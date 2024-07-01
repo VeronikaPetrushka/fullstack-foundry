@@ -66,18 +66,20 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     setValue('name', userSettings.name);
     setValue('email', userSettings.email);
     setValue('weight', userSettings.weight);
-    setValue('dailyNorma', userSettings.dailyNorma);
+    setValue('dailyNorma', (Number(userSettings.dailyNorma) / 1000).toFixed(2));
     setValue('timeActivity', userSettings.timeActivity);
     setValue('gender', userSettings.gender);
     calculateV();
   }, [userSettings, setValue]);
 
   const onSubmit = async data => {
+    data.dailyNorma = (Number(data.dailyNorma) * 1000).toFixed(0);
     try {
       await dispatch(updateUserSettings(data)).unwrap();
       setSuccess(true);
-      toast.success('Successfully updated!');
       closeModal();
+      toast.success('Successfully updated!', {
+        duration: 6000, position: 'top-center',});
     } catch (error) {
       toast.error(error || 'Failed to update data!');
     }
@@ -101,10 +103,10 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     }
   }, [watch]);
 
-  return isError ? (
-    <Toaster position="top-center" />
-  ) : (
+  return (
     <>
+      {(success || isError) && <Toaster position="top-center" />}
+
       {isLoading && (
         <div className={css.loaderBg}>
           <Loader addClass={css.monthDataLoader} />
@@ -245,7 +247,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
           </button>
         </div>
       </form>
-      {success && <Toaster position="top-center"></Toaster>}
     </>
   );
 }
