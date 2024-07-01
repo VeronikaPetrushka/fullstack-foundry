@@ -19,11 +19,19 @@ const schema = yup.object().shape({
     .required('This field is required'),
   name: yup.string(),
   gender: yup.string().oneOf(['male', 'female'], 'Select your gender'),
-  weight: yup.number(),
+  weight: yup
+    .number()
+    .min(1, 'The value must be at least 0')
+    .max(300, 'The value must be no more than 3 numbers')
+    .required('The field is required'),
   timeActivity: yup
     .string()
     .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Enter time in HH:MM format'),
-  dailyNorma: yup.number(),
+  dailyNorma: yup
+    .number()
+    .min(1, 'The value must be at least 0')
+    .max(9999, 'The value must be no more than 4 numbers')
+    .required('The field is required'),
 });
 
 export default function UserSettingsForm({ closeModal, getSetting }) {
@@ -41,7 +49,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     const totalHours = parseInt(hours) + parseInt(minutes) / 60;
     return totalHours;
   };
-
 
   const {
     register,
@@ -65,7 +72,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     calculateV();
   }, [userSettings, setValue]);
 
-
   const onSubmit = async data => {
     try {
       await dispatch(updateUserSettings(data)).unwrap();
@@ -79,7 +85,11 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
 
   const calculateV = useCallback(() => {
     const { gender, weight, timeActivity } = watch();
-    if(typeof weight === 'undefined' || typeof timeActivity === 'undefined' || typeof gender === 'undefined'){
+    if (
+      typeof weight === 'undefined' ||
+      typeof timeActivity === 'undefined' ||
+      typeof gender === 'undefined'
+    ) {
       return;
     }
     if (gender === 'male') {
@@ -91,45 +101,55 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     }
   }, [watch]);
 
-  return isError ? (<Toaster position="top-center" />) :
-    (<>
-    {isLoading && (<div className={css.loaderBg}><Loader addClass={css.monthDataLoader} /></div>)}
+  return isError ? (
+    <Toaster position="top-center" />
+  ) : (
+    <>
+      {isLoading && (
+        <div className={css.loaderBg}>
+          <Loader addClass={css.monthDataLoader} />
+        </div>
+      )}
 
-    <AvatarInput />
+      <AvatarInput />
 
-    <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div>
           <h3 className={css.titleHeader}>Your gender identity</h3>
         </div>
         <div>
           <div className={css.container}>
-          <div className={css.radio}>
-          <input
-            type="radio"
-            {...register('gender')}
-            value="male"
-            id="field-male"
-            onChange={() => {
-              setValue('gender', 'male');
-              calculateV();
-            }}
-        />{' '}
-          <label htmlFor="field-male" className={css.radioLabel}>Male</label>
-          </div>
-          <div className={css.radio}>
-          <input
-            type="radio"
-            {...register('gender')}
-            value="female"
-            id="field-female"
-            onChange={() => {
-              setValue('gender', 'female');
-              calculateV();
-            }}
-          />{' '}
-          <label htmlFor="field-female" className={css.radioLabel}>Female</label>
-          </div>
-          {errors.gender && <p>{errors.gender.message}</p>}
+            <div className={css.radio}>
+              <input
+                type="radio"
+                {...register('gender')}
+                value="male"
+                id="field-male"
+                onChange={() => {
+                  setValue('gender', 'male');
+                  calculateV();
+                }}
+              />{' '}
+              <label htmlFor="field-male" className={css.radioLabel}>
+                Male
+              </label>
+            </div>
+            <div className={css.radio}>
+              <input
+                type="radio"
+                {...register('gender')}
+                value="female"
+                id="field-female"
+                onChange={() => {
+                  setValue('gender', 'female');
+                  calculateV();
+                }}
+              />{' '}
+              <label htmlFor="field-female" className={css.radioLabel}>
+                Female
+              </label>
+            </div>
+            {errors.gender && <p>{errors.gender.message}</p>}
           </div>
         </div>
 
@@ -174,7 +194,8 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                   <span className={css.vector}>!</span>Active time in hours
                 </p>
                 <p>
-                  <span className={css.vector}>!</span>Daily water norma in litres
+                  <span className={css.vector}>!</span>Daily water norma in
+                  litres
                 </p>
               </li>
             </ul>
@@ -182,11 +203,12 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
           <section>
             <div className={css.formKilo}>
               <label>Your weight in kilograms:</label>
-              <input {...register('weight')}
-              onChange={(event) => {
-                setValue('weight', event.target.value);
-                calculateV();
-              }}
+              <input
+                {...register('weight')}
+                onChange={event => {
+                  setValue('weight', event.target.value);
+                  calculateV();
+                }}
               />
               {errors.weight && (
                 <p className={css.error}>{errors.weight.message} </p>
@@ -223,8 +245,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
           </button>
         </div>
       </form>
+      {success && <Toaster position="top-center"></Toaster>}
     </>
   );
 }
-
-
