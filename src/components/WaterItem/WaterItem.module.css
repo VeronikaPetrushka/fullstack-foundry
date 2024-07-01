@@ -1,11 +1,15 @@
 .item {
-    background-color: var(--white);
-    width: 150px;
-    height: 74px;
-    display: flex;
-    padding: 18px 14px 18px 14px;
-    border-radius: 15px;
-    gap: 10px;
+  background-color: var(--white);
+  width: 150px;
+  height: 74px;
+  display: flex;
+  padding: 18px 14px 18px 14px;
+  border-radius: 5px;
+  gap: 5px;
+}
+
+.itemAmount p {
+  text-wrap: nowrap;
 }
 
 @media screen and (min-width: 768px) {
@@ -19,11 +23,10 @@
 }
 
 .itemContent {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    justify-content: center;
-
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
 }
 
 .itemAmount p {
@@ -38,14 +41,14 @@
 }
 
 .icon {
-    fill: var(--green);
+  fill: var(--green);
 }
 
 @media screen and (min-width: 768px) {
-    .icon {
-        width: 44px;
-        height: 45px;
-    }
+  .icon {
+    width: 44px;
+    height: 45px;
+  }
 }
 
 .btns {
@@ -83,27 +86,27 @@
 }
 
 .itemDate {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 12px;
-    color: var(--lightGrey);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 10px;
+  color: var(--lightGrey);
 }
 
 @media screen and (min-width: 768px) {
-    .itemDate {
-        font-size: 12px;
-        line-height: 22.4px;
-    }
+  .itemDate {
+    font-size: 10px;
+    line-height: 20px;
+  }
 }
 
 .changeBtn {
-    border: none;
-    background-color: transparent;
-    padding: 0;
+  border: none;
+  background-color: transparent;
+  padding: 0;
 }
 
 .changeBtn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

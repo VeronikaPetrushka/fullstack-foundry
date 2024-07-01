@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
@@ -34,18 +34,22 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
     }
   }, [modIsOpen]);
 
-  const closeWaterModal = async () => {
+  const closeWaterModal = useCallback(() => { 
     setModIsOpen(false);
-    await fetchDailyActivity(); 
-  };
+    fetchDailyActivity();
+  }, [fetchDailyActivity]);
 
   const handleSubmit = async (data) => {
     try {
-      console.log('Submitting data to server:', data);
       const token = localStorage.getItem('token');
+      const date = new Date();
+      const [hours, minutes] = data.time.split(':');
+      date.setHours(hours, minutes);
+
+      console.log('Submitting data to server:', data);
       const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water', {
         amount: data.amount,
-        date: new Date().toISOString().split('T')[0] 
+        date: date.toISOString()
       }, {
         headers: {
           Authorization: `Bearer ${token}`
