@@ -3,10 +3,10 @@ import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import TimeField from 'react-simple-timefield';
 import { updateUserSettings } from '../../redux/user/operations';
-import { selectIsError, selectIsLoading } from '../../redux/user/selectors';
+import { selectIsLoading } from '../../redux/user/selectors';
 import Loader from '../Loader/Loader';
 
 import css from './UserSettingsForm.module.css';
@@ -40,9 +40,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   const dispatch = useDispatch();
 
   const isLoading = useSelector(selectIsLoading);
-  const isError = useSelector(selectIsError);
-
-  const [success, setSuccess] = useState(false);
 
   const convertToHours = time => {
     const [hours, minutes] = time.toString().split(':');
@@ -76,12 +73,11 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     data.dailyNorma = (Number(data.dailyNorma) * 1000).toFixed(0);
     try {
       await dispatch(updateUserSettings(data)).unwrap();
-      setSuccess(true);
       toast.success('Successfully updated!', {
         duration: 5000, position: 'top-center',});
         closeModal();
       } catch (error) {
-      toast.error(error || 'Failed to update data!');
+        toast.error(error || 'Failed to update data!');
     }
   };
 
@@ -104,10 +100,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   }, [watch]);
 
   return (
-    isError ? (<Toaster position="top-center" />) :
     <>
-    {success && <Toaster position="top-center" />}
-
       {isLoading && (
         <div className={css.loaderBg}>
           <Loader addClass={css.monthDataLoader} />
