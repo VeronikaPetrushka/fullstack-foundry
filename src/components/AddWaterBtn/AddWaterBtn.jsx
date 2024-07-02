@@ -36,7 +36,7 @@ const AddWaterBtn = ({ isBig = true, selectedDate }) => {
 
     try {
       const date = new Date(data.date);
-      const [hours, minutes] = data.time ? data.time.split(':') : [String(date.getHours()).padStart(2, '0'), String(date.getMinutes()).padStart(2, '0')];
+      const [hours, minutes] = data.time ? data.time.split(':') : [String(date.getUTCHours()).padStart(2, '0'), String(date.getUTCMinutes()).padStart(2, '0')];
       const sendData = {
         amount: data.amount,
         date: selectedDate.fullDate + 'T' + hours + ':' + minutes,
