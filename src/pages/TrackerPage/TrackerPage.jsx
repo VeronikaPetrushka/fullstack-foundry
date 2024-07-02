@@ -9,6 +9,7 @@ import CalendarStat from '../../components/Calendar/CalendarStat';
 import { Helmet } from 'react-helmet-async';
 import css from './TrackerPage.module.css';
 import DailyInfo from '../../components/DailyInfo/DailyInfo';
+import { Toaster } from 'react-hot-toast';
 
 const TrackerPage = () => {
 
@@ -40,6 +41,7 @@ const TrackerPage = () => {
           <DailyInfo selectedDate={selectedDate} />
           <CalendarStat selectedDate={selectedDate} handleClick={handleCalendarBtnClick} />
         </section>
+        <Toaster position="top-center" />
       </Page>
     </>
   );
