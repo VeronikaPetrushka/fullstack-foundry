@@ -12,7 +12,7 @@
   --animation: 150ms ease-in;
 
   max-width: 1440px;
-  margin: 0 auto;
+  margin: auto;
 
   color: var(--grey);
   background-color: var(--white);
