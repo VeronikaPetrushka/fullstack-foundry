@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
 import WaterModal from '../WaterModal/WaterModal';
@@ -8,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { addWater } from '../../redux/water/operations';
 
 const AddWaterBtn = ({ isBig = true, selectedDate }) => {
+
   const [modIsOpen, setModIsOpen] = useState(false);
   const [initialData, setInitialData] = useState({ amount: 50, time: '' });
 
@@ -15,42 +15,31 @@ const AddWaterBtn = ({ isBig = true, selectedDate }) => {
 
   useEffect(() => {
     if (modIsOpen) {
-      const fetchData = async () => {
-        try {
-          const token = localStorage.getItem('token');
-          const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water/day', { date: new Date().toISOString().split('T')[0] }, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-          console.log('Data on server before opening modal:', response.data);
-        } catch (error) {
-          console.error('Error fetching water items:', error);
-        }
-      };
-      fetchData();
-
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const currentTime = `${hours}:${minutes}`;
       setInitialData({ amount: 50, time: currentTime });
     }
-  }, [modIsOpen]);
+  }, [modIsOpen, selectedDate]);
 
   const closeWaterModal = useCallback(() => {
     setModIsOpen(false);
-    // fetchDailyActivity();
   }, []);
 
   const handleSubmit = async (data) => {
+    console.log("data: ",data);
     try {
-      const date = new Date(selectedDate);
-      const [hours, minutes] = data.time ? data.time.split(':') : [date.getHours(), date.getMinutes()];
-      date.setHours(hours);
-      date.setMinutes(minutes);
-
-      await dispatch(addWater(data));
+      const date = new Date(data.date);
+      const [hours, minutes] = data.time ? data.time.split(':') : [String(date.getHours()).padStart(2, '0'), String(date.getMinutes()).padStart(2, '0')];
+      // date.setHours(hours);
+      // date.setMinutes(minutes);
+      const sendData = {
+        amount: data.amount,
+        date: selectedDate.fullDate + 'T' + hours + ':' + minutes,
+      }
+console.log("sended data: ",sendData);
+      await dispatch(addWater(sendData));
       closeWaterModal();
     } catch (error) {
       console.error('Error submitting data:', error.response ? error.response.data : error.message);

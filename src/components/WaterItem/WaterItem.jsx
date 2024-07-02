@@ -16,8 +16,8 @@ const WaterItem = ({ item, onEdit, onDelete }) => {
   const handleDelete = () => {
     onDelete();
   };
-
-  const displayTime = new Date(date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+  const dateObj = new Date(date);
+  const displayTime = dateObj.getUTCHours().toString().padStart(2, '0') + ':' + dateObj.getUTCMinutes().toString().padStart(2, '0');
 
   return (
     <div className={css.item}>
