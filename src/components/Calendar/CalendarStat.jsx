@@ -107,7 +107,7 @@ const CalendarStat = ({ selectedDate, handleClick }) => {
       );
   }
 
-  toast.error(isErrorWaterMonth || 'Sorry, error occured! Try later...');
+  isErrorWaterMonth && toast.error(isErrorWaterMonth || 'Sorry, error occured! Try later...');
   return isErrorWaterMonth ? (
     <Toaster position="top-center" />
   ) : (dataForSelectedMonth &&

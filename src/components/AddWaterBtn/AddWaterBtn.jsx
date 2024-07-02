@@ -1,66 +1,48 @@
 import { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
 import WaterModal from '../WaterModal/WaterModal';
 import BasicModal from '../BasicModal/BasicModal';
+import { useDispatch } from 'react-redux';
+import { addWater } from '../../redux/water/operations';
 
-const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
+const AddWaterBtn = ({ isBig = true, selectedDate }) => {
+
   const [modIsOpen, setModIsOpen] = useState(false);
   const [initialData, setInitialData] = useState({ amount: 50, time: '' });
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (modIsOpen) {
-      const fetchData = async () => {
-        try {
-          const token = localStorage.getItem('token');
-          const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water/day', { date: new Date().toISOString().split('T')[0] }, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-          console.log('Data on server before opening modal:', response.data);
-        } catch (error) {
-          console.error('Error fetching water items:', error);
-        }
-      };
-      fetchData();
-
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const currentTime = `${hours}:${minutes}`;
       setInitialData({ amount: 50, time: currentTime });
     }
-  }, [modIsOpen]);
+  }, [modIsOpen, selectedDate]);
 
-  const closeWaterModal = useCallback(() => { 
+  const closeWaterModal = useCallback(() => {
     setModIsOpen(false);
-    fetchDailyActivity();
-  }, [fetchDailyActivity]);
+  }, []);
 
   const handleSubmit = async (data) => {
+    console.log("data: ",data);
     try {
-      const token = localStorage.getItem('token');
-      const date = new Date();
-      const [hours, minutes] = data.time ? data.time.split(':') : [date.getHours(), date.getMinutes()];
-      date.setHours(hours);
-      date.setMinutes(minutes);
-
-      console.log('Submitting data to server:', data);
-      const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water', {
+      const date = new Date(data.date);
+      const [hours, minutes] = data.time ? data.time.split(':') : [String(date.getHours()).padStart(2, '0'), String(date.getMinutes()).padStart(2, '0')];
+      // date.setHours(hours);
+      // date.setMinutes(minutes);
+      const sendData = {
         amount: data.amount,
-        date: date.toISOString()
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      console.log('Server response:', response.data);
+        date: selectedDate.fullDate + 'T' + hours + ':' + minutes,
+      }
+console.log("sended data: ",sendData);
+      await dispatch(addWater(sendData));
       closeWaterModal();
     } catch (error) {
       console.error('Error submitting data:', error.response ? error.response.data : error.message);
-      console.log('Error details:', error.response);
     }
   };
 

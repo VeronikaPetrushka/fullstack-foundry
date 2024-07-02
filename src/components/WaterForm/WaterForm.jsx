@@ -6,6 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 
 const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
+
+  if(type === "edit"){
+    const dateObj = new Date(initialData.date);
+    initialData = {...initialData, time: dateObj.getUTCHours().toString().padStart(2, '0') + ':' + dateObj.getUTCMinutes().toString().padStart(2, '0')};
+  }
+
   const schema = Yup.object().shape({
     amount: Yup.number().required('Amount is required').min(50, 'Amount must be at least 50').max(1000, 'Amount must be no more than 1000'),
     time: Yup.string().required('Time is required').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Time must be in HH:mm format'),
@@ -23,15 +29,13 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (initialData) {
       setValue('time', initialData.time || getCurrentTime());
       setValue('amount', initialData.amount || 50);
-      
-      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Початкові дані`, initialData);
     }
   }, [initialData, setValue]);
 
   const getCurrentTime = () => {
     const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const hours = String(now.getUTCHours()).padStart(2, '0');
+    const minutes = String(now.getUTCMinutes()).padStart(2, '0');
     return `${hours}:${minutes}`;
   };
 
@@ -40,7 +44,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (currentAmount < 1000) {
       const newAmount = currentAmount + 50 > 1000 ? 1000 : currentAmount + 50;
       setValue('amount', newAmount);
-      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Збільшення кількості`, newAmount);
     }
   };
 
@@ -49,26 +52,22 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (currentAmount > 50) {
       const newAmount = currentAmount - 50 < 50 ? 50 : currentAmount - 50;
       setValue('amount', newAmount);
-      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зменшення кількості`, newAmount);
     }
   };
 
   const handleFormSubmit = (data) => {
     const date = new Date();
-    const [hours, minutes] = data.time ? data.time.split(':') : [date.getHours(), date.getMinutes()];
-    date.setHours(hours);
-    date.setMinutes(minutes);
+    const [hours, minutes] = data.time ? data.time.split(':') : [date.getUTCHours(), date.getUTCMinutes()];
+    date.setUTCHours(hours);
+    date.setUTCMinutes(minutes);
 
-    const formattedDate = date.toISOString();
-    const newData = { ...data, date: formattedDate }; // Використання правильного формату ISO 8601 для параметра date
+    const newData = { ...data, date }; // Використання правильного формату ISO 8601 для параметра date
     delete newData.time; // Видалення параметра time
 
-    console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Клік на кнопку Submit`, newData);
     onSubmit(newData);
   };
 
   const handleFormClose = () => {
-    console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Закриття форми`);
     onClose();
   };
 
@@ -107,8 +106,8 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                 name="time"
                 control={control}
                 render={({ field }) => (
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     {...field}
                     className={styles.timeInput}
                     placeholder="HH:MM"
@@ -116,7 +115,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                     title="Time format HH:MM"
                     onChange={(e) => {
                       field.onChange(e);
-                      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зміна часу`, e.target.value);
                     }}
                   />
                 )}
@@ -131,7 +129,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
             name="amount"
             control={control}
             render={({ field }) => (
-              <input 
+              <input
                 type="number"
                 {...field}
                 className={styles.input}
@@ -142,7 +140,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                   if (value > 1000) value = 1000;
                   if (value < 50) value = 50;
                   field.onChange(value);
-                  console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зміна кількості`, value);
                 }}
               />
             )}

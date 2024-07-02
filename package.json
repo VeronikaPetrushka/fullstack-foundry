@@ -15,11 +15,9 @@
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
-    "axios-logger": "^2.8.1",
     "fullstack-foundry": "file:..",
     "i18next": "^23.11.5",
     "jwt-decode": "^4.0.0",
-    "morgan": "^1.10.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -32,7 +30,6 @@
     "react-simple-timefield": "^3.3.1",
     "recharts": "^2.12.7",
     "redux": "^5.0.1",
-    "sass": "^1.77.6",
     "yup": "^1.4.0"
   },
   "eslintConfig": {
