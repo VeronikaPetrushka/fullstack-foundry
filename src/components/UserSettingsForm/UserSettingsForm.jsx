@@ -99,6 +99,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     }
   }, [watch]);
 
+
   return (
     <>
       {isLoading && (
