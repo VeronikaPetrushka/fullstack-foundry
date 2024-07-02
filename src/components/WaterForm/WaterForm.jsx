@@ -23,8 +23,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (initialData) {
       setValue('time', initialData.time || getCurrentTime());
       setValue('amount', initialData.amount || 50);
-      
-      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Початкові дані`, initialData);
     }
   }, [initialData, setValue]);
 
@@ -40,7 +38,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (currentAmount < 1000) {
       const newAmount = currentAmount + 50 > 1000 ? 1000 : currentAmount + 50;
       setValue('amount', newAmount);
-      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Збільшення кількості`, newAmount);
     }
   };
 
@@ -49,7 +46,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (currentAmount > 50) {
       const newAmount = currentAmount - 50 < 50 ? 50 : currentAmount - 50;
       setValue('amount', newAmount);
-      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зменшення кількості`, newAmount);
     }
   };
 
@@ -63,12 +59,10 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     const newData = { ...data, date: formattedDate }; // Використання правильного формату ISO 8601 для параметра date
     delete newData.time; // Видалення параметра time
 
-    console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Клік на кнопку Submit`, newData);
     onSubmit(newData);
   };
 
   const handleFormClose = () => {
-    console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Закриття форми`);
     onClose();
   };
 
@@ -107,8 +101,8 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                 name="time"
                 control={control}
                 render={({ field }) => (
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     {...field}
                     className={styles.timeInput}
                     placeholder="HH:MM"
@@ -116,7 +110,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                     title="Time format HH:MM"
                     onChange={(e) => {
                       field.onChange(e);
-                      console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зміна часу`, e.target.value);
                     }}
                   />
                 )}
@@ -131,7 +124,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
             name="amount"
             control={control}
             render={({ field }) => (
-              <input 
+              <input
                 type="number"
                 {...field}
                 className={styles.input}
@@ -142,7 +135,6 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                   if (value > 1000) value = 1000;
                   if (value < 50) value = 50;
                   field.onChange(value);
-                  console.log(`[WaterForm] ${new Date().toLocaleTimeString()}: Зміна кількості`, value);
                 }}
               />
             )}

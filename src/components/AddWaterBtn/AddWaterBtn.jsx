@@ -4,10 +4,14 @@ import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
 import WaterModal from '../WaterModal/WaterModal';
 import BasicModal from '../BasicModal/BasicModal';
+import { useDispatch } from 'react-redux';
+import { addWater } from '../../redux/water/operations';
 
-const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
+const AddWaterBtn = ({ isBig = true, selectedDate }) => {
   const [modIsOpen, setModIsOpen] = useState(false);
   const [initialData, setInitialData] = useState({ amount: 50, time: '' });
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (modIsOpen) {
@@ -34,33 +38,22 @@ const AddWaterBtn = ({ isBig = true, fetchDailyActivity }) => {
     }
   }, [modIsOpen]);
 
-  const closeWaterModal = useCallback(() => { 
+  const closeWaterModal = useCallback(() => {
     setModIsOpen(false);
-    fetchDailyActivity();
-  }, [fetchDailyActivity]);
+    // fetchDailyActivity();
+  }, []);
 
   const handleSubmit = async (data) => {
     try {
-      const token = localStorage.getItem('token');
-      const date = new Date();
+      const date = new Date(selectedDate);
       const [hours, minutes] = data.time ? data.time.split(':') : [date.getHours(), date.getMinutes()];
       date.setHours(hours);
       date.setMinutes(minutes);
 
-      console.log('Submitting data to server:', data);
-      const response = await axios.post('https://aquatrack-api-myzh.onrender.com/api/water', {
-        amount: data.amount,
-        date: date.toISOString()
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      console.log('Server response:', response.data);
+      await dispatch(addWater(data));
       closeWaterModal();
     } catch (error) {
       console.error('Error submitting data:', error.response ? error.response.data : error.message);
-      console.log('Error details:', error.response);
     }
   };
 
