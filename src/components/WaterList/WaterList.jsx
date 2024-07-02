@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import WaterItem from '../WaterItem/WaterItem';
 import WaterModal from '../WaterModal/WaterModal';
@@ -10,7 +10,7 @@ import { selectWaterDaily } from '../../redux/water/selectors';
 import { useSelector } from 'react-redux';
 
 
-const WaterList = ({ selectedDate }) => {
+const WaterList = () => {
 
   const waterItems = useSelector(selectWaterDaily);
 
@@ -19,10 +19,6 @@ const WaterList = ({ selectedDate }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлення списку водних елементів`, waterItems);
-  }, [waterItems]);
 
   const handleEdit = (item) => {
     setSelectedItem(item);
@@ -42,7 +38,6 @@ const WaterList = ({ selectedDate }) => {
   const handleDeleteModalClose = () => {
     setSelectedItem(null);
     setIsDeleteModalOpen(false);
-    // fetchDailyActivity();
   };
 
   const handleSubmit = async (data) => {
@@ -61,7 +56,6 @@ const WaterList = ({ selectedDate }) => {
           date: data.date,
         })).unwrap();
       }
-      // fetchDailyActivity();
       handleModalClose();
     } catch (error) {
       console.error('Помилка при надсиланні даних:', error);

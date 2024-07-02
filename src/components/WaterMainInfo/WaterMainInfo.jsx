@@ -12,7 +12,7 @@ const WaterMainInfo = ({ selectedDate }) => {
       <WaterProgressBar selectedDate={selectedDate} />
       <AddWaterBtn selectedDate={selectedDate} />
       <div style={{ display: 'none' }}>
-        <WaterList selectedDate={selectedDate} />
+        <WaterList />
       </div>
     </section>
   );
