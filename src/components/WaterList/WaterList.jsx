@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import WaterItem from '../WaterItem/WaterItem';
 import WaterModal from '../WaterModal/WaterModal';
@@ -6,41 +6,53 @@ import { DeleteWaterModal } from '../DeleteWaterModal/DeleteWaterModal';
 import { addWater, editWater } from '../../redux/water/operations';
 import css from './WaterList.module.css';
 import BasicModal from '../BasicModal/BasicModal';
+import { selectWaterDaily } from '../../redux/water/selectors';
+import { useSelector } from 'react-redux';
 
-const WaterList = ({ fetchDailyActivity, waterItems }) => {
+
+const WaterList = () => {
+
+  const waterItems = useSelector(selectWaterDaily);
+
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлення списку водних елементів`, waterItems);
-  }, [waterItems]);
-
   const handleEdit = (item) => {
     setSelectedItem(item);
     setIsModalOpen(true);
-    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Редагування елемента води`, item);
+// =======
+//   useEffect(() => {
+//     console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлення списку водних елементів`, waterItems);
+//   }, [waterItems]);
+
+//   const handleEdit = (item) => {
+//     setSelectedItem(item);
+//     setIsModalOpen(true);
+//     console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Редагування елемента води`, item);
+// >>>>>>> main
   };
 
   const handleDelete = (item) => {
     setSelectedItem(item);
     setIsDeleteModalOpen(true);
-    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Видалення елемента води`, item);
   };
 
   const handleModalClose = () => {
     setSelectedItem(null);
     setIsModalOpen(false);
-    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Модальне вікно закрито`);
   };
 
   const handleDeleteModalClose = () => {
     setSelectedItem(null);
     setIsDeleteModalOpen(false);
-    fetchDailyActivity();
-    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Модальне вікно видалення закрито`);
+// <<<<<<< frontend
+// =======
+//     fetchDailyActivity();
+//     console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Модальне вікно видалення закрито`);
+// >>>>>>> main
   };
 
   const handleSubmit = async (data) => {
@@ -53,15 +65,12 @@ const WaterList = ({ fetchDailyActivity, waterItems }) => {
             date: data.date,
           },
         })).unwrap();
-        console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлено елемент води`, data);
       } else {
         await dispatch(addWater({
           amount: data.amount,
           date: data.date,
         })).unwrap();
-        console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Додано новий елемент води`, data);
       }
-      fetchDailyActivity();
       handleModalClose();
     } catch (error) {
       console.error('Помилка при надсиланні даних:', error);
@@ -89,7 +98,6 @@ const WaterList = ({ fetchDailyActivity, waterItems }) => {
         <DeleteWaterModal
           onClose={handleDeleteModalClose}
           id={selectedItem?._id}
-          fetchDailyActivity={fetchDailyActivity} // Передаємо функцію для оновлення списку
         />
       )}
       </BasicModal>

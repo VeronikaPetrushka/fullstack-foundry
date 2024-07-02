@@ -77,10 +77,10 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     try {
       await dispatch(updateUserSettings(data)).unwrap();
       setSuccess(true);
-      closeModal();
       toast.success('Successfully updated!', {
         duration: 5000, position: 'top-center',});
-    } catch (error) {
+        closeModal();
+      } catch (error) {
       toast.error(error || 'Failed to update data!');
     }
   };

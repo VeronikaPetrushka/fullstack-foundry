@@ -6,23 +6,18 @@ const WaterItem = ({ item, onEdit, onDelete }) => {
   const { amount, date } = item;
 
   if (!date) {
-    // console.error('Помилка: item.createdAt не визначено', item);
     return null;
   }
 
   const handleEdit = () => {
-    // console.log(`[WaterItem] ${new Date().toLocaleTimeString()}: Редагування елемента води`, item);
     onEdit();
   };
 
   const handleDelete = () => {
-    // console.log(`[WaterItem] ${new Date().toLocaleTimeString()}: Видалення елемента води`, item._id);
     onDelete();
   };
-
-  const displayTime = new Date(date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-
-  // console.log(`[WaterItem] ${new Date().toLocaleTimeString()}: Відображення елемента води`, item);
+  const dateObj = new Date(date);
+  const displayTime = dateObj.getUTCHours().toString().padStart(2, '0') + ':' + dateObj.getUTCMinutes().toString().padStart(2, '0');
 
   return (
     <div className={css.item}>

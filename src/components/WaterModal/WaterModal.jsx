@@ -22,19 +22,17 @@ const WaterModal = ({ isOpen, onClose, initialData, onSubmit, type }) => {
   };
 
   useEffect(() => {
-    if (isOpen) {
-      console.log('Modal opened with initial data:', initialData);
-    } else {
+    if (!isOpen) {
       setBackendError('');
     }
   }, [isOpen, initialData]);
 
   return (
     <>
-      <Modal 
-        isOpen={isOpen} 
-        onRequestClose={onClose} 
-        ariaHideApp={false} 
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        ariaHideApp={false}
         className={styles.waterModal}
         overlayClassName={styles.overlay}
       >
@@ -42,14 +40,14 @@ const WaterModal = ({ isOpen, onClose, initialData, onSubmit, type }) => {
           <WaterForm initialData={initialData} onSubmit={handleSubmit} onClose={onClose} type={type} />
         </div>
       </Modal>
-      
+
       {backendError && (
-        <Modal 
-          isOpen={!!backendError} 
-          onRequestClose={handleCloseError} 
-          ariaHideApp={false} 
+        <Modal
+          isOpen={!!backendError}
+          onRequestClose={handleCloseError}
+          ariaHideApp={false}
           className={styles.errorModal}
-          overlayClassName={styles.noOverlay} 
+          overlayClassName={styles.noOverlay}
         >
           <button className={styles.closeBtn} onClick={handleCloseError}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
