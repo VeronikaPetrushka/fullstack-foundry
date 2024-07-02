@@ -3,13 +3,18 @@ import css from './AddWaterBtn.module.css';
 import Icon from '../Icon/Icon';
 import WaterModal from '../WaterModal/WaterModal';
 import BasicModal from '../BasicModal/BasicModal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addWater } from '../../redux/water/operations';
+import toast from 'react-hot-toast';
+import { selectIsLoading } from '../../redux/water/selectors';
+import Loader from '../Loader/Loader';
 
 const AddWaterBtn = ({ isBig = true, selectedDate }) => {
 
   const [modIsOpen, setModIsOpen] = useState(false);
   const [initialData, setInitialData] = useState({ amount: 50, time: '' });
+
+  const isLoading = useSelector(selectIsLoading);
 
   const dispatch = useDispatch();
 
@@ -31,7 +36,7 @@ const AddWaterBtn = ({ isBig = true, selectedDate }) => {
 
     try {
       const date = new Date(data.date);
-      const [hours, minutes] = data.time ? data.time.split(':') : [String(date.getHours()).padStart(2, '0'), String(date.getMinutes()).padStart(2, '0')];
+      const [hours, minutes] = data.time ? data.time.split(':') : [String(date.getUTCHours()).padStart(2, '0'), String(date.getUTCMinutes()).padStart(2, '0')];
       const sendData = {
         amount: data.amount,
         date: selectedDate.fullDate + 'T' + hours + ':' + minutes,
@@ -40,12 +45,19 @@ const AddWaterBtn = ({ isBig = true, selectedDate }) => {
       await dispatch(addWater(sendData));
       closeWaterModal();
     } catch (error) {
+      toast.error(error.message || "Something went wrong. Please try again");
       console.error('Error submitting data:', error.response ? error.response.data : error.message);
     }
   };
 
   return (
     <>
+      {isLoading && (
+        <div className={css.loaderBg}>
+          <Loader addClass={css.monthDataLoader} />
+        </div>
+      )}
+
       <div className={css.addBtnWrap}>
         <button
           className={isBig ? css.btnBig : css.btnSmall}

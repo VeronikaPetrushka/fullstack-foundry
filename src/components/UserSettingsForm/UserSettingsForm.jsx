@@ -22,8 +22,7 @@ const schema = yup.object().shape({
   weight: yup
     .number()
     .min(1, 'The value must be at least 0')
-    .max(300, 'The value must be no more than 3 numbers')
-    .required('The field is required'),
+    .max(300, 'The value must be no more than 3 numbers'),
   timeActivity: yup
     .string()
     .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Enter time in HH:MM format'),
@@ -99,6 +98,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     }
   }, [watch]);
 
+
   return (
     <>
       {isLoading && (
@@ -145,7 +145,9 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                 Female
               </label>
             </div>
-            {errors.gender && <p>{errors.gender.message}</p>}
+            {errors.gender && (
+                <p className={css.error}>{errors.gender.message} </p>
+              )}
           </div>
         </div>
 
