@@ -22,7 +22,7 @@ const handlePending = state => {
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
-  state.error = action.payload;
+  state.isError = action.payload;
 };
 
 const waterSlice = createSlice({
@@ -62,19 +62,34 @@ const waterSlice = createSlice({
     builder.addCase(addWater.pending, handlePending);
     builder.addCase(addWater.fulfilled, (state, action) => {
       const dailyNorma = Number(action.payload.dailyNorma);
+      const newRecord = action.payload.res;
+
       state.isLoading = false;
-      state.waterDaily.push(action.payload.res);
-      const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
-      const mIndex = state.waterMonthly.findIndex(
-        record => record.date.slice(0, 10) === action.payload.res.date.slice(0, 10)
+      state.waterDaily.push(newRecord);
+
+      const totalAmount = state.waterDaily.reduce(
+        (total, record) => total + record.amount,
+        0
       );
-      const percentageOfNorma = totalAmount > dailyNorma ? 100 : Number((totalAmount / dailyNorma * 100).toFixed(0));
+
+      const mIndex = state.waterMonthly.findIndex(
+        record => record.date.slice(0, 10) === newRecord.date.slice(0, 10)
+      );
+
+      const percentageOfNorma =
+        totalAmount > dailyNorma
+          ? 100
+          : Number(((totalAmount / dailyNorma) * 100).toFixed(0));
+
       if (mIndex !== -1) {
         state.waterMonthly[mIndex].totalAmount = totalAmount;
         state.waterMonthly[mIndex].percentageOfNorma = percentageOfNorma;
-      }
-      if(mIndex === -1) {
-        state.waterMonthly.push({ totalAmount, percentageOfNorma, date: action.payload.res.date,  });
+      } else {
+        state.waterMonthly.push({
+          totalAmount,
+          percentageOfNorma,
+          date: newRecord.date,
+        });
       }
     });
     builder.addCase(addWater.rejected, handleRejected);
@@ -82,20 +97,31 @@ const waterSlice = createSlice({
     // Handling editWater
     builder.addCase(editWater.pending, handlePending);
     builder.addCase(editWater.fulfilled, (state, action) => {
-      state.isLoading = false;
       const dailyNorma = Number(action.payload.dailyNorma);
+      const updatedRecord = action.payload.res;
+
+      state.isLoading = false;
       const index = state.waterDaily.findIndex(
-        record => record._id === action.payload.res._id
+        record => record._id === updatedRecord._id
       );
       if (index !== -1) {
-        state.waterDaily[index] = action.payload.res;
+        state.waterDaily[index] = updatedRecord;
       }
 
-      const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
-      const mIndex = state.waterMonthly.findIndex(
-        record => record.date.slice(0, 10) === action.payload.res.date.slice(0, 10)
+      const totalAmount = state.waterDaily.reduce(
+        (total, record) => total + record.amount,
+        0
       );
-      const percentageOfNorma = totalAmount > dailyNorma ? 100 : Number((totalAmount / dailyNorma * 100).toFixed(0));
+
+      const mIndex = state.waterMonthly.findIndex(
+        record => record.date.slice(0, 10) === updatedRecord.date.slice(0, 10)
+      );
+
+      const percentageOfNorma =
+        totalAmount > dailyNorma
+          ? 100
+          : Number(((totalAmount / dailyNorma) * 100).toFixed(0));
+
       if (mIndex !== -1) {
         state.waterMonthly[mIndex].totalAmount = totalAmount;
         state.waterMonthly[mIndex].percentageOfNorma = percentageOfNorma;
@@ -106,23 +132,34 @@ const waterSlice = createSlice({
     // Handling deleteWater
     builder.addCase(deleteWater.pending, handlePending);
     builder.addCase(deleteWater.fulfilled, (state, action) => {
-      state.isLoading = false;
       const dailyNorma = Number(action.payload.dailyNorma);
+      const recordId = action.meta.arg;
+
+      state.isLoading = false;
       const index = state.waterDaily.findIndex(
-        record => record._id === action.meta.arg
+        record => record._id === recordId
       );
       const deletedData = state.waterDaily[index];
       state.waterDaily.splice(index, 1);
 
-      const totalAmount = state.waterDaily.reduce((total, record) => total + record.amount, 0);
+      const totalAmount = state.waterDaily.reduce(
+        (total, record) => total + record.amount,
+        0
+      );
+
       const mIndex = state.waterMonthly.findIndex(
         record => record.date.slice(0, 10) === deletedData.date.slice(0, 10)
       );
-      const percentageOfNorma = totalAmount > dailyNorma ? 100 : Number((totalAmount / dailyNorma * 100).toFixed(0));
+
+      const percentageOfNorma =
+        totalAmount > dailyNorma
+          ? 100
+          : Number(((totalAmount / dailyNorma) * 100).toFixed(0));
+
       if (mIndex !== -1) {
-        if(totalAmount === 0) {
+        if (totalAmount === 0) {
           state.waterMonthly.splice(mIndex, 1);
-        }else{
+        } else {
           state.waterMonthly[mIndex].totalAmount = totalAmount;
           state.waterMonthly[mIndex].percentageOfNorma = percentageOfNorma;
         }

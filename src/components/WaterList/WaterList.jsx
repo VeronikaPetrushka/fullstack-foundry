@@ -23,6 +23,16 @@ const WaterList = () => {
   const handleEdit = (item) => {
     setSelectedItem(item);
     setIsModalOpen(true);
+// =======
+//   useEffect(() => {
+//     console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлення списку водних елементів`, waterItems);
+//   }, [waterItems]);
+
+//   const handleEdit = (item) => {
+//     setSelectedItem(item);
+//     setIsModalOpen(true);
+//     console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Редагування елемента води`, item);
+// >>>>>>> main
   };
 
   const handleDelete = (item) => {
@@ -38,6 +48,11 @@ const WaterList = () => {
   const handleDeleteModalClose = () => {
     setSelectedItem(null);
     setIsDeleteModalOpen(false);
+// <<<<<<< frontend
+// =======
+//     fetchDailyActivity();
+//     console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Модальне вікно видалення закрито`);
+// >>>>>>> main
   };
 
   const handleSubmit = async (data) => {
