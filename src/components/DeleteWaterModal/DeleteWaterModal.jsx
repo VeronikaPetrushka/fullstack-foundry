@@ -1,25 +1,25 @@
-import { useDispatch } from 'react-redux';
-import css from './DeleteWaterModal.module.css';
-import { deleteWater } from '../../redux/water/operations';
-import toast from 'react-hot-toast';
-import Icon from '../Icon/Icon';
+import { useDispatch } from "react-redux";
+import css from "./DeleteWaterModal.module.css";
+import { deleteWater } from "../../redux/water/operations";
+import toast from "react-hot-toast";
+import Icon from "../Icon/Icon";
 
 export const DeleteWaterModal = ({ onClose, id }) => {
   const dispatch = useDispatch();
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteWater(id)).unwrap();
-      toast.success('The amount of water has been successfully deleted');
-      onClose(); // Закриваємо модалку після успішного видалення
+      await dispatch(deleteWater(id));
+      toast.success("The amount of water has been successfully deleted");
     } catch (error) {
-      toast.error('Something went wrong. Please try again');
+      toast.error("Something went wrong. Please try again");
     }
+    onClose();
   };
 
   return (
     <div className={css.modalBox}>
-      <button type="button" className={css.close} onClick={onClose}>
+      <button type="button" className={css.close} onClick={() => onClose()}>
         <Icon width="28" height="28" iconName="close" styles="icon-close" />
       </button>
       <p className={css.title}>Delete entry</p>
