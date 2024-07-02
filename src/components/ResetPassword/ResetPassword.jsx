@@ -55,7 +55,11 @@ const ResetPassword = () => {
 
   const onSubmit = async formData => {
     try {
-      await dispatch(resetPassword(formData)).unwrap();
+      const reqData = {
+        email: formData.email,
+        password: formData.password,
+      }
+      await dispatch(resetPassword(reqData)).unwrap();
       toast.success('Password has been successfully changed! Please sign in.');
       reset();
       navigate('/signin');
