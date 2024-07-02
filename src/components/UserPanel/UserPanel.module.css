@@ -1,8 +1,15 @@
+.hiUserWrapper{
+  white-space: nowrap;
+  text-wrap: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .hiUser {
     display: flex;
     color: var(--dark-grey);
     font-size: 36px;
     white-space: nowrap;
+    text-wrap: none;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -10,6 +17,8 @@
 .userName {
     font-weight: 700;
     white-space: nowrap;
+    text-wrap: none;
     overflow: hidden;
     text-overflow: ellipsis;
  }
+

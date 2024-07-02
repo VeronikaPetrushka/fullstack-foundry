@@ -13,10 +13,18 @@ const UserBar = () => {
     setIsPopoverActive(prevState => !prevState);
   };
 
+  const getUserName = () => {
+    if(user.name === "" || !user.name){
+      const emailParts = String(user.email).split('@');
+      return emailParts[0];
+    }
+    return user.name;
+  };
+
   return (
     <div className={css.userBarWrapper}>
       <div className={css.userBarMainWrapper}>
-        <p className={css.userName}>{user.name || 'You'}</p>
+        <p className={css.userName}>{getUserName()}</p>
         <div className={css.avatarBox}>
           <img
             src={user.avatar || 'src/assets/img/avatar-default.jpg'}
