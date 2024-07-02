@@ -15,32 +15,32 @@ const WaterList = ({ fetchDailyActivity, waterItems }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлення списку водних елементів`, waterItems);
+    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлення списку водних елементів`, waterItems);
   }, [waterItems]);
 
   const handleEdit = (item) => {
     setSelectedItem(item);
     setIsModalOpen(true);
-    // console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Редагування елемента води`, item);
+    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Редагування елемента води`, item);
   };
 
   const handleDelete = (item) => {
     setSelectedItem(item);
     setIsDeleteModalOpen(true);
-    // console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Видалення елемента води`, item);
+    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Видалення елемента води`, item);
   };
 
   const handleModalClose = () => {
     setSelectedItem(null);
     setIsModalOpen(false);
-    // console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Модальне вікно закрито`);
+    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Модальне вікно закрито`);
   };
 
   const handleDeleteModalClose = () => {
     setSelectedItem(null);
     setIsDeleteModalOpen(false);
     fetchDailyActivity();
-    // console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Модальне вікно видалення закрито`);
+    console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Модальне вікно видалення закрито`);
   };
 
   const handleSubmit = async (data) => {
@@ -53,13 +53,13 @@ const WaterList = ({ fetchDailyActivity, waterItems }) => {
             date: data.date,
           },
         })).unwrap();
-        // console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлено елемент води`, data);
+        console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Оновлено елемент води`, data);
       } else {
         await dispatch(addWater({
           amount: data.amount,
           date: data.date,
         })).unwrap();
-        // console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Додано новий елемент води`, data);
+        console.log(`[WaterList] ${new Date().toLocaleTimeString()}: Додано новий елемент води`, data);
       }
       fetchDailyActivity();
       handleModalClose();
