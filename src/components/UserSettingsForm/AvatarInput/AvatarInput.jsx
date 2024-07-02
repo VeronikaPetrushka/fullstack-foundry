@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { uploadAvatar } from '../../../redux/user/operations';
 import Icon from '../../Icon/Icon'
 import Loader from '../../Loader/Loader';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 export default function AvatarInput() {
   const { register } = useForm();
@@ -39,10 +39,9 @@ export default function AvatarInput() {
     }
   };
 
-  toast.error(isErrorAvatar || 'Sorry, error occured! Try later...');
+  isErrorAvatar && toast.error(isErrorAvatar || 'Sorry, error occured! Try later...');
 
   return (
-    isErrorAvatar ? (<Toaster position="top-center" />) :
     <div className={css.avatarInput}>
       <div className={css.avatarBox}>
         {isLoadingAvatar ? <Loader /> :

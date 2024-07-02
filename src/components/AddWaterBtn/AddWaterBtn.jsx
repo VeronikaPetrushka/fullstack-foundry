@@ -28,17 +28,15 @@ const AddWaterBtn = ({ isBig = true, selectedDate }) => {
   }, []);
 
   const handleSubmit = async (data) => {
-    console.log("data: ",data);
+
     try {
       const date = new Date(data.date);
       const [hours, minutes] = data.time ? data.time.split(':') : [String(date.getHours()).padStart(2, '0'), String(date.getMinutes()).padStart(2, '0')];
-      // date.setHours(hours);
-      // date.setMinutes(minutes);
       const sendData = {
         amount: data.amount,
         date: selectedDate.fullDate + 'T' + hours + ':' + minutes,
       }
-console.log("sended data: ",sendData);
+
       await dispatch(addWater(sendData));
       closeWaterModal();
     } catch (error) {

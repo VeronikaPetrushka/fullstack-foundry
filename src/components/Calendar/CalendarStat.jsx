@@ -9,7 +9,7 @@ import {
 } from '../../redux/water/selectors';
 import { getDateObject } from '../../helpers/dateHelpers';
 import { selectUserInfo } from '../../redux/user/selectors';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import CalendarPagination from '../CalendarPagination/CalendarPagination';
 import Calendar from './Calendar';
 import Chart from './Chart';
@@ -81,7 +81,7 @@ const CalendarStat = ({ selectedDate, handleClick }) => {
   }, [dispatch, monthDate]);
 
   const daysOfSelectedMonth = [];
-  for (let i = 1; i <= today.dayInMonth; i++) {
+  for (let i = 1; i <= selectedMonth.dayInMonth; i++) {
     daysOfSelectedMonth[i] = {
       day: i,
       percentageOfNorma: 0,
@@ -107,10 +107,9 @@ const CalendarStat = ({ selectedDate, handleClick }) => {
       );
   }
 
+
   isErrorWaterMonth && toast.error(isErrorWaterMonth || 'Sorry, error occured! Try later...');
-  return isErrorWaterMonth ? (
-    <Toaster position="top-center" />
-  ) : (dataForSelectedMonth &&
+  return (dataForSelectedMonth &&
     <div className={css.calendar}>
       <div className={css.calendarHead}>
         <div className={css.calendarTitle}>Month</div>
