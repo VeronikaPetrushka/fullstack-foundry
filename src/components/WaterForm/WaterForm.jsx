@@ -13,7 +13,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
   }
 
   const schema = Yup.object().shape({
-    amount: Yup.number().required('Amount is required').min(50, 'Amount must be at least 50').max(1000, 'Amount must be no more than 1000'),
+    amount: Yup.number().typeError('Enter valid number').required('Amount is required').min(50, 'Amount must be at least 50').max(1000, 'Amount must be no more than 1000'),
     time: Yup.string().required('Time is required').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Time must be in HH:mm format'),
   });
 
@@ -27,8 +27,8 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
 
   useEffect(() => {
     if (initialData) {
-      setValue('time', initialData.time || getCurrentTime());
-      setValue('amount', initialData.amount || 50);
+      setValue('time', initialData?.time || getCurrentTime());
+      setValue('amount', initialData?.amount || 50);
     }
   }, [initialData, setValue]);
 
@@ -56,13 +56,16 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
   };
 
   const handleFormSubmit = (data) => {
+
     const date = new Date();
     const [hours, minutes] = data.time ? data.time.split(':') : [date.getUTCHours(), date.getUTCMinutes()];
     date.setUTCHours(hours);
     date.setUTCMinutes(minutes);
+    date.setUTCSeconds(0);
+    date.setUTCMilliseconds(0);
 
-    const newData = { ...data, date }; // Використання правильного формату ISO 8601 для параметра date
-    delete newData.time; // Видалення параметра time
+    const newData = { ...data, date };
+    delete newData.time;
 
     onSubmit(newData);
   };
@@ -89,7 +92,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                   control={control}
                   render={({ field }) => (
                     <div className={styles.volume}>
-                      {field.value} ml
+                      {field.value ? field.value : 50} ml
                     </div>
                   )}
                 />
