@@ -6,10 +6,8 @@ import { selectUserInfo } from '../redux/user/selectors';
 import { tokenRefresh } from '../redux/auth/operations';
 import { useSearchParams } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-// import { useNavigate } from 'react-router-dom';
 
 export const useRefreshUser = () => {
-  // const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const gToken = searchParams.get('token');
 
@@ -18,7 +16,6 @@ export const useRefreshUser = () => {
     const current = new Date();
     if (decoded.exp * 1000 > current.getTime()) {
       localStorage.setItem('token', gToken);
-      // navigate('/signin');
     }
   }
 

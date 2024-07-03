@@ -71,6 +71,7 @@ export const uploadUserAvatar = async formData => {
   instance.defaults.headers['Content-Type'] = 'multipart/form-data';
   instance.body = formData;
   const { data } = await instance.post('/users/avatar', formData);
+  instance.defaults.headers['Content-Type'] = 'application/json';
   return data;
 };
 
