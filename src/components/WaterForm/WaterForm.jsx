@@ -7,9 +7,6 @@ import { useEffect } from 'react';
 
 const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
 
-console.log("initialData in WaterForm", initialData);
-console.log("Type of form: ", type);
-
   if(type === "edit"){
     const dateObj = new Date(initialData.date);
     initialData = {...initialData, time: dateObj.getUTCHours().toString().padStart(2, '0') + ':' + dateObj.getUTCMinutes().toString().padStart(2, '0')};
@@ -62,7 +59,7 @@ console.log("Type of form: ", type);
 
   const handleFormSubmit = (data) => {
 
-    const date = new Date();
+    const date = initialData?.date ? new Date(initialData.date) : new Date();
     const [hours, minutes] = data.time ? data.time.split(':') : [date.getUTCHours(), date.getUTCMinutes()];
     date.setUTCHours(hours);
     date.setUTCMinutes(minutes);
