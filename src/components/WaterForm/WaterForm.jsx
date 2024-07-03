@@ -93,6 +93,9 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                   render={({ field }) => (
                     <div className={styles.volume}>
                       {field.value ? field.value : 50} ml
+// =======
+//                       {isNaN(field.value) ? 0 : field.value} ml
+// >>>>>>> main
                     </div>
                   )}
                 />
