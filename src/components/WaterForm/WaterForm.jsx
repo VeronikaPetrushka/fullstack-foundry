@@ -13,7 +13,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
   }
 
   const schema = Yup.object().shape({
-    amount: Yup.number().typeError('Enter valid number').required('Amount is required').min(50, 'Amount must be at least 50').max(1000, 'Amount must be no more than 1000'),
+    amount: Yup.number().typeError('Amount must be at least 50').required('Amount is required').min(50, 'Amount must be at least 50').max(1000, 'Amount must be no more than 1000'),
     time: Yup.string().required('Time is required').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Time must be in HH:mm format'),
   });
 
