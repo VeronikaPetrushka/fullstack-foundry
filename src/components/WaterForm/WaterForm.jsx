@@ -22,6 +22,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     defaultValues: {
       amount: initialData?.amount || 50,
       time: initialData?.time || '',
+      date: initialData?.date || '',
     }
   });
 
@@ -29,6 +30,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (initialData) {
       setValue('time', initialData?.time || getCurrentTime());
       setValue('amount', initialData?.amount || 50);
+      setValue('date', initialData?.date || '');
     }
   }, [initialData, setValue]);
 
@@ -57,7 +59,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
 
   const handleFormSubmit = (data) => {
 
-    const date = new Date();
+    const date = initialData?.date ? new Date(initialData.date) : new Date();
     const [hours, minutes] = data.time ? data.time.split(':') : [date.getUTCHours(), date.getUTCMinutes()];
     date.setUTCHours(hours);
     date.setUTCMinutes(minutes);
@@ -92,7 +94,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
                   control={control}
                   render={({ field }) => (
                     <div className={styles.volume}>
-                    {isNaN(field.value) ? 0 : field.value} ml
+                       {isNaN(field.value) ? 0 : field.value} ml
                     </div>
                   )}
                 />

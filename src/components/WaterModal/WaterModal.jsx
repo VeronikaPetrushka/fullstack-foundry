@@ -9,6 +9,7 @@ import Loader from '../Loader/Loader';
 import { selectIsLoading } from '../../redux/water/selectors';
 
 const WaterModal = ({ isOpen, onClose, initialData, onSubmit, type }) => {
+
   const [backendError, setBackendError] = useState('');
 
   const isLoading = useSelector(selectIsLoading);
