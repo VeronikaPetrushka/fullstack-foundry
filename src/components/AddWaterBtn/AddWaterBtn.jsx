@@ -12,7 +12,7 @@ import Loader from '../Loader/Loader';
 const AddWaterBtn = ({ isBig = true, selectedDate }) => {
 
   const [modIsOpen, setModIsOpen] = useState(false);
-  const [initialData, setInitialData] = useState({ amount: 50, time: '' });
+  const [initialData, setInitialData] = useState({ amount: 50, time: '', date: selectedDate.fullDate });
 
   const isLoading = useSelector(selectIsLoading);
 
@@ -24,7 +24,7 @@ const AddWaterBtn = ({ isBig = true, selectedDate }) => {
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const currentTime = `${hours}:${minutes}`;
-      setInitialData({ amount: 50, time: currentTime });
+      setInitialData({ amount: 50, time: currentTime, date: selectedDate.fullDate });
     }
   }, [modIsOpen, selectedDate]);
 

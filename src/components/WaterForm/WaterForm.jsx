@@ -7,6 +7,9 @@ import { useEffect } from 'react';
 
 const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
 
+console.log("initialData in WaterForm", initialData);
+console.log("Type of form: ", type);
+
   if(type === "edit"){
     const dateObj = new Date(initialData.date);
     initialData = {...initialData, time: dateObj.getUTCHours().toString().padStart(2, '0') + ':' + dateObj.getUTCMinutes().toString().padStart(2, '0')};
@@ -22,6 +25,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     defaultValues: {
       amount: initialData?.amount || 50,
       time: initialData?.time || '',
+      date: initialData?.date || '',
     }
   });
 
@@ -29,6 +33,7 @@ const WaterForm = ({ initialData, onSubmit, onClose, type }) => {
     if (initialData) {
       setValue('time', initialData?.time || getCurrentTime());
       setValue('amount', initialData?.amount || 50);
+      setValue('date', initialData?.date || '');
     }
   }, [initialData, setValue]);
 

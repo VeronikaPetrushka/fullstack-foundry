@@ -56,6 +56,7 @@ const WaterList = () => {
   };
 
   const handleSubmit = async (data) => {
+    console.log(data)
     try {
       if (selectedItem) {
         await dispatch(editWater({
