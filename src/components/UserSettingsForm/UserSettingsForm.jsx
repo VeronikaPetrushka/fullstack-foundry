@@ -21,7 +21,8 @@ const schema = yup.object().shape({
   gender: yup.string().oneOf(['male', 'female'], 'Select your gender'),
   weight: yup
     .number()
-    .min(1, 'The value must be at least 0')
+    .typeError('Input 0 in case of not providing your weight')
+    .min(0, 'The value must be at least 0')
     .max(300, 'The value must be no more than 3 numbers'),
   timeActivity: yup
     .string()

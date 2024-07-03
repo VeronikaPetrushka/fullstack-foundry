@@ -62,7 +62,7 @@ const SignInForm = () => {
 
   return (
     <div className={css.signUpWrap}>
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <h2 className={css.formTitle}>Sign In</h2>
         <label className={css.label}>Email</label>
